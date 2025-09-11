@@ -18,7 +18,7 @@ export const level1 = {
         ".........................",
     ],
     objects: [
-       
+       { type: "player", x: 50, y: 50 }
         
     ]
 };
