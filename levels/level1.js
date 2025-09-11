@@ -28,6 +28,7 @@ export const level1 = {
         {type: "snowytree",x: 50, y:50,width: 80, height:130 },
         {type: "wolf", x: 50, y: 416 },
         {type: "fire", x: 150, y: 100},
+        {type: "hill",x: 50, y:50,width: 80, height:130 },
       
         
     ]
