@@ -8,13 +8,13 @@ export const level1 = {
         "RNNN...NNNNNNNW...NNNN..R",                            // I-lód
         "R.............W.........R",                            // L-lawa
         "R.............W.........R",                           //  W-water 
-        "R.............W.........R",                          //   S-kolce
-        "R..NNNNN.....RWIIIR.....R",                           //  M-magma
+        "R..NNNNN......W.........R",                          //   S-kolce
+        "R............RWIIIR.....R",                           //  M-magma
         "R............RWWWWR.....R",                             
         "R.......NN...RRRRRR.....R",                           
         "R..................NNN..R",                           
-        "R......NNNNNN...........R",                           
-       "R........................R",
+        "R.......................R",                           
+       "R.......NNNNNN...........R",
         "NNNNNNLLLLLLLLLLLLLLLLNNN"
     ],
     objects: [
