@@ -70,6 +70,10 @@ export class LevelLoader {
                 const snowytree = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "snowytree");
                 gameObjects.push(snowytree);
             }
+            else if (objData.type === "volcano") {
+                const volcano = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "volcano");
+                gameObjects.push(volcano);
+            }
             
              
     });
