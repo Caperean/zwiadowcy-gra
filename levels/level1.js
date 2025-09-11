@@ -5,7 +5,7 @@ export const level1 = {
         "R............W..........R",                             // G-trawa
         "R............W..........R",                             // #-blok ziemi
         "R............WW.........R",                             // N-śnieg
-        "RNNN....NNNNNNW...NNNN..R",                            // I-lód
+        "RNNN...NNNNNNNW...NNNN..R",                            // I-lód
         "R.............W.........R",                            // L-lawa
         "R.............W.........R",                           //  W-water 
         "R.............W.........R",                          //   S-kolce
