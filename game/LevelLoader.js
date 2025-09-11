@@ -28,8 +28,8 @@ export class LevelLoader {
         const gameObjects = [];
         let player = null;
 
-        // 1. Loading the tilemap
-        levelData.map.forEach((row, rowIndex) => {
+        // 1. Loading the tilemap 
+        levelData.map.forEach((row, rowIndex) => {                         // bloki terenu
             for (let i = 0; i < row.length; i++) {
                 const char = row[i];
                 const tileX = i * TILE_WIDTH;
@@ -58,7 +58,7 @@ export class LevelLoader {
         });
 
         // 2. Loading background objects (bushes, trees)
-        levelData.objects.forEach(objData => {
+        levelData.objects.forEach(objData => {                                                                //obiekty tła
             if (objData.type === "bush") {
                 const bush = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "bush");
                 gameObjects.push(bush);
@@ -74,7 +74,7 @@ export class LevelLoader {
              
     });
 
-        // 3. Loading the exit gate
+        // 3. Loading the exit                                      // wyjście z serwera
         levelData.objects.forEach(objData => {
             if (objData.type === "exitGate") {
                 const exitGate = new ExitGate(objData.x, objData.y, objData.width, objData.height);
@@ -83,7 +83,7 @@ export class LevelLoader {
         });
 
         // 4. Loading interactive objects, including the player and wolf
-        levelData.objects.forEach(objData => {
+        levelData.objects.forEach(objData => {                              // obiekty interaktywne nie ruszać na razie
             if (objData.type === "player") {
                 player = new Player(objData.x, objData.y, game);
                 gameObjects.push(player);
