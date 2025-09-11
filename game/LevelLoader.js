@@ -74,6 +74,10 @@ export class LevelLoader {
                 const volcano = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "volcano");
                 gameObjects.push(volcano);
             }
+            else if (objData.type === "hill") {
+                const hill = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "hill");
+                gameObjects.push(hill);
+            }
             
              
     });
