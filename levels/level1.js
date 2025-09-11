@@ -1,21 +1,21 @@
 export const level1 = {
     backgroundColor: "#add8e6",
     map: [
-        "RRRRRRRRRRRRRRRRRRRRRRRRR",                            // R-skała
-        "R............R..........R",                             // G-trawa
-        "R.......................R",                             // #-blok ziemi
-        "R.......................R",                             // N-śnieg
-        "RRRR.....RRRR.....RRRR..R",                            // I-lód
-        "R.......................R",                            // L-lawa
-        "R.......................R",                           //  W-water 
-        "R.......................R",                          //   S-kolce
-        "R.......................R",                           //  M-magma
-        "R.......................R",                             
-        "R.......................R",                           
-        "R.......................R",                           
-        "R......RRRRRR...........R",                           
-       "R....RRR................R",
-        "RRRRRRLLLLLLLLLLLLRRRRRRR"
+        "RRRRRRRRRRRRRWRRRRRRRRRRR",                            // R-skała
+        "R............W..........R",                             // G-trawa
+        "R............W..........R",                             // #-blok ziemi
+        "R............WW.........R",                             // N-śnieg
+        "RNNN....NNNNNNW...NNNN..R",                            // I-lód
+        "R.............W.........R",                            // L-lawa
+        "R.............W.........R",                           //  W-water 
+        "R.............W.........R",                          //   S-kolce
+        "R..NNNNN.....RWIIIR.....R",                           //  M-magma
+        "R............RWWWWR.....R",                             
+        "R.......NN...RRRRRR.....R",                           
+        "R..................NNN..R",                           
+        "R......NNNNNN...........R",                           
+       "R........................R",
+        "NNNNNNLLLLLLLLLLLLLLLLNNN"
     ],
     objects: [
         { type: "player", x: 50, y: 50 },
