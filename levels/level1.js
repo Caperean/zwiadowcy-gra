@@ -13,8 +13,8 @@ export const level1 = {
         "R............RWWWWR.....R",                             
         "R.......NN...RRRRRR.....R",                           
         "R..................NNN..R",                           
-        "R.......................R",                           
-       "R.......NNNNNN...........R",
+        "R.........NNN...........R",                           
+       "R.......NNN..............R",
         "NNNNNNLLLLLLLLLLLLLLLLNNN"
     ],
     objects: [
