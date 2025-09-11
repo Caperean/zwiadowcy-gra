@@ -3,16 +3,16 @@ export const level1 = {
     map: [
         ".........................",                            // R-skała
         ".........................",                             // G-trawa
-        ".NNN.....................",                             // #-blok ziemi
-        "SSSSSNNWWIIWWIIWN........",                             // N-śnieg
-        "RRRRRRRRRRRRRRRRR........",                            // I-lód
+        ".........................",                             // #-blok ziemi
+        "NNNN.....................",                             // N-śnieg
+        "SSSSSNNWWIIWWIIWN........",                            // I-lód
         ".........................",                            // L-lawa
-        "..........................",                           //  W-water 
-        "...........NNNN..........",                          //   S-kolce
-        "....NNNNN........NNNNN...",                           //  M-magma
-        ".........................",                             
+        ".........................",                           //  W-water 
+        ".........................",                          //   S-kolce
+        "...........NNNN..........",                           //  M-magma
+        "....NNNNN........NNNNN...",                             
         ".....SSSSSSSSSSSSSSSSSSSS",                           
-        ".....RRRRRRRRRRRRRRRRRRRR",                           
+        ".........................",                           
         ".........................",                           
        "..........................",
         "NNWWIIWIIWWIIIWWIIWWIIWNNN",
