@@ -9,13 +9,13 @@ export const level1 = {
         "....S....................",                            // L-lawa
         ".........................",                           //  W-water 
         ".........................",                          //   S-kolce
-        "...........NNNN..........",                           //  M-magma
-        "....NNNNNSS.....SNNNNNSSS",                             
+        "...........NNNNN.........",                           //  M-magma
+        "....NNNNNSS.....NNNNNNSSS",                             
         ".........................",                           
         ".........................",                           
         ".........................",                           
        "..........................",
-        "NNWWIIWIIWWIIIWWIIWWIIWNNN",
+        "NNWIIWWIWIIWIIWIWIIWIIWNNN",
     ],
     objects: [
        { type: "player", x: 50, y: 50 }
