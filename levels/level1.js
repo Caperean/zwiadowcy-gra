@@ -15,7 +15,7 @@ export const level1 = {
         ".........................",                           
         "........................N",                           
        "........................N#",
-        "NNWIIWWIWIIWIIWIWIIWIIW##N",
+        "NNWIIWWIWIIWIIWIWIIWIIWN#N",
     ],
     objects: [
        { type: "player", x: 15, y: 15 },
