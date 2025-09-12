@@ -1,10 +1,10 @@
 export const level1 = {
     backgroundColor: "#add8e6",
     map: [
-        "N..........................",                            // R-skała
-        "N..........................",                             // G-trawa
-        "N..........................",                             // #-blok ziemi
-        "NNNNNNWIIWIIWIIWNN.......",                             // N-śnieg
+        "N........................",                            // R-skała
+        "#........................",                             // G-trawa
+        "#.....WIIWIIWIIWNN.......",                             // #-blok ziemi
+        "#NNNNN############.......",                             // N-śnieg
         ".........................",                            // I-lód
         ".........................",                            // L-lawa
         ".........................",                           //  W-water 
@@ -14,8 +14,8 @@ export const level1 = {
         ".........................",                           
         ".........................",                           
         "........................N",                           
-       "........................NN",
-        "NNWIIWWIWIIWIIWIWIIWIIWNNN",
+       "........................N#",
+        "NNWIIWWIWIIWIIWIWIIWIIW##N",
     ],
     objects: [
        { type: "player", x: 15, y: 15 },
