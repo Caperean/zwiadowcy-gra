@@ -18,8 +18,8 @@ export const level1 = {
         "NNWIIWWIWIIWIIWIWIIWIIWNNN",
     ],
     objects: [
-       { type: "player", x: 15, y: 15 },
-        { type: "greenpot", x: 100, y: 30 }
+       { type: "player", x: 15, y: 15 }
+        
         
     ]
 };
