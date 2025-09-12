@@ -105,6 +105,13 @@ export class LevelLoader {
             }  else if (objData.type === "apple") { // <--- Dodaj tę logikę
                 const apple = new Apple(objData.x, objData.y, game);
                 gameObjects.push(apple);
+              } else if (objData.type === "greenpot") { 
+                const greenPot = new Potion(objData.x, objData.y, "green");
+                gameObjects.push(greenPot);
+            } else if (objData.type === "bluepot") { 
+                const bluePot = new Potion(objData.x, objData.y, "blue");
+                gameObjects.push(bluePot);
+            }    
             }
         });
 
