@@ -106,10 +106,6 @@ export class LevelLoader {
                 const apple = new Apple(objData.x, objData.y, game);
                 gameObjects.push(apple);
             }
-            else if (objData.type === "greenpot") { // <--- Dodaj tę logikę
-                const greenpot = new greenpot(objData.x, objData.y, game);
-                gameObjects.push(greenpot);
-            }
         });
 
         return { gameObjects, backgroundColor: levelData.backgroundColor };
