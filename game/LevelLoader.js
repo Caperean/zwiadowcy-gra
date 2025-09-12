@@ -5,6 +5,7 @@ import { Wolf } from "../objects/wolf.js";
 import { BackgroundObject } from "../objects/BackgroundObject.js";
 import { ExitGate } from "../objects/ExitGate.js";
 import { level1 } from "../levels/level1.js";
+import { Potion } from "../objects/Potion.js";
 import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 import { Apple } from "../objects/apple.js";
 const levels = {
@@ -104,6 +105,10 @@ export class LevelLoader {
             }  else if (objData.type === "apple") { // <--- Dodaj tę logikę
                 const apple = new Apple(objData.x, objData.y, game);
                 gameObjects.push(apple);
+            }
+            else if (objData.type === "greenpot") { // <--- Dodaj tę logikę
+                const apple = new greenpot(objData.x, objData.y, game);
+                gameObjects.push(greenpot);
             }
         });
 

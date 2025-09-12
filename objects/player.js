@@ -1,8 +1,10 @@
 import { GameObject } from "./object.js";
 import { GRAVITY, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_SPEED, JUMP_STRENGTH, PLAYER_ANIMATION_SPEED, MAX_POWER_CHARGE, ARROW_SPEED, ARROW_VERTICAL_STRENGTH } from "../engine/Constants.js";
 import { Arrow } from "./arrow.js"; 
+import { PoisonedArrow } from "./PoisonedArrow.js"; // <--- Import nowej strzały
 import { Tile } from "./tile.js";
 import { ExitGate } from "./ExitGate.js";
+import { Potion } from "./Potion.js"; // <--- Import eliksirów
 
 export class Player extends GameObject {
     /**
@@ -17,11 +19,9 @@ export class Player extends GameObject {
         this.dy = 0;
         this.onGround = false;
 
-        // HP
         this.maxHP = 3;
         this.currentHP = 3;
 
-        // Serduszka
         this.hearts = [];
         for (let i = 0; i < this.maxHP; i++) {
             const heartImage = new Image();
@@ -29,33 +29,31 @@ export class Player extends GameObject {
             this.hearts.push(heartImage);
         }
 
-        // Przechowywanie początkowej pozycji do respawnu
         this.startX = x;
         this.startY = y;
 
-        // Ładowanie obrazów sprite'ów
         this.idleSprite = new Image();
         this.idleSprite.src = "assets/sprites/player_sprites/standingsprite.png";
-
         this.walkSprites = [];
         this.walkSprites[0] = new Image();
         this.walkSprites[0].src = "assets/sprites/player_sprites/walkingsprite1.png";
         this.walkSprites[1] = new Image();
         this.walkSprites[1].src = "assets/sprites/player_sprites/walkingsprite2.png";
-
         this.jumpSprite = new Image();
         this.jumpSprite.src = "assets/sprites/player_sprites/jump.png";
-        
         this.snipingSprite = new Image();
         this.snipingSprite.src = "assets/sprites/player_sprites/snipingsprite.png";
 
-        // Zmienne do zarządzania animacją i strzelaniem
         this.facingDirection = "right";
         this.state = "idle";
         this.animationTimer = 0;
         this.animationFrame = 0;
         this.animationSpeed = PLAYER_ANIMATION_SPEED;
         this.powerCharge = 0;
+        
+        this.poisonedArrows = 0; // <--- Nowa zmienna do przechowywania liczby zatrutych strzał
+        this.poisonedArrowSprite = new Image();
+        this.poisonedArrowSprite.src = "assets/sprites/poisonedarrow.png";
     }
 
     /**
@@ -81,6 +79,15 @@ export class Player extends GameObject {
     }
 
     /**
+     * Dodaje zatrute strzały do ekwipunku gracza.
+     * @param {number} amount - Liczba zatrutych strzał do dodania.
+     */
+    addPoisonedArrows(amount) {
+        this.poisonedArrows += amount;
+        console.log(`Gracz znalazł zatruty eliksir! Ma teraz ${this.poisonedArrows} zatrutych strzał.`);
+    }
+
+    /**
      * Zmniejsza punkty życia gracza o 1 i sprawdza, czy powinien zostać zrespawnowany.
      */
     takeDamage() {
@@ -99,7 +106,6 @@ export class Player extends GameObject {
     update(deltaTime) {
         const keys = this.game.input.keys;
 
-        // Logika strzelania ma teraz najwyższy priorytet
         if (keys["Space"]) {
             this.state = "sniping";
             this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
@@ -108,11 +114,18 @@ export class Player extends GameObject {
             this.state = "idle";
             const power = this.powerCharge / MAX_POWER_CHARGE;
             const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
-            const arrowDy = ARROW_VERTICAL_STRENGTH * power;
-            this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+            const arrowDy = 0; // Strzały mają lecieć prosto
+
+            if (this.poisonedArrows > 0) {
+                // Jeśli gracz ma zatrute strzały, strzela nimi
+                this.game.arrows.push(new PoisonedArrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+                this.poisonedArrows--;
+            } else {
+                // W przeciwnym razie strzela zwykłymi strzałami
+                this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+            }
             this.powerCharge = 0;
         } else {
-            // Normalny ruch i animacje, gdy gracz nie celuje
             this.dx = 0;
             if (keys["ArrowLeft"] || keys["KeyA"]) {
                 this.dx = -PLAYER_SPEED;
@@ -155,7 +168,6 @@ export class Player extends GameObject {
 
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile) {
-                // Sprawdzanie kolizji z normalnymi kafelkami
                 if (this.checkCollision(obj)) {
                     if (this.dy > 0 && prevY + this.height <= obj.y) {
                         this.y = obj.y - this.height;
@@ -173,7 +185,6 @@ export class Player extends GameObject {
                         this.x = obj.x + obj.width;
                     }
                     
-                    // Sprawdzanie kolizji z niebezpiecznymi kafelkami
                     const lethalTiles = ["lava", "water", "spikes"];
                     if (lethalTiles.includes(obj.spriteName)) {
                         console.log("Gracz dotknął niebezpiecznego kafelka!");
@@ -207,7 +218,7 @@ export class Player extends GameObject {
     }
 
     /**
-     * Rysuje gracza, pasek siły i serca na canvasie.
+     * Rysuje gracza, pasek siły, serca i licznik zatrutych strzał na canvasie.
      * @param {CanvasRenderingContext2D} ctx - Kontekst rysowania 2D.
      */
     draw(ctx) {
@@ -217,6 +228,20 @@ export class Player extends GameObject {
             if (heart.complete) {
                 ctx.drawImage(heart, 10 + i * 40, 10, 30, 30);
             }
+        }
+
+        // Rysowanie licznika zatrutych strzał w prawym górnym rogu
+        if (this.poisonedArrows > 0) {
+            ctx.fillStyle = "white";
+            ctx.font = "bold 20px Arial";
+            ctx.textAlign = "right";
+            
+            // Rysowanie ikonki zatrutej strzały
+            if (this.poisonedArrowSprite.complete) {
+                ctx.drawImage(this.poisonedArrowSprite, this.game.canvas.width - 50, 10, 40, 10);
+            }
+
+            ctx.fillText(`x ${this.poisonedArrows}`, this.game.canvas.width - 60, 30);
         }
 
         let spriteToDraw;
