@@ -112,7 +112,7 @@ export class LevelLoader {
                 const bluePot = new Potion(objData.x, objData.y, "blue");
                 gameObjects.push(bluePot);
             }    
-            }
+            
         });
 
         return { gameObjects, backgroundColor: levelData.backgroundColor };
