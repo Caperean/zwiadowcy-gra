@@ -4,7 +4,7 @@ export const level1 = {
         "N........................",                            // R-skała
         "N........................",                             // G-trawa
         "N........................",                             // #-blok ziemi
-        "NNNNNNWNWIIWIIWNN........",                             // N-śnieg
+        "NNNNNNWIIWIIWIIWNN........",                             // N-śnieg
         ".........................",                            // I-lód
         ".........................",                            // L-lawa
         ".........................",                           //  W-water 
@@ -19,7 +19,7 @@ export const level1 = {
     ],
     objects: [
        { type: "player", x: 15, y: 15 }
-        
+       { type: "wolf", x: 5, y: 15 }   {     
         
     ]
 };
