@@ -22,4 +22,4 @@ export const level1 = {
        { type: "wolf", x: 5, y: 15 }        
         
     ]
-;
+
