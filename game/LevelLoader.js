@@ -107,7 +107,7 @@ export class LevelLoader {
                 gameObjects.push(apple);
             }
             else if (objData.type === "greenpot") { // <--- Dodaj tę logikę
-                const apple = new greenpot(objData.x, objData.y, game);
+                const greenpot = new greenpot(objData.x, objData.y, game);
                 gameObjects.push(greenpot);
             }
         });
