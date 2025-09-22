@@ -9,7 +9,7 @@ export const level1 = {
         ".........................",                            // L-lawa
         ".........................",                           //  W-water 
         "....N...................N",                          //   S-kolce
-        "....#NNNNNN.NNN....NNNNNN",                           //  M-magma
+        "....#NNNNNN.NNN.NN.NNNNNN",                           //  M-magma
         ".........................",                             
         ".........................",                           
         ".........................",                           
@@ -22,6 +22,6 @@ export const level1 = {
        { type: "wolf", x: 100, y: 15 } ,      
        { type: "wolf", x: 400, y: 100 },
        
-        { type: "exitGate", x: 700, y: 700, width: 64, height: 64 }
+        { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
 };
