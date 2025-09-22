@@ -30,6 +30,18 @@ export class Fireball extends GameObject {
         }
     }
 
+    /**
+     * Sprawdza kolizję z innym obiektem.
+     * @param {GameObject} other - Inny obiekt do sprawdzenia kolizji.
+     * @returns {boolean} - True, jeśli jest kolizja, w przeciwnym razie false.
+     */
+    checkCollision(other) {
+        return this.x < other.x + other.width &&
+               this.x + this.width > other.x &&
+               this.y < other.y + other.height &&
+               this.y + this.height > other.y;
+    }
+
     draw(ctx) {
         if (this.sprite.complete) {
             ctx.drawImage(this.sprite, this.x, this.y, this.width, this.height);
