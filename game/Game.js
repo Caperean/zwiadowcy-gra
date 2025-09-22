@@ -52,7 +52,7 @@ export class Game {
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 
-    /**
+      /**
      * Aktualizuje stan wszystkich obiektów gry.
      * @param {number} deltaTime - Czas od ostatniej klatki.
      */
@@ -67,6 +67,7 @@ export class Game {
             console.log("Poziom ukończony! Ładowanie następnego poziomu...");
             this.currentLevelIndex++;
             this.loadLevel(this.currentLevelIndex);
+            return; // <-- Dodaj tę linijkę, aby zatrzymać dalsze przetwarzanie
         }
 
         // Usuwanie obiektów, które są oznaczone do usunięcia (np. jabłka, które zostały zebrane)
