@@ -2,6 +2,8 @@ import { LevelLoader } from "./LevelLoader.js";
 import { Input } from "../engine/Input.js"; 
 import { Player } from "../objects/player.js";
 import { Apple } from "../objects/apple.js";
+import { ExitGate } from "../objects/ExitGate.js"; // Nowy import
+import { allLevels } from "../levels/levels.js"; // Nowy import
 
 export class Game {
     constructor(canvas) {
@@ -11,18 +13,31 @@ export class Game {
 
         this.input = new Input();
         this.groundY = 500;
-        const levelData = LevelLoader.load("level1.js", this);
+        
+        this.currentLevelIndex = 0;
+        this.loadLevel(this.currentLevelIndex);
+        
+        // Zapisanie ostatniego czasu do obliczania deltaTime
+        this.lastTime = 0; 
+    }
+
+    loadLevel(levelIndex) {
+        if (levelIndex >= allLevels.length) {
+            console.log("Koniec gry! Ukończyłeś wszystkie poziomy.");
+            // Tutaj możesz dodać ekran końcowy lub inne akcje
+            return;
+        }
+
+        const levelName = allLevels[levelIndex].name;
+        const levelData = LevelLoader.load(levelName, this);
         this.gameObjects = levelData.gameObjects;
         this.backgroundColor = levelData.backgroundColor;
         this.arrows = [];
         
         // Poprawne przypisanie gracza
         this.player = this.gameObjects.find(obj => obj instanceof Player);
-        
-        // Zapisanie ostatniego czasu do obliczania deltaTime
-        this.lastTime = 0; 
     }
-
+    
     /**
      * Główna pętla gry.
      * @param {number} timestamp - Aktualny czas.
@@ -45,6 +60,15 @@ export class Game {
         // Aktualizacja wszystkich obiektów gry
         this.gameObjects.forEach(obj => obj.update(deltaTime));
         this.arrows.forEach(arrow => arrow.update(deltaTime));
+
+        // Sprawdzanie kolizji gracza z ExitGate
+        const exitGate = this.gameObjects.find(obj => obj instanceof ExitGate);
+        if (exitGate && this.player && this.player.checkCollision(exitGate)) {
+            console.log("Poziom ukończony! Ładowanie następnego poziomu...");
+            this.currentLevelIndex++;
+            this.loadLevel(this.currentLevelIndex);
+            return; // Ważne, aby zatrzymać aktualizację po załadowaniu nowego poziomu
+        }
 
         // Usuwanie obiektów, które są oznaczone do usunięcia (np. jabłka, które zostały zebrane)
         this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
