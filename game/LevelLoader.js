@@ -8,6 +8,7 @@ import { Potion } from "../objects/Potion.js";
 import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 import { Apple } from "../objects/apple.js";
 import { allLevels } from "../levels/levels.js"; // Zmiana tutaj!
+import { Mage } from "../objects/Mage.js";
 
 export class LevelLoader {
     /**
