@@ -109,7 +109,7 @@ export class LevelLoader {
                 const bluePot = new Potion(objData.x, objData.y, "blue");
                 gameObjects.push(bluePot);
             }  
-            } else if (objData.type === "mage") {
+             else if (objData.type === "mage") {
                 const mage = new Mage(objData.x, objData.y, game);
                 gameObjects.push(mage);
             }
