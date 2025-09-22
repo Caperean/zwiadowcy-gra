@@ -108,7 +108,11 @@ export class LevelLoader {
             } else if (objData.type === "bluepot") { 
                 const bluePot = new Potion(objData.x, objData.y, "blue");
                 gameObjects.push(bluePot);
-            }    
+            }  
+            } else if (objData.type === "mage") { // <--- Dodaj logikę dla maga
+                const mage = new Mage(objData.x, objData.y, game);
+                gameObjects.push(mage);
+            }
             
         });
 
