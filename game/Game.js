@@ -67,7 +67,6 @@ export class Game {
             console.log("Poziom ukończony! Ładowanie następnego poziomu...");
             this.currentLevelIndex++;
             this.loadLevel(this.currentLevelIndex);
-            return; // Ważne, aby zatrzymać aktualizację po załadowaniu nowego poziomu
         }
 
         // Usuwanie obiektów, które są oznaczone do usunięcia (np. jabłka, które zostały zebrane)
