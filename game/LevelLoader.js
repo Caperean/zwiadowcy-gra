@@ -4,13 +4,10 @@ import { Fire } from "../objects/fire.js";
 import { Wolf } from "../objects/wolf.js";
 import { BackgroundObject } from "../objects/BackgroundObject.js";
 import { ExitGate } from "../objects/ExitGate.js";
-import { level1 } from "../levels/level1.js";
 import { Potion } from "../objects/Potion.js";
 import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 import { Apple } from "../objects/apple.js";
-const levels = {
-    "level1.js": level1
-};
+import { allLevels } from "../levels/levels.js"; // Zmiana tutaj!
 
 export class LevelLoader {
     /**
@@ -20,7 +17,7 @@ export class LevelLoader {
      * @returns {{gameObjects: Array<object>, backgroundColor: string}} An object containing the loaded game objects and the background color.
      */
     static load(levelName, game) {
-        const levelData = levels[levelName];
+        const levelData = allLevels.find(level => level.name === levelName); // Zmiana tutaj!
         if (!levelData) {
             console.error(`Level '${levelName}' not found.`);
             return { gameObjects: [], backgroundColor: "#000000" }; // Return a default color
@@ -30,7 +27,7 @@ export class LevelLoader {
         let player = null;
 
         // 1. Loading the tilemap 
-        levelData.map.forEach((row, rowIndex) => {                         // bloki terenu
+        levelData.data.map.forEach((row, rowIndex) => {                         // bloki terenu
             for (let i = 0; i < row.length; i++) {
                 const char = row[i];
                 const tileX = i * TILE_WIDTH;
@@ -59,7 +56,7 @@ export class LevelLoader {
         });
 
         // 2. Loading background objects (bushes, trees)
-        levelData.objects.forEach(objData => {                                                                //obiekty tła
+        levelData.data.objects.forEach(objData => {                                                                //obiekty tła
             if (objData.type === "bush") {
                 const bush = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "bush");
                 gameObjects.push(bush);
@@ -84,7 +81,7 @@ export class LevelLoader {
     });
 
         // 3. Loading the exit                                      // wyjście z serwera
-        levelData.objects.forEach(objData => {
+        levelData.data.objects.forEach(objData => {
             if (objData.type === "exitGate") {
                 const exitGate = new ExitGate(objData.x, objData.y, objData.width, objData.height);
                 gameObjects.push(exitGate);
@@ -92,7 +89,7 @@ export class LevelLoader {
         });
 
         // 4. Loading interactive objects, including the player and wolf
-        levelData.objects.forEach(objData => {                              // obiekty interaktywne nie ruszać na razie
+        levelData.data.objects.forEach(objData => {                              // obiekty interaktywne nie ruszać na razie
             if (objData.type === "player") {
                 player = new Player(objData.x, objData.y, game);
                 gameObjects.push(player);
@@ -115,6 +112,6 @@ export class LevelLoader {
             
         });
 
-        return { gameObjects, backgroundColor: levelData.backgroundColor };
+        return { gameObjects, backgroundColor: levelData.data.backgroundColor };
     }
 }
