@@ -20,6 +20,7 @@ export const level2 = {
     objects: [
        { type: "player", x: 15, y: 15 },
        { type: "wolf", x: 100, y: 15 } ,      
-       { type: "wolf", x: 400, y: 100 }   
+       { type: "wolf", x: 400, y: 100 },
+       { type: "exitgate", x: 400, y: 100 }
     ]
 };
