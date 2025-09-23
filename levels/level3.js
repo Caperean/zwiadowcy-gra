@@ -19,7 +19,7 @@ export const level3 = {
     ],
     objects: [
        { type: "player", x: 50, y: 15 },
-       { type: "cactus", x: 100, y: 100 }
+       { type: "cactus", x: 100, y: 100, width: 140, height: 200 }
       
        
     ]
