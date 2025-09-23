@@ -19,7 +19,7 @@ export const level2 = {
     ],
     objects: [
        { type: "player", x: 15, y: 15 },
-       { type: "Mage", x: 600, y: 300 }, 
+       { type: "Mage", x: 700, y: 400 }, 
    
        
     ]
