@@ -77,7 +77,10 @@ export class LevelLoader {
                 const hill = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "hill");
                 gameObjects.push(hill);
             }
-            
+             else if (objData.type === "cactus") {
+                const cactus = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "cactus");
+                gameObjects.push(cactus);
+            }
              
     });
 
