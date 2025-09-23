@@ -10,7 +10,7 @@ export class Mage extends GameObject {
         this.facingDirection = "left"; // Domyślna orientacja
         this.attackCooldown = 2000; // 2 sekundy cooldownu
         this.lastAttackTime = 0;
-        this.detectionRange = 200; // Zasięg wykrywania gracza
+        this.detectionRange = 350; // Zasięg wykrywania gracza
 
         this.idleSprite = new Image();
         this.idleSprite.src = "assets/sprites/mag1.png";
