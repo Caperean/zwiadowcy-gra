@@ -1,5 +1,5 @@
 export const level3 = {
-    backgroundColor: "#add8e6",
+    backgroundColor: "#FF934A",
     map: [
         ".........................",                            // R-skała
         ".........................",                             // G-trawa
