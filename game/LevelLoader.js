@@ -10,6 +10,7 @@ import { Apple } from "../objects/apple.js";
 import { allLevels } from "../levels/levels.js"; // Zmiana tutaj!
 import { Mage } from "../objects/Mage.js";
 import { Bat } from "../objects/Bat.js"; // <--- Nowy import
+import { Arab } from "../objects/Arab.js"; // Nowy import
 
 export class LevelLoader {
     /**
@@ -123,6 +124,9 @@ export class LevelLoader {
             } else if (objData.type === "bat") { // <--- Dodaj logikę dla nietoperza
                 const bat = new Bat(objData.x, objData.y, game);
                 gameObjects.push(bat);
+            } else if (objData.type === "arab") { // <--- Dodaj tę logikę
+                const arab = new Arab(objData.x, objData.y, game);
+                gameObjects.push(arab);
             }
             
         });
