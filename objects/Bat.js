@@ -6,9 +6,9 @@ export class Bat extends GameObject {
     constructor(x, y, game) {
         super(x, y, TILE_WIDTH * 1.5, TILE_HEIGHT); 
         this.game = game;
-        this.initialX = x; // Początkowy punkt patrolowania
+        this.initialX = x;
         this.initialY = y;
-        this.state = "patrol";
+        this.state = "patrol"; // patrol, attack, escape
         this.hp = 1;
         this.speed = 1.5;
         this.detectionRange = 250;
@@ -16,10 +16,9 @@ export class Bat extends GameObject {
         this.escapeDistance = 150;
         this.patrolRadius = 50;
         this.angle = 0;
-        this.facingDirection = "right";
         this.flightAngle = 0;
-        this.dy = 0;
         this.dx = 0;
+        this.dy = 0;
 
         this.sprite = new Image();
         this.sprite.src = "assets/sprites/bat.png";
@@ -31,17 +30,14 @@ export class Bat extends GameObject {
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
 
-        // Pusty obiekt dla logiki kolizji
-        let proposedX = this.x + this.dx;
-        let proposedY = this.y + this.dy;
-
         if (this.state === "patrol") {
             // Ruch po okręgu
             this.angle += 0.02;
-            this.dx = this.initialX + this.patrolRadius * Math.cos(this.angle) - this.x;
-            this.dy = this.initialY + this.patrolRadius * Math.sin(this.angle) - this.y;
-            this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
-            
+            const targetX = this.initialX + this.patrolRadius * Math.cos(this.angle);
+            const targetY = this.initialY + this.patrolRadius * Math.sin(this.angle);
+            this.dx = (targetX - this.x) * 0.05;
+            this.dy = (targetY - this.y) * 0.05;
+
             // Wykrywanie gracza
             if (distanceToPlayer < this.detectionRange) {
                 this.state = "attack";
@@ -54,9 +50,6 @@ export class Bat extends GameObject {
             
             this.dx = (dx / distance) * this.speed;
             this.dy = (dy / distance) * this.speed;
-
-            // Obliczanie kąta lotu
-            this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
 
             // Kolizja z graczem
             if (this.checkCollision(this.game.player)) {
@@ -72,30 +65,48 @@ export class Bat extends GameObject {
             this.dx = (dx / distance) * this.speed * 2;
             this.dy = (dy / distance) * this.speed * 2;
             
-            // Obliczanie kąta ucieczki
-            this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
-
-            // Powrót do patrolu po oddaleniu się
-            if (distance > this.escapeDistance && distanceToPlayer > this.detectionRange) {
+            // Powrót do patrolu po oddaleniu się I niewidzeniu gracza
+            if (distanceToPlayer > this.detectionRange) {
                 this.state = "patrol";
             }
         }
         
-        // Sprawdzanie kolizji z kafelkami
+        // Obliczanie kąta lotu dla rysowania
+        this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
+
+        // Sprawdzanie kolizji z kafelkami PRZED ruchem
+        let nextX = this.x + this.dx;
+        let nextY = this.y + this.dy;
+
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile) {
-                if (this.checkCollision(obj)) {
-                    // Odwracamy kierunek lotu
-                    this.dx = -this.dx;
-                    this.dy = -this.dy;
-                    this.state = "patrol"; // Wraca do patrolowania
+                // Sprawdzenie kolizji w osi X
+                if (this.x < obj.x + obj.width && this.x + this.width > obj.x && nextY < obj.y + obj.height && nextY + this.height > obj.y) {
+                    if (this.dx > 0) {
+                        this.dx = 0;
+                        nextX = obj.x - this.width;
+                    } else if (this.dx < 0) {
+                        this.dx = 0;
+                        nextX = obj.x + obj.width;
+                    }
+                }
+                
+                // Sprawdzenie kolizji w osi Y
+                if (this.y < obj.y + obj.height && this.y + this.height > obj.y && nextX < obj.x + obj.width && nextX + this.width > obj.x) {
+                    if (this.dy > 0) {
+                        this.dy = 0;
+                        nextY = obj.y - this.height;
+                    } else if (this.dy < 0) {
+                        this.dy = 0;
+                        nextY = obj.y + obj.height;
+                    }
                 }
             }
         });
 
         // Aktualizacja pozycji po kolizjach
-        this.x += this.dx;
-        this.y += this.dy;
+        this.x = nextX;
+        this.y = nextY;
     }
     
     checkCollision(other) {
