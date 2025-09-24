@@ -4,7 +4,7 @@ import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 
 export class Bat extends GameObject {
     constructor(x, y, game) {
-        super(x, y, TILE_WIDTH * 1.5, TILE_HEIGHT);
+        super(x, y, TILE_WIDTH * 1.5, TILE_HEIGHT); 
         this.game = game;
         this.initialX = x;
         this.initialY = y;
@@ -19,7 +19,8 @@ export class Bat extends GameObject {
         this.facingDirection = "right";
         this.bounceCooldown = 500;
         this.lastBounceTime = 0;
-        
+        this.flightAngle = 0;
+
         this.sprite = new Image();
         this.sprite.src = "assets/sprites/bat.png";
     }
@@ -35,6 +36,7 @@ export class Bat extends GameObject {
             this.angle += 0.02;
             this.x = this.initialX + this.patrolRadius * Math.cos(this.angle);
             this.y = this.initialY + this.patrolRadius * Math.sin(this.angle);
+            this.flightAngle = Math.atan2(this.y - (this.initialY), this.x - (this.initialX)) + Math.PI / 2;
 
             // Wykrywanie gracza
             if (distanceToPlayer < this.detectionRange) {
@@ -45,10 +47,14 @@ export class Bat extends GameObject {
             const dx = player.x - this.x;
             const dy = player.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Obliczanie kąta lotu
+            this.flightAngle = Math.atan2(dy, dx) + Math.PI / 2;
+
             this.x += (dx / distance) * this.speed;
             this.y += (dy / distance) * this.speed;
             
-            // Zmiana kierunku
+            // Zmiana kierunku, ale sprite'a obracamy kątem
             this.facingDirection = dx > 0 ? "right" : "left";
 
             // Kolizja z graczem
@@ -61,6 +67,10 @@ export class Bat extends GameObject {
             const dx = this.x - player.x;
             const dy = this.y - player.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Obliczanie kąta ucieczki
+            this.flightAngle = Math.atan2(dy, dx) + Math.PI / 2;
+
             this.x += (dx / distance) * this.speed * 2;
             this.y += (dy / distance) * this.speed * 2;
             
@@ -81,9 +91,9 @@ export class Bat extends GameObject {
                     const dx = this.x - obj.x;
                     const dy = this.y - obj.y;
                     if (Math.abs(dx) > Math.abs(dy)) {
-                        this.facingDirection = dx > 0 ? "right" : "left";
+                        this.x -= (dx / Math.abs(dx)) * 10;
                     } else {
-                        this.facingDirection = dy > 0 ? "up" : "down";
+                        this.y -= (dy / Math.abs(dy)) * 10;
                     }
                     this.state = "patrol"; // Wracamy do stanu patrolowania
                     this.lastBounceTime = Date.now();
@@ -103,12 +113,7 @@ export class Bat extends GameObject {
         if (this.sprite.complete) {
             ctx.save();
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
-
-            if (this.facingDirection === "left") {
-                ctx.scale(-1, 1);
-            }
-            // Obracamy sprite'a, by leciał w kierunku, w którym jest zwrócony
-            ctx.rotate(Math.PI / 2);
+            ctx.rotate(this.flightAngle);
             
             ctx.drawImage(this.sprite, -this.width / 2, -this.height / 2, this.width, this.height);
             ctx.restore();
