@@ -9,6 +9,7 @@ import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 import { Apple } from "../objects/apple.js";
 import { allLevels } from "../levels/levels.js"; // Zmiana tutaj!
 import { Mage } from "../objects/Mage.js";
+import { Bat } from "../objects/Bat.js"; // <--- Nowy import
 
 export class LevelLoader {
     /**
@@ -119,6 +120,9 @@ export class LevelLoader {
              else if (objData.type === "mage") {
                 const mage = new Mage(objData.x, objData.y, game);
                 gameObjects.push(mage);
+            } else if (objData.type === "bat") { // <--- Dodaj logikę dla nietoperza
+                const bat = new Bat(objData.x, objData.y, game);
+                gameObjects.push(bat);
             }
             
         });
