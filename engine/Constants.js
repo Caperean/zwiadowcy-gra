@@ -21,3 +21,6 @@ export const ARROW_WIDTH = 64;
 export const ARROW_HEIGHT = 16;
 export const ARROW_SPEED = 8;
 export const ARROW_VERTICAL_STRENGTH = -2;
+// Nowe stałe dla nietoperza
+export const BAT_WIDTH = 32;
+export const BAT_HEIGHT = 32;
