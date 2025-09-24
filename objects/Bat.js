@@ -6,7 +6,7 @@ export class Bat extends GameObject {
     constructor(x, y, game) {
         super(x, y, TILE_WIDTH * 1.5, TILE_HEIGHT); 
         this.game = game;
-        this.initialX = x;
+        this.initialX = x; // Początkowy punkt patrolowania
         this.initialY = y;
         this.state = "patrol";
         this.hp = 1;
@@ -17,9 +17,9 @@ export class Bat extends GameObject {
         this.patrolRadius = 50;
         this.angle = 0;
         this.facingDirection = "right";
-        this.bounceCooldown = 500;
-        this.lastBounceTime = 0;
         this.flightAngle = 0;
+        this.dy = 0;
+        this.dx = 0;
 
         this.sprite = new Image();
         this.sprite.src = "assets/sprites/bat.png";
@@ -31,13 +31,17 @@ export class Bat extends GameObject {
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
 
+        // Pusty obiekt dla logiki kolizji
+        let proposedX = this.x + this.dx;
+        let proposedY = this.y + this.dy;
+
         if (this.state === "patrol") {
             // Ruch po okręgu
             this.angle += 0.02;
-            this.x = this.initialX + this.patrolRadius * Math.cos(this.angle);
-            this.y = this.initialY + this.patrolRadius * Math.sin(this.angle);
-            this.flightAngle = Math.atan2(this.y - (this.initialY), this.x - (this.initialX)) + Math.PI / 2;
-
+            this.dx = this.initialX + this.patrolRadius * Math.cos(this.angle) - this.x;
+            this.dy = this.initialY + this.patrolRadius * Math.sin(this.angle) - this.y;
+            this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
+            
             // Wykrywanie gracza
             if (distanceToPlayer < this.detectionRange) {
                 this.state = "attack";
@@ -47,18 +51,15 @@ export class Bat extends GameObject {
             const dx = player.x - this.x;
             const dy = player.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            this.dx = (dx / distance) * this.speed;
+            this.dy = (dy / distance) * this.speed;
 
             // Obliczanie kąta lotu
-            this.flightAngle = Math.atan2(dy, dx) + Math.PI / 2;
-
-            this.x += (dx / distance) * this.speed;
-            this.y += (dy / distance) * this.speed;
-            
-            // Zmiana kierunku, ale sprite'a obracamy kątem
-            this.facingDirection = dx > 0 ? "right" : "left";
+            this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
 
             // Kolizja z graczem
-            if (distanceToPlayer < this.attackRange) {
+            if (this.checkCollision(this.game.player)) {
                 this.game.player.takeDamage(1);
                 this.state = "escape";
             }
@@ -68,38 +69,33 @@ export class Bat extends GameObject {
             const dy = this.y - player.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            // Obliczanie kąta ucieczki
-            this.flightAngle = Math.atan2(dy, dx) + Math.PI / 2;
-
-            this.x += (dx / distance) * this.speed * 2;
-            this.y += (dy / distance) * this.speed * 2;
+            this.dx = (dx / distance) * this.speed * 2;
+            this.dy = (dy / distance) * this.speed * 2;
             
-            // Zmiana kierunku
-            this.facingDirection = dx > 0 ? "right" : "left";
+            // Obliczanie kąta ucieczki
+            this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
 
             // Powrót do patrolu po oddaleniu się
-            if (distance > this.escapeDistance) {
+            if (distance > this.escapeDistance && distanceToPlayer > this.detectionRange) {
                 this.state = "patrol";
             }
         }
         
-        // Nowa logika kolizji z kafelkami, by nie przelatywać przez ściany
-        if (Date.now() - this.lastBounceTime > this.bounceCooldown) {
-            this.game.gameObjects.forEach(obj => {
-                if (obj instanceof Tile && this.checkCollision(obj)) {
-                    // Odbijanie się od kafelków
-                    const dx = this.x - obj.x;
-                    const dy = this.y - obj.y;
-                    if (Math.abs(dx) > Math.abs(dy)) {
-                        this.x -= (dx / Math.abs(dx)) * 10;
-                    } else {
-                        this.y -= (dy / Math.abs(dy)) * 10;
-                    }
-                    this.state = "patrol"; // Wracamy do stanu patrolowania
-                    this.lastBounceTime = Date.now();
+        // Sprawdzanie kolizji z kafelkami
+        this.game.gameObjects.forEach(obj => {
+            if (obj instanceof Tile) {
+                if (this.checkCollision(obj)) {
+                    // Odwracamy kierunek lotu
+                    this.dx = -this.dx;
+                    this.dy = -this.dy;
+                    this.state = "patrol"; // Wraca do patrolowania
                 }
-            });
-        }
+            }
+        });
+
+        // Aktualizacja pozycji po kolizjach
+        this.x += this.dx;
+        this.y += this.dy;
     }
     
     checkCollision(other) {
