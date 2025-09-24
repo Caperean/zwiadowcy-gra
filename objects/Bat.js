@@ -4,7 +4,7 @@ import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 
 export class Bat extends GameObject {
     constructor(x, y, game) {
-        super(x, y, TILE_WIDTH * 1.5, TILE_HEIGHT); 
+        super(x, y, TILE_WIDTH * 1.5, TILE_HEIGHT);
         this.game = game;
         this.initialX = x;
         this.initialY = y;
@@ -17,7 +17,9 @@ export class Bat extends GameObject {
         this.patrolRadius = 50;
         this.angle = 0;
         this.facingDirection = "right";
-
+        this.bounceCooldown = 500;
+        this.lastBounceTime = 0;
+        
         this.sprite = new Image();
         this.sprite.src = "assets/sprites/bat.png";
     }
@@ -59,7 +61,7 @@ export class Bat extends GameObject {
             const dx = this.x - player.x;
             const dy = this.y - player.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            this.x += (dx / distance) * this.speed * 2; // Szybsza ucieczka
+            this.x += (dx / distance) * this.speed * 2;
             this.y += (dy / distance) * this.speed * 2;
             
             // Zmiana kierunku
@@ -69,6 +71,24 @@ export class Bat extends GameObject {
             if (distance > this.escapeDistance) {
                 this.state = "patrol";
             }
+        }
+        
+        // Nowa logika kolizji z kafelkami, by nie przelatywać przez ściany
+        if (Date.now() - this.lastBounceTime > this.bounceCooldown) {
+            this.game.gameObjects.forEach(obj => {
+                if (obj instanceof Tile && this.checkCollision(obj)) {
+                    // Odbijanie się od kafelków
+                    const dx = this.x - obj.x;
+                    const dy = this.y - obj.y;
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        this.facingDirection = dx > 0 ? "right" : "left";
+                    } else {
+                        this.facingDirection = dy > 0 ? "up" : "down";
+                    }
+                    this.state = "patrol"; // Wracamy do stanu patrolowania
+                    this.lastBounceTime = Date.now();
+                }
+            });
         }
     }
     
@@ -82,13 +102,15 @@ export class Bat extends GameObject {
     draw(ctx) {
         if (this.sprite.complete) {
             ctx.save();
+            ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+
             if (this.facingDirection === "left") {
-                ctx.translate(this.x + this.width, this.y);
                 ctx.scale(-1, 1);
-                ctx.drawImage(this.sprite, 0, 0, this.width, this.height);
-            } else {
-                ctx.drawImage(this.sprite, this.x, this.y, this.width, this.height);
             }
+            // Obracamy sprite'a, by leciał w kierunku, w którym jest zwrócony
+            ctx.rotate(Math.PI / 2);
+            
+            ctx.drawImage(this.sprite, -this.width / 2, -this.height / 2, this.width, this.height);
             ctx.restore();
         } else {
             ctx.fillStyle = "darkgray";
