@@ -30,20 +30,22 @@ export class Bat extends GameObject {
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
 
+        // Zapisz pozycję na początku aktualizacji, na wypadek cofnięcia ruchu
+        const oldX = this.x;
+        const oldY = this.y;
+
+        // --- Logika stanu i ruchu ---
         if (this.state === "patrol") {
-            // Ruch po okręgu
             this.angle += 0.02;
             const targetX = this.initialX + this.patrolRadius * Math.cos(this.angle);
             const targetY = this.initialY + this.patrolRadius * Math.sin(this.angle);
             this.dx = (targetX - this.x) * 0.05;
             this.dy = (targetY - this.y) * 0.05;
-
-            // Wykrywanie gracza
+            
             if (distanceToPlayer < this.detectionRange) {
                 this.state = "attack";
             }
         } else if (this.state === "attack") {
-            // Lecenie w kierunku gracza
             const dx = player.x - this.x;
             const dy = player.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
@@ -51,13 +53,11 @@ export class Bat extends GameObject {
             this.dx = (dx / distance) * this.speed;
             this.dy = (dy / distance) * this.speed;
 
-            // Kolizja z graczem
             if (this.checkCollision(this.game.player)) {
                 this.game.player.takeDamage(1);
                 this.state = "escape";
             }
         } else if (this.state === "escape") {
-            // Ucieczka od gracza
             const dx = this.x - player.x;
             const dy = this.y - player.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
@@ -65,48 +65,37 @@ export class Bat extends GameObject {
             this.dx = (dx / distance) * this.speed * 2;
             this.dy = (dy / distance) * this.speed * 2;
             
-            // Powrót do patrolu po oddaleniu się I niewidzeniu gracza
             if (distanceToPlayer > this.detectionRange) {
                 this.state = "patrol";
             }
         }
         
-        // Obliczanie kąta lotu dla rysowania
         this.flightAngle = Math.atan2(this.dy, this.dx) + Math.PI / 2;
 
-        // Sprawdzanie kolizji z kafelkami PRZED ruchem
-        let nextX = this.x + this.dx;
-        let nextY = this.y + this.dy;
+        // --- Logika kolizji z kafelkami ---
+        
+        // Zaktualizuj pozycję tymczasowo, aby sprawdzić kolizje
+        this.x += this.dx;
+        this.y += this.dy;
 
+        // Sprawdź kolizje z kafelkami
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile) {
-                // Sprawdzenie kolizji w osi X
-                if (this.x < obj.x + obj.width && this.x + this.width > obj.x && nextY < obj.y + obj.height && nextY + this.height > obj.y) {
-                    if (this.dx > 0) {
-                        this.dx = 0;
-                        nextX = obj.x - this.width;
-                    } else if (this.dx < 0) {
-                        this.dx = 0;
-                        nextX = obj.x + obj.width;
+                if (this.checkCollision(obj)) {
+                    // Jeśli wystąpiła kolizja, cofnij ruch w odpowiedniej osi
+                    if (this.x + this.width > obj.x && oldX + this.width <= obj.x) { // Kolizja z lewej
+                        this.x = obj.x - this.width;
+                    } else if (this.x < obj.x + obj.width && oldX >= obj.x + obj.width) { // Kolizja z prawej
+                        this.x = obj.x + obj.width;
                     }
-                }
-                
-                // Sprawdzenie kolizji w osi Y
-                if (this.y < obj.y + obj.height && this.y + this.height > obj.y && nextX < obj.x + obj.width && nextX + this.width > obj.x) {
-                    if (this.dy > 0) {
-                        this.dy = 0;
-                        nextY = obj.y - this.height;
-                    } else if (this.dy < 0) {
-                        this.dy = 0;
-                        nextY = obj.y + obj.height;
+                    if (this.y + this.height > obj.y && oldY + this.height <= obj.y) { // Kolizja z góry
+                        this.y = obj.y - this.height;
+                    } else if (this.y < obj.y + obj.height && oldY >= obj.y + obj.height) { // Kolizja z dołu
+                        this.y = obj.y + obj.height;
                     }
                 }
             }
         });
-
-        // Aktualizacja pozycji po kolizjach
-        this.x = nextX;
-        this.y = nextY;
     }
     
     checkCollision(other) {
