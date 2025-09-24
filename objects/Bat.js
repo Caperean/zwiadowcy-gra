@@ -1,10 +1,10 @@
 import { GameObject } from "./object.js";
 import { Tile } from "./tile.js";
-import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
+import { TILE_WIDTH, TILE_HEIGHT, BAT_WIDTH, BAT_HEIGHT } from "../engine/Constants.js"; // Import nowych stałych
 
 export class Bat extends GameObject {
     constructor(x, y, game) {
-        super(x, y, TILE_WIDTH * 1.5, TILE_HEIGHT); 
+        super(x, y, BAT_WIDTH, BAT_HEIGHT); // Użyj nowych stałych
         this.game = game;
         this.initialX = x;
         this.initialY = y;
