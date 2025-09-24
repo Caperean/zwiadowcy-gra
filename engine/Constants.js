@@ -24,3 +24,7 @@ export const ARROW_VERTICAL_STRENGTH = -2;
 // Nowe stałe dla nietoperza
 export const BAT_WIDTH = 18;
 export const BAT_HEIGHT = 12;
+// ... (istniejące stałe)
+
+export const ARAB_SPEED = 1;
+export const ARAB_DETECTION_RANGE = 300;
