@@ -1,7 +1,7 @@
 import { GameObject } from "./object.js";
 import { Tile } from "./tile.js";
 import { EnemyArrow } from "./EnemyArrow.js";
-import { GRAVITY, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARAB_FOV_ANGLE, TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
+import { GRAVITY, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARAB_FOV_ANGLE } from "../engine/Constants.js";
 
 export class Arab extends GameObject {
     constructor(x, y, game) {
@@ -51,19 +51,25 @@ export class Arab extends GameObject {
 
         // Logika stanu
         if (this.state === "walk") {
-            this.x += this.speed * (this.facingDirection === "right" ? 1 : -1);
+            const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
+            let isBlocked = false;
             
-            // Kolizja z kafelkami (prosta logika jak u wilka)
+            // Sprawdź kolizję z kafelkami na nowej pozycji
             this.game.gameObjects.forEach(obj => {
                 if (obj instanceof Tile) {
-                    if (this.checkCollision(obj)) {
-                         // Jeśli Arab koliduje z kafelkiem po bokach, zawraca
-                        if (this.y + this.height > obj.y + 5 && this.y < obj.y + obj.height - 5) {
-                            this.facingDirection = this.facingDirection === "right" ? "left" : "right";
-                        }
+                    const futureRect = { x: nextX, y: this.y, width: this.width, height: this.height };
+                    if (this.checkCollision(obj, futureRect)) {
+                        isBlocked = true;
                     }
                 }
             });
+
+            // Wykonaj ruch tylko jeśli nie ma kolizji
+            if (isBlocked) {
+                this.facingDirection = this.facingDirection === "right" ? "left" : "right";
+            } else {
+                this.x = nextX;
+            }
 
             if (playerInSight) {
                 this.state = "aim";
@@ -112,11 +118,11 @@ export class Arab extends GameObject {
         this.game.gameObjects.push(arrow);
     }
     
-    checkCollision(other) {
-        return this.x < other.x + other.width &&
-               this.x + this.width > other.x &&
-               this.y < other.y + other.height &&
-               this.y + this.height > other.y;
+    checkCollision(other, rect = this) {
+        return rect.x < other.x + other.width &&
+               rect.x + rect.width > other.x &&
+               rect.y < other.y + other.height &&
+               rect.y + rect.height > other.y;
     }
 
     draw(ctx) {
