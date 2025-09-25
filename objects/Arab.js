@@ -1,7 +1,7 @@
 import { GameObject } from "./object.js";
 import { Tile } from "./tile.js";
 import { EnemyArrow } from "./EnemyArrow.js";
-import { GRAVITY, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARAB_FOV_ANGLE } from "../engine/Constants.js";
+import { GRAVITY, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARAB_FOV_ANGLE, ARROW_WIDTH } from "../engine/Constants.js";
 
 export class Arab extends GameObject {
     constructor(x, y, game) {
@@ -115,8 +115,8 @@ export class Arab extends GameObject {
     }
 
     shootArrow() {
-        // Zmiana: strzała tworzy się na środku grafiki Araba
-        const arrowX = this.x + this.width / 2;
+        // Poprawiona logika pozycji strzały
+        const arrowX = this.facingDirection === "right" ? this.x + this.width : this.x - ARROW_WIDTH;
         const arrowY = this.y + this.height / 2;
         
         const dx = this.game.player.x - this.x;
