@@ -26,5 +26,9 @@ export const BAT_WIDTH = 18;
 export const BAT_HEIGHT = 12;
 // ... (istniejące stałe)
 
+// Nowe stałe dla araba
+export const ARAB_WIDTH = 24;
+export const ARAB_HEIGHT = 48;
 export const ARAB_SPEED = 1;
 export const ARAB_DETECTION_RANGE = 300;
+export const ARAB_FOV_ANGLE = Math.PI / 3; // 60 stopni w radianach
