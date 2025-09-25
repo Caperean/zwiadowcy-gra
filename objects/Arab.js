@@ -51,34 +51,19 @@ export class Arab extends GameObject {
 
         // Logika stanu
         if (this.state === "walk") {
-            const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
+            this.x += this.speed * (this.facingDirection === "right" ? 1 : -1);
             
-            let isBlockedByWall = false;
-            let isGoingToFall = true;
-
-            // Sprawdź, czy przed arabem jest przeszkoda lub krawędź
+            // Kolizja z kafelkami (prosta logika jak u wilka)
             this.game.gameObjects.forEach(obj => {
                 if (obj instanceof Tile) {
-                    // Sprawdzenie kolizji z boku
-                    const futureRect = { x: nextX, y: this.y, width: this.width, height: this.height };
-                    if (this.checkCollision(obj, futureRect)) {
-                        isBlockedByWall = true;
-                    }
-                    
-                    // Sprawdzenie, czy jest podłoże przed Arabem
-                    const groundCheckX = nextX + (this.facingDirection === "right" ? this.width / 2 : this.width / 2);
-                    const groundCheckY = this.y + this.height + 1;
-                    if (obj.x < groundCheckX && obj.x + obj.width > groundCheckX && obj.y < groundCheckY && obj.y + obj.height > groundCheckY) {
-                         isGoingToFall = false;
+                    if (this.checkCollision(obj)) {
+                         // Jeśli Arab koliduje z kafelkiem po bokach, zawraca
+                        if (this.y + this.height > obj.y + 5 && this.y < obj.y + obj.height - 5) {
+                            this.facingDirection = this.facingDirection === "right" ? "left" : "right";
+                        }
                     }
                 }
             });
-
-            if (isBlockedByWall || isGoingToFall) {
-                this.facingDirection = this.facingDirection === "right" ? "left" : "right";
-            } else {
-                this.x = nextX;
-            }
 
             if (playerInSight) {
                 this.state = "aim";
@@ -103,7 +88,7 @@ export class Arab extends GameObject {
             }
         }
 
-        // Kolizje z kafelkami (grawitacja i kolizja z dołem)
+        // Kolizje z dołem do sprawdzania, czy jest na ziemi
         this.onGround = false;
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile && this.checkCollision(obj)) {
@@ -122,16 +107,16 @@ export class Arab extends GameObject {
         const dy = this.game.player.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const normalizedDx = (dx / distance);
-        const normalizedDy = (dy / distance) * this.speed;
+        const normalizedDy = (dy / distance);
         const arrow = new EnemyArrow(arrowX, arrowY, normalizedDx, normalizedDy, this.game);
         this.game.gameObjects.push(arrow);
     }
     
-    checkCollision(other, rect = this) {
-        return rect.x < other.x + other.width &&
-               rect.x + rect.width > other.x &&
-               rect.y < other.y + other.height &&
-               rect.y + rect.height > other.y;
+    checkCollision(other) {
+        return this.x < other.x + other.width &&
+               this.x + this.width > other.x &&
+               this.y < other.y + other.height &&
+               this.y + this.height > other.y;
     }
 
     draw(ctx) {
