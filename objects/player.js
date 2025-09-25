@@ -125,6 +125,12 @@ export class Player extends GameObject {
                 this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
             }
             this.powerCharge = 0;
+            // Sprawdzanie śmierci gracza
+        if (this.currentHP <= 0) {
+            console.log("Gracz zginął! Resetowanie gracza i mobów...");
+            this.game.resetLevelObjects();
+            return;
+        }
         } else {
             this.dx = 0;
             if (keys["ArrowLeft"] || keys["KeyA"]) {
