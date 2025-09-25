@@ -35,7 +35,6 @@ export class Arab extends GameObject {
         const angleToPlayer = Math.atan2(player.y - this.y, player.x - this.x);
         const playerIsRight = player.x > this.x;
 
-        // Kąt widzenia
         let playerInFOV = false;
         if (playerIsRight && Math.abs(angleToPlayer) < ARAB_FOV_ANGLE / 2) {
             playerInFOV = true;
@@ -54,18 +53,31 @@ export class Arab extends GameObject {
         if (this.state === "walk") {
             const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
             
-            // Sprawdzanie, czy przed arabem jest kafelka
+            // Sprawdzenie, czy przed arabem jest przeszkoda lub krawędź
             let collisionAhead = false;
+            let edgeAhead = false;
+
             this.game.gameObjects.forEach(obj => {
                 if (obj instanceof Tile) {
                     const tempRect = { x: nextX, y: this.y, width: this.width, height: this.height };
+                    
+                    // Sprawdzenie kolizji z boku
                     if (this.checkCollision(obj, tempRect)) {
                         collisionAhead = true;
+                    }
+                    
+                    // Sprawdzenie, czy jest podłoże przed Arabem
+                    const groundCheckX = this.x + (this.facingDirection === "right" ? this.width : -TILE_WIDTH);
+                    const groundCheckY = this.y + this.height + 1; // 1px pod stopami
+                    if (obj.x < groundCheckX && obj.x + obj.width > groundCheckX && obj.y < groundCheckY && obj.y + obj.height > groundCheckY) {
+                         // Ok, jest podłoże.
+                    } else {
+                        edgeAhead = true; // Nie ma podłoża, to jest krawędź
                     }
                 }
             });
 
-            if (collisionAhead) {
+            if (collisionAhead || edgeAhead) {
                 this.facingDirection = this.facingDirection === "right" ? "left" : "right";
             } else {
                 this.x = nextX;
@@ -94,7 +106,7 @@ export class Arab extends GameObject {
             }
         }
 
-        // Kolizje z kafelkami
+        // Kolizje z kafelkami (grawitacja i kolizja z dołem)
         this.onGround = false;
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile && this.checkCollision(obj)) {
