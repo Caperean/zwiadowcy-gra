@@ -3,12 +3,14 @@ import { Tile } from "./tile.js";
 import { ARROW_WIDTH, ARROW_HEIGHT, ARROW_SPEED } from "../engine/Constants.js";
 
 export class EnemyArrow extends GameObject {
-    constructor(x, y, direction, game) {
+    constructor(x, y, dx, dy, game) {
         super(x, y, ARROW_WIDTH, ARROW_HEIGHT);
         this.game = game;
         this.speed = ARROW_SPEED;
-        this.dx = direction === "right" ? this.speed : -this.speed;
+        this.dx = dx * this.speed;
+        this.dy = dy * this.speed;
         this.toRemove = false;
+        this.flightAngle = Math.atan2(this.dy, this.dx);
 
         this.sprite = new Image();
         this.sprite.src = "assets/sprites/arrow.png";
@@ -16,6 +18,7 @@ export class EnemyArrow extends GameObject {
 
     update(deltaTime) {
         this.x += this.dx;
+        this.y += this.dy;
 
         // Kolizja z graczem
         if (this.checkCollision(this.game.player)) {
@@ -43,9 +46,7 @@ export class EnemyArrow extends GameObject {
         if (this.sprite.complete) {
             ctx.save();
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
-            if (this.dx < 0) {
-                ctx.scale(-1, 1);
-            }
+            ctx.rotate(this.flightAngle);
             ctx.drawImage(this.sprite, -this.width / 2, -this.height / 2, this.width, this.height);
             ctx.restore();
         } else {
