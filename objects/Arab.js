@@ -34,11 +34,8 @@ export class Arab extends GameObject {
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
         const playerIsRight = player.x > this.x;
 
-        // Określanie, czy gracz jest w zasięgu widzenia
-        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE && (
-            (playerIsRight && this.facingDirection === "right") ||
-            (!playerIsRight && this.facingDirection === "left")
-        );
+        // Kluczowa zmiana: Arab widzi gracza w każdym kierunku, jeśli jest w zasięgu.
+        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE;
 
         // Grawitacja
         if (!this.onGround) {
@@ -50,12 +47,10 @@ export class Arab extends GameObject {
             const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
             let isBlocked = false;
 
-            // Sprawdzamy kolizję z kafelkami na nowej pozycji
             this.game.gameObjects.forEach(obj => {
                 if (obj instanceof Tile) {
                     const futureRect = { x: nextX, y: this.y, width: this.width, height: this.height };
                     if (this.checkCollision(obj, futureRect)) {
-                        // Upewnij się, że to kolizja boczna, a nie z podłożem
                         if (this.y + this.height > obj.y + 5 && this.y < obj.y + obj.height - 5) {
                             isBlocked = true;
                         }
@@ -159,4 +154,5 @@ export class Arab extends GameObject {
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
+}
 }
