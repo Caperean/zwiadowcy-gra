@@ -32,10 +32,23 @@ export class Arab extends GameObject {
         if (!player) return;
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
+        const angleToPlayer = Math.atan2(player.y - this.y, player.x - this.x);
         const playerIsRight = player.x > this.x;
 
-        // Kluczowa zmiana: Arab widzi gracza w każdym kierunku, jeśli jest w zasięgu.
-        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE;
+        // Określenie, czy gracz jest w zasięgu FOV (60 stopni do przodu i tyłu)
+        let playerInFOV = false;
+        const currentAngle = this.facingDirection === "right" ? 0 : Math.PI;
+        const angleDifference = Math.abs(angleToPlayer - currentAngle);
+
+        // Używamy modulo, aby obsłużyć kąty ujemne i większe niż 2PI
+        const normalizedAngleDifference = Math.min(angleDifference, 2 * Math.PI - angleDifference);
+        
+        // Sprawdzamy, czy kąt gracza mieści się w stożku 60 stopni (pi/3)
+        if (normalizedAngleDifference <= ARAB_FOV_ANGLE / 2) {
+            playerInFOV = true;
+        }
+
+        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE && playerInFOV;
 
         // Grawitacja
         if (!this.onGround) {
@@ -107,8 +120,10 @@ export class Arab extends GameObject {
     }
 
     shootArrow() {
-        const arrowX = this.x + this.width / 2;
+        // Nowa, poprawna pozycja strzały
+        const arrowX = this.facingDirection === "right" ? this.x + this.width : this.x;
         const arrowY = this.y + this.height / 2;
+        
         const dx = this.game.player.x - this.x;
         const dy = this.game.player.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -155,4 +170,3 @@ export class Arab extends GameObject {
         }
     }
 }
-
