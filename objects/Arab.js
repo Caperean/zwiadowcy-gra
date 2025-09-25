@@ -33,36 +33,26 @@ export class Arab extends GameObject {
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
         const playerIsRight = player.x > this.x;
-        
-        // Zrezygnowanie z dokładnego obliczania kąta.
-        // Zamiast tego, sprawdzamy, czy gracz jest w zasięgu wykrywania I
-        // czy znajduje się w stożku widzenia z przodu LUB z tyłu Araba.
+
         let playerInFOV = false;
         const playerAngleFromArab = Math.atan2(player.y - this.y, player.x - this.x);
-
-        // Kąt skierowania Araba (0 dla prawo, PI dla lewo)
         const arabFacingAngle = this.facingDirection === "right" ? 0 : Math.PI;
 
-        // Różnica kątów
         let angleDiff = Math.abs(playerAngleFromArab - arabFacingAngle);
         if (angleDiff > Math.PI) {
             angleDiff = 2 * Math.PI - angleDiff;
         }
 
-        // Kąt widzenia to ARAB_FOV_ANGLE (PI/3 dla 60 stopni)
         if (angleDiff <= ARAB_FOV_ANGLE / 2 || angleDiff >= Math.PI - ARAB_FOV_ANGLE / 2) {
             playerInFOV = true;
         }
 
         const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE && playerInFOV;
 
-
-        // Grawitacja
         if (!this.onGround) {
             this.y += GRAVITY;
         }
 
-        // Logika stanu
         if (this.state === "walk") {
             const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
             let isBlocked = false;
@@ -89,7 +79,6 @@ export class Arab extends GameObject {
                 this.aimTimer = 500;
             }
         } else if (this.state === "aim") {
-            // Zmień kierunek celowania, jeśli gracz zmienił stronę
             if (playerIsRight) {
                 this.facingDirection = "right";
             } else {
@@ -114,7 +103,6 @@ export class Arab extends GameObject {
             }
         }
 
-        // Kolizje z dołem do sprawdzania, czy jest na ziemi
         this.onGround = false;
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile && this.checkCollision(obj)) {
@@ -127,7 +115,8 @@ export class Arab extends GameObject {
     }
 
     shootArrow() {
-        const arrowX = this.facingDirection === "right" ? this.x + this.width : this.x;
+        // Poprawne określenie pozycji początkowej strzały
+        const arrowX = this.facingDirection === "right" ? this.x + this.width : this.x - 10;
         const arrowY = this.y + this.height / 2;
         
         const dx = this.game.player.x - this.x;
