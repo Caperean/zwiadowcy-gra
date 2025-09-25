@@ -32,17 +32,13 @@ export class Arab extends GameObject {
         if (!player) return;
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
-        const angleToPlayer = Math.atan2(player.y - this.y, player.x - this.x);
         const playerIsRight = player.x > this.x;
 
-        let playerInFOV = false;
-        if (playerIsRight && Math.abs(angleToPlayer) < ARAB_FOV_ANGLE / 2) {
-            playerInFOV = true;
-        } else if (!playerIsRight && Math.abs(Math.PI - Math.abs(angleToPlayer)) < ARAB_FOV_ANGLE / 2) {
-            playerInFOV = true;
-        }
-
-        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE && playerInFOV;
+        // Określanie, czy gracz jest w zasięgu widzenia
+        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE && (
+            (playerIsRight && this.facingDirection === "right") ||
+            (!playerIsRight && this.facingDirection === "left")
+        );
 
         // Grawitacja
         if (!this.onGround) {
@@ -52,32 +48,24 @@ export class Arab extends GameObject {
         // Logika stanu
         if (this.state === "walk") {
             const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
-            
-            let obstacleAhead = false;
-            let groundAhead = false;
+            let isBlocked = false;
 
-            // Sprawdź, czy przed arabem jest przeszkoda lub krawędź
+            // Sprawdzamy kolizję z kafelkami na nowej pozycji
             this.game.gameObjects.forEach(obj => {
                 if (obj instanceof Tile) {
-                    // Sprawdzenie kolizji z boku
                     const futureRect = { x: nextX, y: this.y, width: this.width, height: this.height };
                     if (this.checkCollision(obj, futureRect)) {
-                        obstacleAhead = true;
-                    }
-                    
-                    // Sprawdzenie, czy jest podłoże przed Arabem
-                    const groundCheckRect = { x: nextX, y: this.y + this.height + 1, width: this.width, height: 1 };
-                    if (this.checkCollision(obj, groundCheckRect)) {
-                        groundAhead = true;
+                        // Upewnij się, że to kolizja boczna, a nie z podłożem
+                        if (this.y + this.height > obj.y + 5 && this.y < obj.y + obj.height - 5) {
+                            isBlocked = true;
+                        }
                     }
                 }
             });
 
-            // Zmień kierunek, jeśli jest przeszkoda LUB nie ma podłoża
-            if (obstacleAhead || !groundAhead) {
+            if (isBlocked) {
                 this.facingDirection = this.facingDirection === "right" ? "left" : "right";
             } else {
-                // Kontynuuj ruch, jeśli jest bezpiecznie
                 this.x = nextX;
             }
 
@@ -86,6 +74,13 @@ export class Arab extends GameObject {
                 this.aimTimer = 500;
             }
         } else if (this.state === "aim") {
+            // Zmień kierunek celowania, jeśli gracz zmienił stronę
+            if (playerIsRight) {
+                this.facingDirection = "right";
+            } else {
+                this.facingDirection = "left";
+            }
+
             this.aimTimer -= deltaTime;
             if (this.aimTimer <= 0) {
                 this.shootArrow();
@@ -155,7 +150,8 @@ export class Arab extends GameObject {
                 ctx.scale(-1, 1);
                 ctx.drawImage(currentSprite, 0, 0, this.width, this.height);
             } else {
-                ctx.drawImage(currentSprite, this.x, this.y, this.width, this.height);
+                ctx.translate(this.x, this.y);
+                ctx.drawImage(currentSprite, 0, 0, this.width, this.height);
             }
             ctx.restore();
         } else {
