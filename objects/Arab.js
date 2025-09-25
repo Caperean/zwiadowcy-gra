@@ -52,22 +52,32 @@ export class Arab extends GameObject {
         // Logika stanu
         if (this.state === "walk") {
             const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
-            let isBlocked = false;
             
-            // Sprawdź kolizję z kafelkami na nowej pozycji
+            let obstacleAhead = false;
+            let groundAhead = false;
+
+            // Sprawdź, czy przed arabem jest przeszkoda lub krawędź
             this.game.gameObjects.forEach(obj => {
                 if (obj instanceof Tile) {
+                    // Sprawdzenie kolizji z boku
                     const futureRect = { x: nextX, y: this.y, width: this.width, height: this.height };
                     if (this.checkCollision(obj, futureRect)) {
-                        isBlocked = true;
+                        obstacleAhead = true;
+                    }
+                    
+                    // Sprawdzenie, czy jest podłoże przed Arabem
+                    const groundCheckRect = { x: nextX, y: this.y + this.height + 1, width: this.width, height: 1 };
+                    if (this.checkCollision(obj, groundCheckRect)) {
+                        groundAhead = true;
                     }
                 }
             });
 
-            // Wykonaj ruch tylko jeśli nie ma kolizji
-            if (isBlocked) {
+            // Zmień kierunek, jeśli jest przeszkoda LUB nie ma podłoża
+            if (obstacleAhead || !groundAhead) {
                 this.facingDirection = this.facingDirection === "right" ? "left" : "right";
             } else {
+                // Kontynuuj ruch, jeśli jest bezpiecznie
                 this.x = nextX;
             }
 
