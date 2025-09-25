@@ -1,7 +1,7 @@
 import { GameObject } from "./object.js";
 import { Tile } from "./tile.js";
 import { EnemyArrow } from "./EnemyArrow.js";
-import { GRAVITY, TILE_WIDTH, TILE_HEIGHT, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARAB_FOV_ANGLE } from "../engine/Constants.js";
+import { GRAVITY, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARAB_FOV_ANGLE, TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 
 export class Arab extends GameObject {
     constructor(x, y, game) {
@@ -53,31 +53,28 @@ export class Arab extends GameObject {
         if (this.state === "walk") {
             const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
             
-            // Sprawdzenie, czy przed arabem jest przeszkoda lub krawędź
-            let collisionAhead = false;
-            let edgeAhead = false;
+            let isBlockedByWall = false;
+            let isGoingToFall = true;
 
+            // Sprawdź, czy przed arabem jest przeszkoda lub krawędź
             this.game.gameObjects.forEach(obj => {
                 if (obj instanceof Tile) {
-                    const tempRect = { x: nextX, y: this.y, width: this.width, height: this.height };
-                    
                     // Sprawdzenie kolizji z boku
-                    if (this.checkCollision(obj, tempRect)) {
-                        collisionAhead = true;
+                    const futureRect = { x: nextX, y: this.y, width: this.width, height: this.height };
+                    if (this.checkCollision(obj, futureRect)) {
+                        isBlockedByWall = true;
                     }
                     
                     // Sprawdzenie, czy jest podłoże przed Arabem
-                    const groundCheckX = this.x + (this.facingDirection === "right" ? this.width : -TILE_WIDTH);
-                    const groundCheckY = this.y + this.height + 1; // 1px pod stopami
+                    const groundCheckX = nextX + (this.facingDirection === "right" ? this.width / 2 : this.width / 2);
+                    const groundCheckY = this.y + this.height + 1;
                     if (obj.x < groundCheckX && obj.x + obj.width > groundCheckX && obj.y < groundCheckY && obj.y + obj.height > groundCheckY) {
-                         // Ok, jest podłoże.
-                    } else {
-                        edgeAhead = true; // Nie ma podłoża, to jest krawędź
+                         isGoingToFall = false;
                     }
                 }
             });
 
-            if (collisionAhead || edgeAhead) {
+            if (isBlockedByWall || isGoingToFall) {
                 this.facingDirection = this.facingDirection === "right" ? "left" : "right";
             } else {
                 this.x = nextX;
@@ -125,7 +122,7 @@ export class Arab extends GameObject {
         const dy = this.game.player.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const normalizedDx = (dx / distance);
-        const normalizedDy = (dy / distance);
+        const normalizedDy = (dy / distance) * this.speed;
         const arrow = new EnemyArrow(arrowX, arrowY, normalizedDx, normalizedDy, this.game);
         this.game.gameObjects.push(arrow);
     }
