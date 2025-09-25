@@ -1,11 +1,11 @@
 import { GameObject } from "./object.js";
 import { Tile } from "./tile.js";
 import { EnemyArrow } from "./EnemyArrow.js";
-import { GRAVITY, TILE_WIDTH, TILE_HEIGHT, ARAB_SPEED, ARAB_DETECTION_RANGE } from "../engine/Constants.js";
+import { GRAVITY, TILE_WIDTH, TILE_HEIGHT, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARAB_FOV_ANGLE } from "../engine/Constants.js";
 
 export class Arab extends GameObject {
     constructor(x, y, game) {
-        super(x, y, TILE_WIDTH, TILE_HEIGHT * 2);
+        super(x, y, ARAB_WIDTH, ARAB_HEIGHT);
         this.game = game;
         this.hp = 1;
         this.speed = ARAB_SPEED;
@@ -32,10 +32,19 @@ export class Arab extends GameObject {
         if (!player) return;
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
+        const angleToPlayer = Math.atan2(player.y - this.y, player.x - this.x);
+        const playerIsRight = player.x > this.x;
 
-        // Zawsze sprawdzaj, czy arab widzi gracza
-        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE;
-        
+        // Kąt widzenia
+        let playerInFOV = false;
+        if (playerIsRight && Math.abs(angleToPlayer) < ARAB_FOV_ANGLE / 2) {
+            playerInFOV = true;
+        } else if (!playerIsRight && Math.abs(Math.PI - Math.abs(angleToPlayer)) < ARAB_FOV_ANGLE / 2) {
+            playerInFOV = true;
+        }
+
+        const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE && playerInFOV;
+
         // Grawitacja
         if (!this.onGround) {
             this.y += GRAVITY;
@@ -43,17 +52,35 @@ export class Arab extends GameObject {
 
         // Logika stanu
         if (this.state === "walk") {
-            this.x += this.speed * (this.facingDirection === "right" ? 1 : -1);
+            const nextX = this.x + this.speed * (this.facingDirection === "right" ? 1 : -1);
+            
+            // Sprawdzanie, czy przed arabem jest kafelka
+            let collisionAhead = false;
+            this.game.gameObjects.forEach(obj => {
+                if (obj instanceof Tile) {
+                    const tempRect = { x: nextX, y: this.y, width: this.width, height: this.height };
+                    if (this.checkCollision(obj, tempRect)) {
+                        collisionAhead = true;
+                    }
+                }
+            });
+
+            if (collisionAhead) {
+                this.facingDirection = this.facingDirection === "right" ? "left" : "right";
+            } else {
+                this.x = nextX;
+            }
+
             if (playerInSight) {
                 this.state = "aim";
-                this.aimTimer = 500; // Czas do strzału
+                this.aimTimer = 500;
             }
         } else if (this.state === "aim") {
             this.aimTimer -= deltaTime;
             if (this.aimTimer <= 0) {
                 this.shootArrow();
                 this.state = "reload";
-                this.reloadTimer = 2000; // Czas przeładowania
+                this.reloadTimer = 2000;
             }
         } else if (this.state === "reload") {
             this.reloadTimer -= deltaTime;
@@ -70,42 +97,32 @@ export class Arab extends GameObject {
         // Kolizje z kafelkami
         this.onGround = false;
         this.game.gameObjects.forEach(obj => {
-            if (obj instanceof Tile) {
-                if (this.checkCollision(obj)) {
-                    // Kolizja z dołu
-                    if (this.y < obj.y + obj.height && this.y + this.height > obj.y) {
-                        if (this.x + this.width > obj.x && this.x < obj.x + obj.width) {
-                            if (this.y + this.height > obj.y && this.y + this.height < obj.y + obj.height + 5) {
-                                this.y = obj.y - this.height;
-                                this.onGround = true;
-                            }
-                        }
-                    }
-                    // Kolizja boczna
-                    if (this.state === "walk" && this.checkCollision(obj)) {
-                        if (this.facingDirection === "right" && this.x + this.width > obj.x) {
-                            this.facingDirection = "left";
-                        } else if (this.facingDirection === "left" && this.x < obj.x + obj.width) {
-                            this.facingDirection = "right";
-                        }
-                    }
+            if (obj instanceof Tile && this.checkCollision(obj)) {
+                if (this.y + this.height > obj.y && this.y + this.height < obj.y + GRAVITY + 5) {
+                    this.y = obj.y - this.height;
+                    this.onGround = true;
                 }
             }
         });
     }
 
     shootArrow() {
-        const arrowX = this.x + (this.facingDirection === "right" ? this.width : 0);
+        const arrowX = this.x + this.width / 2;
         const arrowY = this.y + this.height / 2;
-        const arrow = new EnemyArrow(arrowX, arrowY, this.facingDirection, this.game);
+        const dx = this.game.player.x - this.x;
+        const dy = this.game.player.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const normalizedDx = (dx / distance);
+        const normalizedDy = (dy / distance);
+        const arrow = new EnemyArrow(arrowX, arrowY, normalizedDx, normalizedDy, this.game);
         this.game.gameObjects.push(arrow);
     }
     
-    checkCollision(other) {
-        return this.x < other.x + other.width &&
-               this.x + this.width > other.x &&
-               this.y < other.y + other.height &&
-               this.y + this.height > other.y;
+    checkCollision(other, rect = this) {
+        return rect.x < other.x + other.width &&
+               rect.x + rect.width > other.x &&
+               rect.y < other.y + other.height &&
+               rect.y + rect.height > other.y;
     }
 
     draw(ctx) {
@@ -114,7 +131,7 @@ export class Arab extends GameObject {
             currentSprite = this.sprites.aim;
         } else {
             const now = Date.now();
-            if (now - this.lastWalkFrameChange > 200) { // Animacja chodzenia
+            if (now - this.lastWalkFrameChange > 200) {
                 this.walkAnimationFrame = (this.walkAnimationFrame === 0) ? 1 : 0;
                 this.lastWalkFrameChange = now;
             }
