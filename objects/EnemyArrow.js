@@ -50,7 +50,8 @@ export class EnemyArrow extends GameObject {
         if (this.sprite.complete) {
             ctx.save();
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
-            ctx.rotate(this.flightAngle);
+            // Dodaj stały obrót o 90 stopni, aby wyrównać pionowy sprite z poziomym kierunkiem lotu
+            ctx.rotate(this.flightAngle + Math.PI / 2);
             ctx.drawImage(this.sprite, -this.width / 2, -this.height / 2, this.width, this.height);
             ctx.restore();
         } else {
