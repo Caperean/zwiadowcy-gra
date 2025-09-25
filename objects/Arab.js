@@ -32,23 +32,30 @@ export class Arab extends GameObject {
         if (!player) return;
 
         const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
-        const angleToPlayer = Math.atan2(player.y - this.y, player.x - this.x);
         const playerIsRight = player.x > this.x;
-
-        // Określenie, czy gracz jest w zasięgu FOV (60 stopni do przodu i tyłu)
-        let playerInFOV = false;
-        const currentAngle = this.facingDirection === "right" ? 0 : Math.PI;
-        const angleDifference = Math.abs(angleToPlayer - currentAngle);
-
-        // Używamy modulo, aby obsłużyć kąty ujemne i większe niż 2PI
-        const normalizedAngleDifference = Math.min(angleDifference, 2 * Math.PI - angleDifference);
         
-        // Sprawdzamy, czy kąt gracza mieści się w stożku 60 stopni (pi/3)
-        if (normalizedAngleDifference <= ARAB_FOV_ANGLE / 2) {
+        // Zrezygnowanie z dokładnego obliczania kąta.
+        // Zamiast tego, sprawdzamy, czy gracz jest w zasięgu wykrywania I
+        // czy znajduje się w stożku widzenia z przodu LUB z tyłu Araba.
+        let playerInFOV = false;
+        const playerAngleFromArab = Math.atan2(player.y - this.y, player.x - this.x);
+
+        // Kąt skierowania Araba (0 dla prawo, PI dla lewo)
+        const arabFacingAngle = this.facingDirection === "right" ? 0 : Math.PI;
+
+        // Różnica kątów
+        let angleDiff = Math.abs(playerAngleFromArab - arabFacingAngle);
+        if (angleDiff > Math.PI) {
+            angleDiff = 2 * Math.PI - angleDiff;
+        }
+
+        // Kąt widzenia to ARAB_FOV_ANGLE (PI/3 dla 60 stopni)
+        if (angleDiff <= ARAB_FOV_ANGLE / 2 || angleDiff >= Math.PI - ARAB_FOV_ANGLE / 2) {
             playerInFOV = true;
         }
 
         const playerInSight = distanceToPlayer < ARAB_DETECTION_RANGE && playerInFOV;
+
 
         // Grawitacja
         if (!this.onGround) {
@@ -120,7 +127,6 @@ export class Arab extends GameObject {
     }
 
     shootArrow() {
-        // Nowa, poprawna pozycja strzały
         const arrowX = this.facingDirection === "right" ? this.x + this.width : this.x;
         const arrowY = this.y + this.height / 2;
         
