@@ -115,8 +115,8 @@ export class Arab extends GameObject {
     }
 
     shootArrow() {
-        // Poprawne określenie pozycji początkowej strzały
-        const arrowX = this.facingDirection === "right" ? this.x + this.width : this.x - 10;
+        // Zmiana: strzała tworzy się na środku grafiki Araba
+        const arrowX = this.x + this.width / 2;
         const arrowY = this.y + this.height / 2;
         
         const dx = this.game.player.x - this.x;
