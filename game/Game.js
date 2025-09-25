@@ -76,7 +76,30 @@ export class Game {
         // Filtrowanie strzał, które wyleciały poza ekran
         this.arrows = this.arrows.filter(arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove);
     }
-
+/**
+     * Resetuje pozycje gracza i wszystkich mobów do ich stanu początkowego.
+     */
+    resetLevelObjects() {
+        // Resetowanie gracza
+        this.player.currentHP = this.player.maxHP;
+        const playerStart = this.levelLoader.getPlayerStartPosition();
+        this.player.x = playerStart.x;
+        this.player.y = playerStart.y;
+        this.player.dx = 0;
+        this.player.dy = 0;
+        this.player.state = "idle";
+        this.player.onGround = false;
+        this.player.isCharging = false;
+        
+        // Resetowanie mobów i strzał
+        this.arrows = []; // Usuń wszystkie lecące strzały
+        this.gameObjects.forEach(obj => {
+            // Sprawdzanie, czy obiekt jest mobem i ma metodę resetPosition()
+            if (typeof obj.resetPosition === 'function') {
+                obj.resetPosition();
+            }
+        });
+    }
     /**
      * Czyści płótno i rysuje wszystkie obiekty gry.
      */
