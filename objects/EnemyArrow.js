@@ -1,44 +1,35 @@
 import { GameObject } from "./object.js";
+import { ARROW_WIDTH, ARROW_HEIGHT } from "../engine/Constants.js";
 import { Tile } from "./tile.js";
-import { ARROW_WIDTH, ARROW_HEIGHT, ARROW_SPEED } from "../engine/Constants.js";
+import { Fire } from "./fire.js";
 
 export class EnemyArrow extends GameObject {
+    /**
+     * @param {number} x - Pozycja X startowa strzały.
+     * @param {number} y - Pozycja Y startowa strzały.
+     * @param {number} dx - Prędkość w poziomie.
+     * @param {number} dy - Prędkość w pionie.
+     * @param {object} game - Obiekt gry, potrzebny do kolizji z kafelkami.
+     */
     constructor(x, y, dx, dy, game) {
         super(x, y, ARROW_WIDTH, ARROW_HEIGHT);
+        this.dx = dx * 10; // Przyspieszenie strzały
+        this.dy = dy * 10; // Przyspieszenie strzały
         this.game = game;
-        this.speed = ARROW_SPEED;
-        
-        // Oblicz prędkość w oparciu o znormalizowane wektory
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        this.dx = (dx / distance) * this.speed;
-        this.dy = (dy / distance) * this.speed;
-        
-        this.toRemove = false;
-        
-        // Zapisz kąt lotu dla rysowania
-        this.flightAngle = Math.atan2(this.dy, this.dx);
-
         this.sprite = new Image();
-        this.sprite.src = "assets/sprites/arrow.png";
+        this.sprite.src = "assets/sprites/arrow.png"; 
+        this.burningSprite = new Image();
+        this.burningSprite.src = "assets/sprites/burningArrow.png";
+        this.isFired = true;
+        this.toRemove = false; // Flaga do usunięcia strzały
+        this.isBurning = false; // Nowa flaga dla płonącej strzały
     }
-
-    update(deltaTime) {
-        this.x += this.dx;
-        this.y += this.dy;
-
-        if (this.checkCollision(this.game.player)) {
-            this.game.player.takeDamage(1);
-            this.toRemove = true;
-            return;
-        }
-
-        this.game.gameObjects.forEach(obj => {
-            if (obj instanceof Tile && this.checkCollision(obj)) {
-                this.toRemove = true;
-            }
-        });
-    }
-
+    
+    /**
+     * Sprawdza kolizję z innym obiektem.
+     * @param {GameObject} other - Inny obiekt do sprawdzenia kolizji.
+     * @returns {boolean} - True, jeśli jest kolizja, w przeciwnym razie false.
+     */
     checkCollision(other) {
         return this.x < other.x + other.width &&
                this.x + this.width > other.x &&
@@ -46,17 +37,44 @@ export class EnemyArrow extends GameObject {
                this.y + this.height > other.y;
     }
 
+    /**
+     * Aktualizuje pozycję i stan strzały w każdej klatce gry.
+     * @param {number} deltaTime - Czas od ostatniej klatki w milisekundach.
+     */
+    update(deltaTime) {
+        // Kolizja z kafelkami i ogniem
+        this.game.gameObjects.forEach(obj => {
+            if (obj instanceof Tile && this.checkCollision(obj)) {
+                this.isFired = false;
+                this.toRemove = true; // Strzała znika po kolizji
+            } else if (obj instanceof Fire && this.checkCollision(obj)) {
+                this.isBurning = true;
+            }
+        });
+
+        this.x += this.dx;
+        this.y += this.dy;
+    }
+
+    /**
+     * Rysuje strzałę na canvasie.
+     * @param {CanvasRenderingContext2D} ctx - Kontekst rysowania 2D.
+     */
     draw(ctx) {
-        if (this.sprite.complete) {
+        const spriteToDraw = this.isBurning ? this.burningSprite : this.sprite;
+
+        if (spriteToDraw.complete) {
             ctx.save();
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
-            // Dodaj stały obrót o 90 stopni, aby wyrównać pionowy sprite z poziomym kierunkiem lotu
-            ctx.rotate(this.flightAngle + Math.PI / 2);
-            ctx.drawImage(this.sprite, -this.width / 2, -this.height / 2, this.width, this.height);
+
+            // Oblicza kąt obrotu strzały na podstawie jej wektora ruchu (dx, dy)
+            const angle = Math.atan2(this.dy, this.dx);
+            ctx.rotate(angle);
+
+            // Rysuje strzałę
+            ctx.drawImage(spriteToDraw, -this.width / 2, -this.height / 2, this.width, this.height);
+            
             ctx.restore();
-        } else {
-            ctx.fillStyle = "gray";
-            ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
 }
