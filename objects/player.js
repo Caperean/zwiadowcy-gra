@@ -291,3 +291,4 @@ export class Player extends GameObject {
             ctx.fillRect(this.x, this.y - 10, powerWidth, 5);
         }
     }
+}
