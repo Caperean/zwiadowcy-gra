@@ -7,6 +7,11 @@ import { Potion } from "./Potion.js";
 import { Fire } from "./fire.js";
 
 export class Player extends GameObject {
+    /**
+     * @param {number} x - Początkowa pozycja X gracza.
+     * @param {number} y - Początkowa pozycja Y gracza.
+     * @param {object} game - Obiekt gry, potrzebny do interakcji.
+     */
     constructor(x, y, game) {
         super(x, y, PLAYER_WIDTH, PLAYER_HEIGHT);
         this.game = game;
@@ -34,6 +39,8 @@ export class Player extends GameObject {
         this.walkSprites[1].src = "assets/sprites/walk2.png";
         this.walkSprites[2].src = "assets/sprites/walk3.png";
         
+        // Usunięto: this.snipingSprite
+        
         this.animationFrame = 0;
         this.animationTimer = 0;
         this.state = "idle";
@@ -42,6 +49,8 @@ export class Player extends GameObject {
         this.canShoot = true;
         this.shootingCooldown = 500;
         this.lastShotTime = 0;
+
+        // Usunięto: this.chargeStartTime, this.power, this.isCharging
     }
 
     takeDamage(amount) {
@@ -87,13 +96,12 @@ export class Player extends GameObject {
             this.state = "jump";
         }
 
-        // --- UPROSZCZONA LOGIKA STRZELANIA ---
-        // Naciśnięcie spacji od razu strzela
+        // Uproszczona logika strzelania: natychmiastowe wystrzelenie strzały
         if (input.keys["Space"] && this.canShoot) {
             this.shootArrow();
         }
         
-        // Zmiana stanu animacji
+        // Zmiana stanu animacji (usunięto stan 'sniping')
         if (this.dx !== 0) {
             this.state = "walk";
         } else if (this.onGround) {
@@ -180,6 +188,8 @@ export class Player extends GameObject {
     }
 
     draw(ctx) {
+        // Usunięto: kod do rysowania paska siły strzały
+
         let spriteToDraw;
         switch (this.state) {
             case "walk":
