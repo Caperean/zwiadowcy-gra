@@ -15,11 +15,11 @@ export const level4 = {
         "R..RRR..................R",                           
         "R.......................R",                           
         "R.......................R",
-        "RRRRRRSSRRRRSSRRRRRRRRRRR",
+        "RRRRRRRRRSRRSSRRRRRRRRRRR",
     ],
     objects: [
        { type: "player", x: 15, y: 15 },
-       { type: "bat", x: 400, y: 500 } ,      
+        { type: "bat", x: 500, y: 400 },     
    
        
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
