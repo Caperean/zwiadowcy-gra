@@ -22,6 +22,7 @@ export const level3 = {
        { type: "cactus", x: 100, y: 100, width: 140, height: 200 },
         { type: "bat", x: 500, y: 400 },
         { type: "arab", x: 400, y: 100 },
+         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
       
        
     ]
