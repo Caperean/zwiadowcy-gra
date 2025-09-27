@@ -16,7 +16,7 @@ export const WOLF_RETREAT_DISTANCE = 100;
 export const WOLF_ANIMATION_SPEED = 100;
 
 // Nowe stałe do obsługi strzały i paska siły
-export const MAX_POWER_CHARGE = 4000; // 4 sekundy w milisekundach
+export const MAX_POWER_CHARGE = 2000; // 4 sekundy w milisekundach
 export const ARROW_WIDTH = 64;
 export const ARROW_HEIGHT = 16;
 export const ARROW_SPEED = 8;
