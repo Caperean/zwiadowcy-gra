@@ -1,11 +1,10 @@
 import { GameObject } from "./object.js";
 import { GRAVITY, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_SPEED, JUMP_STRENGTH, PLAYER_ANIMATION_SPEED, MAX_POWER_CHARGE, ARROW_SPEED, ARROW_VERTICAL_STRENGTH } from "../engine/Constants.js";
 import { Arrow } from "./arrow.js"; 
-import { PoisonedArrow } from "./PoisonedArrow.js";
+import { PoisonedArrow } from "./PoisonedArrow.js"; // <--- Import nowej strzały
 import { Tile } from "./tile.js";
 import { ExitGate } from "./ExitGate.js";
-import { Potion } from "./Potion.js";
-import { Fire } from "./fire.js";
+import { Potion } from "./Potion.js"; // <--- Import eliksirów
 
 export class Player extends GameObject {
     /**
@@ -30,177 +29,225 @@ export class Player extends GameObject {
             this.hearts.push(heartImage);
         }
 
-        // Zmienne dla animacji
+        this.startX = x;
+        this.startY = y;
+
         this.idleSprite = new Image();
-        this.idleSprite.src = "assets/sprites/player_sprites/idle.png";
+        this.idleSprite.src = "assets/sprites/player_sprites/standingsprite.png";
+        this.walkSprites = [];
+        this.walkSprites[0] = new Image();
+        this.walkSprites[0].src = "assets/sprites/player_sprites/walkingsprite1.png";
+        this.walkSprites[1] = new Image();
+        this.walkSprites[1].src = "assets/sprites/player_sprites/walkingsprite2.png";
         this.jumpSprite = new Image();
         this.jumpSprite.src = "assets/sprites/player_sprites/jump.png";
-        this.walkSprites = [new Image(), new Image(), new Image()];
-        this.walkSprites[0].src = "assets/sprites/player_sprites/walk1.png";
-        this.walkSprites[1].src = "assets/sprites/player_sprites/walk2.png";
-        this.walkSprites[2].src = "assets/sprites/player_sprites/walk3.png";
         this.snipingSprite = new Image();
-        this.snipingSprite.src = "assets/sprites/player_sprites/sniping.png";
-        
-        this.animationFrame = 0;
-        this.animationTimer = 0;
-        this.state = "idle";
-        this.facingDirection = "right";
+        this.snipingSprite.src = "assets/sprites/player_sprites/snipingsprite.png";
 
-        this.canShoot = true;
-        this.shootingCooldown = 500;
-        this.lastShotTime = 0;
+        this.facingDirection = "right";
+        this.state = "idle";
+        this.animationTimer = 0;
+        this.animationFrame = 0;
+        this.animationSpeed = PLAYER_ANIMATION_SPEED;
+        this.powerCharge = 0;
         
-        // Zmienne do obsługi ładowania strzały
-        this.isCharging = false;
-        this.chargeStartTime = 0;
-        this.power = 0;
+        this.poisonedArrows = 0; // <--- Nowa zmienna do przechowywania liczby zatrutych strzał
+        this.poisonedArrowSprite = new Image();
+        this.poisonedArrowSprite.src = "assets/sprites/poisonedarrow.png";
     }
 
-    takeDamage(amount) {
-        if (this.currentHP > 0) {
-            this.currentHP -= amount;
-        }
+    /**
+     * Sprawdza kolizję z innym obiektem.
+     * @param {GameObject} other - Inny obiekt do sprawdzenia kolizji.
+     * @returns {boolean} - True, jeśli jest kolizja, w przeciwnym razie false.
+     */
+    checkCollision(other) {
+        return this.x < other.x + other.width &&
+               this.x + this.width > other.x &&
+               this.y < other.y + other.height &&
+               this.y + this.height > other.y;
     }
     
+    /**
+     * Zwiększa punkty życia gracza o 1, ale nie więcej niż maksymalna wartość.
+     */
     heal() {
         if (this.currentHP < this.maxHP) {
-            this.currentHP += 1;
+            this.currentHP++;
+            console.log(`Gracz odzyskał HP. Pozostało HP: ${this.currentHP}`);
         }
     }
 
+    /**
+     * Dodaje zatrute strzały do ekwipunku gracza.
+     * @param {number} amount - Liczba zatrutych strzał do dodania.
+     */
+    addPoisonedArrows(amount) {
+        this.poisonedArrows += amount;
+        console.log(`Gracz znalazł zatruty eliksir! Ma teraz ${this.poisonedArrows} zatrutych strzał.`);
+    }
+
+    /**
+     * Zmniejsza punkty życia gracza o 1 i sprawdza, czy powinien zostać zrespawnowany.
+     */
+    takeDamage() {
+        this.currentHP--;
+        console.log(`Gracz otrzymał obrażenia. Pozostało HP: ${this.currentHP}`);
+        if (this.currentHP <= 0) {
+            this.currentHP = this.maxHP;
+            this.respawn();
+        }
+    }
+
+    /**
+     * Aktualizuje stan gracza w każdej klatce gry.
+     * @param {number} deltaTime - Czas od ostatniej klatki w milisekundach.
+     */
     update(deltaTime) {
-        // Sprawdzanie śmierci gracza
+        const keys = this.game.input.keys;
+
+        if (keys["Space"]) {
+            this.state = "sniping";
+            this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
+            this.dx = 0;
+        } else if (this.state === "sniping" && !keys["Space"]) {
+            this.state = "idle";
+            const power = this.powerCharge / MAX_POWER_CHARGE;
+            const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
+            const arrowDy = 0; // Strzały mają lecieć prosto
+
+            if (this.poisonedArrows > 0) {
+                // Jeśli gracz ma zatrute strzały, strzela nimi
+                this.game.arrows.push(new PoisonedArrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+                this.poisonedArrows--;
+            } else {
+                // W przeciwnym razie strzela zwykłymi strzałami
+                this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+            }
+            this.powerCharge = 0;
+            // Sprawdzanie śmierci gracza
         if (this.currentHP <= 0) {
             console.log("Gracz zginął! Resetowanie gracza i mobów...");
             this.game.resetLevelObjects();
             return;
         }
-
-        const input = this.game.input;
-
-        // Logika ruchu poziomego
-        this.dx = 0;
-        if (input.keys["ArrowLeft"] || input.keys["KeyA"]) {
-            this.dx = -PLAYER_SPEED;
-            this.facingDirection = "left";
-        } else if (input.keys["ArrowRight"] || input.keys["KeyD"]) {
-            this.dx = PLAYER_SPEED;
-            this.facingDirection = "right";
-        }
-
-        // Logika skoku
-        if ((input.keys["ArrowUp"] || input.keys["KeyW"]) && this.onGround) {
-            this.dy = JUMP_STRENGTH;
-            this.onGround = false;
-        }
-
-        // Logika ładowania strzały
-        if (input.keys["Space"] && this.canShoot) {
-            this.isCharging = true;
-            this.state = "sniping";
-            this.power = Math.min(this.power + deltaTime, MAX_POWER_CHARGE);
-        } else if (this.isCharging) {
-            // Strzał, gdy klawisz spacji został puszczony
-            this.shootArrow();
-            this.isCharging = false;
-            this.power = 0;
-        }
-        
-        // Zmiana stanu animacji
-        if (this.isCharging) {
-            this.state = "sniping";
-        } else if (this.dx !== 0) {
-            this.state = "walk";
-        } else if (!this.onGround) {
-            this.state = "jump";
         } else {
-            this.state = "idle";
-        }
-        
-        if (this.state === "walk") {
-            this.animationTimer += deltaTime;
-            if (this.animationTimer >= PLAYER_ANIMATION_SPEED) {
-                this.animationFrame = (this.animationFrame + 1) % this.walkSprites.length;
+            this.dx = 0;
+            if (keys["ArrowLeft"] || keys["KeyA"]) {
+                this.dx = -PLAYER_SPEED;
+                this.facingDirection = "left";
+            } else if (keys["ArrowRight"] || keys["KeyD"]) {
+                this.dx = PLAYER_SPEED;
+                this.facingDirection = "right";
+            }
+
+            if ((keys["ArrowUp"] || keys["KeyW"]) && this.onGround) {
+                this.dy = JUMP_STRENGTH;
+                this.onGround = false;
+            }
+
+            if (!this.onGround) {
+                this.state = "jump";
+            } else if (this.dx !== 0) {
+                this.state = "walk";
+                this.animationTimer += deltaTime;
+                if (this.animationTimer >= this.animationSpeed) {
+                    this.animationFrame = (this.animationFrame + 1) % this.walkSprites.length;
+                    this.animationTimer = 0;
+                }
+            } else {
+                this.state = "idle";
+                this.animationFrame = 0;
                 this.animationTimer = 0;
             }
         }
         
-        // Zastosowanie grawitacji
         this.dy += GRAVITY;
+        
+        const prevX = this.x;
+        const prevY = this.y;
 
-        // Zapisz stare pozycje do wykrywania kolizji
-        const oldX = this.x;
-        const oldY = this.y;
-
-        // Aktualizacja pozycji
         this.x += this.dx;
         this.y += this.dy;
 
-        // Sprawdzanie kolizji z kafelkami i resetowanie pozycji
         this.onGround = false;
-        this.game.gameObjects.forEach(obj => {
-            if (obj instanceof Tile || obj instanceof ExitGate) {
-                if (this.checkCollision(obj, { x: this.x, y: this.y, width: this.width, height: this.height })) {
-                    // Kolizja w poziomie
-                    if (this.x + this.width > obj.x && oldX + this.width <= obj.x) { // Z lewej
-                        this.x = obj.x - this.width;
-                    } else if (this.x < obj.x + obj.width && oldX >= obj.x + obj.width) { // Z prawej
-                        this.x = obj.x + obj.width;
-                    }
 
-                    // Kolizja w pionie
-                    if (this.y + this.height > obj.y && oldY + this.height <= obj.y) { // Z góry
+        this.game.gameObjects.forEach(obj => {
+            if (obj instanceof Tile) {
+                if (this.checkCollision(obj)) {
+                    if (this.dy > 0 && prevY + this.height <= obj.y) {
                         this.y = obj.y - this.height;
                         this.dy = 0;
                         this.onGround = true;
-                    } else if (this.y < obj.y + obj.height && oldY >= obj.y + obj.height) { // Z dołu
+                    }
+                    else if (this.dy < 0 && prevY >= obj.y + obj.height) {
                         this.y = obj.y + obj.height;
                         this.dy = 0;
                     }
+                    else if (this.dx > 0 && prevX + this.width <= obj.x) {
+                        this.x = obj.x - this.width;
+                    }
+                    else if (this.dx < 0 && prevX >= obj.x + obj.width) {
+                        this.x = obj.x + obj.width;
+                    }
+                    
+                    const lethalTiles = ["lava", "water", "spikes"];
+                    if (lethalTiles.includes(obj.spriteName)) {
+                        console.log("Gracz dotknął niebezpiecznego kafelka!");
+                        this.takeDamage();
+                    }
                 }
-            } else if (obj instanceof Potion) {
-                if (this.checkCollision(obj) && obj.type === "green") {
-                    this.heal();
-                    obj.toRemove = true;
-                }
-            } else if (obj instanceof Fire) {
-                 if (this.checkCollision(obj)) {
-                    this.takeDamage(1);
-                 }
+            }
+            else if (obj instanceof ExitGate && this.checkCollision(obj)) {
+                console.log("Poziom ukończony!");
             }
         });
-    }
-
-    shootArrow() {
-        if (Date.now() - this.lastShotTime < this.shootingCooldown) {
-            return;
-        }
         
-        const dx = this.facingDirection === "right" ? ARROW_SPEED : -ARROW_SPEED;
-        const dy = ARROW_VERTICAL_STRENGTH;
-        const arrowX = this.x + (this.facingDirection === "right" ? this.width : 0);
-        const arrowY = this.y + this.height / 2;
-        const arrow = new PoisonedArrow(arrowX, arrowY, dx, dy, this.game);
-        this.game.arrows.push(arrow);
-        this.canShoot = false;
-        this.lastShotTime = Date.now();
-        setTimeout(() => this.canShoot = true, this.shootingCooldown);
-    }
-    
-    checkCollision(other, rect = this) {
-        return rect.x < other.x + other.width &&
-               rect.x + rect.width > other.x &&
-               rect.y < other.y + other.height &&
-               rect.y + rect.height > other.y;
+        if (this.y + this.height >= this.game.groundY) {
+            this.y = this.game.groundY - this.height;
+            this.dy = 0;
+            this.onGround = true;
+        }
     }
 
+    /**
+     * Teleportuje gracza do jego początkowej pozycji.
+     */
+    respawn() {
+        this.x = this.startX;
+        this.y = this.startY;
+        this.dx = 0;
+        this.dy = 0;
+        this.state = "idle";
+        this.onGround = false;
+        console.log("Gracz został zrespawnowany.");
+    }
+
+    /**
+     * Rysuje gracza, pasek siły, serca i licznik zatrutych strzał na canvasie.
+     * @param {CanvasRenderingContext2D} ctx - Kontekst rysowania 2D.
+     */
     draw(ctx) {
-        // Rysowanie paska siły
-        if (this.isCharging) {
-            const powerBarWidth = (this.power / MAX_POWER_CHARGE) * this.width;
-            ctx.fillStyle = "lime";
-            ctx.fillRect(this.x, this.y - 10, powerBarWidth, 5);
+        // Rysowanie serc w lewym górnym rogu
+        for (let i = 0; i < this.currentHP; i++) {
+            const heart = this.hearts[i];
+            if (heart.complete) {
+                ctx.drawImage(heart, 10 + i * 40, 10, 30, 30);
+            }
+        }
+
+        // Rysowanie licznika zatrutych strzał w prawym górnym rogu
+        if (this.poisonedArrows > 0) {
+            ctx.fillStyle = "white";
+            ctx.font = "bold 20px Arial";
+            ctx.textAlign = "right";
+            
+            // Rysowanie ikonki zatrutej strzały
+            if (this.poisonedArrowSprite.complete) {
+                ctx.drawImage(this.poisonedArrowSprite, this.game.canvas.width - 50, 10, 40, 10);
+            }
+
+            ctx.fillText(`x ${this.poisonedArrows}`, this.game.canvas.width - 60, 30);
         }
 
         let spriteToDraw;
@@ -235,11 +282,13 @@ export class Player extends GameObject {
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
 
-        // Rysowanie pasków zdrowia
-        for (let i = 0; i < this.currentHP; i++) {
-            if (this.hearts[i].complete) {
-                ctx.drawImage(this.hearts[i], 10 + i * 35, 10, 32, 32);
-            }
+        if (this.state === "sniping") {
+            ctx.fillStyle = "white";
+            ctx.fillRect(this.x, this.y - 10, this.width, 5);
+            
+            const powerWidth = (this.powerCharge / MAX_POWER_CHARGE) * this.width;
+            ctx.fillStyle = "green";
+            ctx.fillRect(this.x, this.y - 10, powerWidth, 5);
         }
     }
 }
