@@ -32,15 +32,15 @@ export class Player extends GameObject {
 
         // Zmienne dla animacji
         this.idleSprite = new Image();
-        this.idleSprite.src = "assets/sprites/player/idle.png";
+        this.idleSprite.src = "assets/sprites/idle.png";
         this.jumpSprite = new Image();
-        this.jumpSprite.src = "assets/sprites/player/jump.png";
+        this.jumpSprite.src = "assets/sprites/jump.png";
         this.walkSprites = [new Image(), new Image(), new Image()];
-        this.walkSprites[0].src = "assets/sprites/player/walk1.png";
-        this.walkSprites[1].src = "assets/sprites/player/walk2.png";
-        this.walkSprites[2].src = "assets/sprites/player/walk3.png";
+        this.walkSprites[0].src = "assets/sprites/walk1.png";
+        this.walkSprites[1].src = "assets/sprites/walk2.png";
+        this.walkSprites[2].src = "assets/sprites/walk3.png";
         this.snipingSprite = new Image();
-        this.snipingSprite.src = "assets/sprites/player/sniping.png";
+        this.snipingSprite.src = "assets/sprites/sniping.png";
         
         this.animationFrame = 0;
         this.animationTimer = 0;
