@@ -12,8 +12,8 @@ export const level5 = {
         "M................MLMMMMMMM",                           //  M-magma
         "MMMM.............MMM.....M",                             
         "M....MM..................M",                           
-        "M........MM..............M",                           
-        "M............MM..........M",                           
+        "M.......MMM..............M",                           
+        "M...........MMM..........M",                           
         "M..............MMMMM.....M",
         "MLLLLLLLLLLLLLLLLLLLLMMMMM",
     ],
