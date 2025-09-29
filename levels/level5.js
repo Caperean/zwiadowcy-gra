@@ -19,8 +19,8 @@ export const level5 = {
     ],
     objects: [
        { type: "player", x: 60, y: 15 },
-       { type: "Mag", x: 600, y: 400 },
-        { type: "volcano", x: 400, y: 400, width: 200, height: 200 }, 
+       { type: "mage", x: 600, y: 400 },
+        
        { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
        
     ]
