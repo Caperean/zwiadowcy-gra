@@ -1,21 +1,21 @@
 export const level5 = {
     backgroundColor: "#911313",
     map: [
-        "M........................",   
-        "M.......................",// R-skała
-        "M........................",                             // G-trawa
-        "MMMLMMLLMMLLMMLLMMLLMMM..",                             // #-blok ziemi
-        "MMMMMMMMMMMMMMMMMMMM......",                             // N-śnieg
-        "M........................",                            // I-lód                             L-lawa
-        "M........................",                           //  W-water 
-        "M...........................",                          //   S-kolce
-        "M.........................",                           //  M-magma
-        "M..........................",                             
-        "M..MMM..............M..",                           
-        "M...... MMM......MLLLLLLLM",                           
-        "M............MM...........",                           
-        "M..............MMMMM.......",
-        "MLLLLLLLLLLLLLLLLLLLLMMMMMM",
+        "M........................M",   
+        "M........................M",// R-skała
+        "M........................M",                             // G-trawa
+        "MMMLMMLLMMLLMMLLMMLLMMM..M",                             // #-blok ziemi
+        "MMMMMMMMMMMMMMMMMMMM.....M",                             // N-śnieg
+        "M........................M",                            // I-lód                             L-lawa
+        "M.....MMMMMM.............M",                           //  W-water 
+        "M............MMMMMLLLLLLLM",                          //   S-kolce
+        "MM...............MMMMMMMMM",                           //  M-magma
+        "MMM......................M",                             
+        ".....MM..................M",                           
+        "M........MM..............M",                           
+        "M............MM..........M",                           
+        "M..............MMMMM.....M",
+        "MLLLLLLLLLLLLLLLLLLLLMMMMM",
     ],
     objects: [
        { type: "player", x: 60, y: 15 },
