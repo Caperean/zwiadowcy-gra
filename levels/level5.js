@@ -8,7 +8,7 @@ export const level5 = {
         "MMMMMMMMMMMMMMMMMMMM.....M",                             // N-śnieg
         "M........................M",                            // I-lód                             L-lawa
         "M.....MMMMMM.............M",                           //  W-water 
-        "M............MMMMMLLLLLLLM",                          //   S-kolce
+        "M............MMMMMLMMLMLLM",                          //   S-kolce
         "MM...............MMMMMMMMM",                           //  M-magma
         "MMM......................M",                             
         ".....MM..................M",                           
