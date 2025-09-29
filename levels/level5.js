@@ -3,13 +3,13 @@ export const level5 = {
     map: [
         "M........................M",   
         "M........................M",// R-skała
-        "M........................M",                             // G-trawa
-        "MMMLMMLLMMLLMMLLMMLLMMM..M",                             // #-blok ziemi
-        "MMMMMMMMMMMMMMMMMMMM.....M",                             // N-śnieg
-        "M........................M",                            // I-lód                             L-lawa
+        "M....................M...M",                             // G-trawa
+        "MMMLMMLLMMLLMMLLMMLMM....M",                             // #-blok ziemi
+        "MMMMMMMMMMMMMMMMMMM......M",                             // N-śnieg
+        "M....................M....M",                            // I-lód                             L-lawa
         "M........................M",                           //  W-water 
-        "M..MMMMMMMMMMMMMM..MMLMLLM",                          //   S-kolce
-        "MM...............MLMMMMMMM",                           //  M-magma
+        "M....MMMMMMMMMMMM..MMLMLLM",                          //   S-kolce
+        "M................MLMMMMMMM",                           //  M-magma
         "MMM..............MMM.....M",                             
         ".....MM..................M",                           
         "M........MM..............M",                           
