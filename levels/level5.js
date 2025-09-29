@@ -1,12 +1,12 @@
 export const level5 = {
     backgroundColor: "#911313",
     map: [
-        "M........................",                            // R-skała
+        "M........................",   
+        "M.......................",// R-skała
         "M........................",                             // G-trawa
-        "MMLLMMLLMMLLMMLLMMLLMMM..",                             // #-blok ziemi
+        "MMMLMMLLMMLLMMLLMMLLMMM..",                             // #-blok ziemi
         "MMMMMMMMMMMMMMMMMMMM......",                             // N-śnieg
-        "M........................",                            // I-lód
-        "M.......................",                            // L-lawa
+        "M........................",                            // I-lód                             L-lawa
         "M........................",                           //  W-water 
         "M...........................",                          //   S-kolce
         "M.........................",                           //  M-magma
