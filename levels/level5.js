@@ -1,21 +1,21 @@
 export const level5 = {
-    backgroundColor: "#CB1717",
+    backgroundColor: "#911313",
     map: [
-        "M...M....................",                            // R-skała
+        "M........................",                            // R-skała
         "M........................",                             // G-trawa
-        "M.MMM..................",                             // #-blok ziemi
-        "M....................",                             // N-śnieg
+        "MMLLMMLLMMLLMMLLMMLLMMM..",                             // #-blok ziemi
+        "MMMMMMMMMMMMMMMMMMMM......",                             // N-śnieg
         "M........................",                            // I-lód
         "M.......................",                            // L-lawa
-        "MMLLMMLLMMLLMMLLMMLLMMM..",                           //  W-water 
-        "MMMMMMMMMMMMMMMMMMMM........",                          //   S-kolce
+        "M........................",                           //  W-water 
+        "M...........................",                          //   S-kolce
         "M.........................",                           //  M-magma
-        "M........................MM",                             
-        "M....................MM..",                           
-        "M...............MMM......",                           
-        "M.......MMMMMMM...........",                           
-        "MMMMMM....................",
-        "MLLLLLLLLLMMMMLLLLLLMMMMMM",
+        "M..........................",                             
+        "M..MMM..............M..",                           
+        "M...... MMM......MLLLLLLLM",                           
+        "M............MM...........",                           
+        "M..............MMMMM.......",
+        "MLLLLLLLLLLLLLLLLLLLLMMMMMM",
     ],
     objects: [
        { type: "player", x: 60, y: 15 },
