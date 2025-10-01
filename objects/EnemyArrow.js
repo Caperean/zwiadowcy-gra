@@ -15,7 +15,6 @@ export class EnemyArrow extends GameObject {
         
         this.toRemove = false;
         
-        // Zapisz kąt lotu dla rysowania
         this.flightAngle = Math.atan2(this.dy, this.dx);
         
         this.sprite = new Image();
@@ -29,6 +28,7 @@ export class EnemyArrow extends GameObject {
         this.x += this.dx;
         this.y += this.dy;
 
+        // ZMIANA: Użycie metody takeDamage() gracza
         if (this.checkCollision(this.game.player)) {
             this.game.player.takeDamage(1);
             this.toRemove = true;
@@ -56,12 +56,11 @@ export class EnemyArrow extends GameObject {
         if (spriteToDraw.complete) {
             ctx.save();
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
-            // Ta linia poprawnie obraca pionowy sprite strzały, aby leciał prosto
-            ctx.rotate(this.flightAngle + Math.PI / 2);
+            ctx.rotate(this.flightAngle + Math.PI);
             ctx.drawImage(spriteToDraw, -this.width / 2, -this.height / 2, this.width, this.height);
             ctx.restore();
         } else {
-            ctx.fillStyle = "gray";
+            ctx.fillStyle = this.isBurning ? "orange" : "white";
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
