@@ -5,6 +5,8 @@ import { TILE_WIDTH, TILE_HEIGHT } from "../engine/Constants.js";
 export class Mage extends GameObject {
     constructor(x, y, game) {
         super(x, y, TILE_WIDTH, TILE_HEIGHT * 2); // Mag jest wyższy niż kafelek
+        this.hp = 1; // Mag ma 3 HP
+        this.toRemove = false;
         this.game = game;
         this.state = "idle";
         this.facingDirection = "left"; // Domyślna orientacja
@@ -20,6 +22,10 @@ export class Mage extends GameObject {
     }
 
     update(deltaTime) {
+        if (this.hp <= 0) {
+        this.toRemove = true;
+        return;
+    }
         const player = this.game.player;
         if (!player) return;
 
