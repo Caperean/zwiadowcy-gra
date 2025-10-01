@@ -1,3 +1,4 @@
+
 export class GameObject {
     constructor(x, y, width, height) {
         this.x = x;
@@ -8,4 +9,19 @@ export class GameObject {
 
     update(deltaTime, game) {}
     draw(ctx) {}
+    checkCollision(other) {
+        return this.x < other.x + other.width &&
+               this.x + this.width > other.x &&
+               this.y < other.y + other.height &&
+               this.y + this.height > other.y;
+    }
+
+    // ZMIANA: Dodano metodę do zadawania obrażeń
+    takeDamage(amount) {
+        this.hp -= amount;
+        if (this.hp <= 0) {
+            this.toRemove = true;
+        }
+        console.log(`HP: ${this.hp}`);
+    }
 }
