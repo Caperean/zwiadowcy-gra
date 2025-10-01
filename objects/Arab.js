@@ -6,6 +6,8 @@ import { GRAVITY, ARAB_SPEED, ARAB_DETECTION_RANGE, ARAB_WIDTH, ARAB_HEIGHT, ARA
 export class Arab extends GameObject {
     constructor(x, y, game) {
         super(x, y, ARAB_WIDTH, ARAB_HEIGHT);
+        this.hp = 1; // Arab ma 1 HP
+        this.toRemove = false; 
         this.game = game;
         this.hp = 1;
         this.speed = ARAB_SPEED;
@@ -28,6 +30,11 @@ export class Arab extends GameObject {
     }
 
     update(deltaTime) {
+        
+    if (this.hp <= 0) {
+        this.toRemove = true;
+        return;
+    }
         const player = this.game.player;
         if (!player) return;
 
