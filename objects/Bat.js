@@ -5,6 +5,8 @@ import { TILE_WIDTH, TILE_HEIGHT, BAT_WIDTH, BAT_HEIGHT } from "../engine/Consta
 export class Bat extends GameObject {
     constructor(x, y, game) {
         super(x, y, BAT_WIDTH, BAT_HEIGHT); // Użyj nowych stałych
+        this.hp = 1; // Nietoperz ma 1 HP
+        this.toRemove = false;
         this.game = game;
         this.initialX = x;
         this.initialY = y;
@@ -25,6 +27,10 @@ export class Bat extends GameObject {
     }
 
     update(deltaTime) {
+         if (this.hp <= 0) {
+        this.toRemove = true;
+        return;
+    }
         const player = this.game.player;
         if (!player) return;
 
