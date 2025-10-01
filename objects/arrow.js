@@ -2,7 +2,10 @@ import { GameObject } from "./object.js";
 import { ARROW_WIDTH, ARROW_HEIGHT } from "../engine/Constants.js";
 import { Tile } from "./tile.js";
 import { Fire } from "./fire.js";
-
+import { Wolf } from "./wolf.js";
+import { Mage } from "./Mage.js";
+import { Bat } from "./Bat.js";
+import { Arab } from "./Arab.js";
 export class Arrow extends GameObject {
     /**
      * @param {number} x - Pozycja X startowa strzały.
@@ -41,23 +44,34 @@ export class Arrow extends GameObject {
      * Aktualizuje stan strzały w każdej klatce gry.
      * @param {number} deltaTime - Czas od ostatniej klatki w milisekundach.
      */
-    update(deltaTime) {
+ update(deltaTime) {
         if (!this.isFired) return;
-        
+
         // Sprawdzanie kolizji z kafelkami i ogniem
         this.game.gameObjects.forEach(obj => {
-            if (obj instanceof Tile && this.checkCollision(obj)) {
-                this.isFired = false;
-                this.toRemove = true; // Strzała znika po kolizji
-            } else if (obj instanceof Fire && this.checkCollision(obj)) {
-                this.isBurning = true;
+            if (this.checkCollision(obj)) {
+                if (obj instanceof Tile) {
+                    this.isFired = false;
+                    this.toRemove = true; // Strzała znika po kolizji
+                } else if (obj instanceof Fire) {
+                    this.isBurning = true;
+                }
+            }
+        });
+
+        // Nowa logika sprawdzania kolizji z przeciwnikami
+        this.game.gameObjects.forEach(obj => {
+            if (this.checkCollision(obj)) {
+                if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab) {
+                    obj.takeDamage(1); // Zadaj 1 punkt obrażeń
+                    this.toRemove = true; // Strzała znika po trafieniu
+                }
             }
         });
 
         this.x += this.dx;
         this.y += this.dy;
     }
-
     /**
      * Rysuje strzałę na canvasie.
      * @param {CanvasRenderingContext2D} ctx - Kontekst rysowania 2D.
