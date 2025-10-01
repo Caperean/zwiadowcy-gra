@@ -12,6 +12,8 @@ export class Wolf extends GameObject {
      */
     constructor(x, y, player, game) {
         super(x, y, WOLF_WIDTH, WOLF_HEIGHT);
+        this.hp = 1; // Wilki mają 1 HP
+        this.toRemove = false;
         this.player = player;
         this.game = game;
         this.dx = 0;
