@@ -59,8 +59,10 @@ export class Game {
     update(deltaTime) {
         // Aktualizacja wszystkich obiektów gry
         this.gameObjects.forEach(obj => obj.update(deltaTime));
+        this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
         this.arrows.forEach(arrow => arrow.update(deltaTime));
-
+        
+    
         // Sprawdzanie kolizji gracza z ExitGate
         const exitGate = this.gameObjects.find(obj => obj instanceof ExitGate);
         if (exitGate && this.player && this.player.checkCollision(exitGate)) {
