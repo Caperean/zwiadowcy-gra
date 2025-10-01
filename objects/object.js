@@ -16,12 +16,13 @@ export class GameObject {
                this.y + this.height > other.y;
     }
 
-    // ZMIANA: Dodano metodę do zadawania obrażeń
-    takeDamage(amount) {
+   takeDamage(amount) {
+    if (this.hp !== undefined) {
         this.hp -= amount;
         if (this.hp <= 0) {
             this.toRemove = true;
         }
         console.log(`HP: ${this.hp}`);
     }
+}
 }
