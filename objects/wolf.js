@@ -77,7 +77,9 @@ export class Wolf extends GameObject {
     update(deltaTime) {
         // Grawitacja
         this.dy += GRAVITY;
-
+        if (this.hp <= 0) {
+        this.toRemove = true;
+        return;}
         const distanceToPlayer = Math.abs(this.player.x - this.x);
         const prevX = this.x;
         const prevY = this.y;
