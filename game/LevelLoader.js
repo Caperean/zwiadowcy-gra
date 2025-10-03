@@ -59,6 +59,8 @@ export class LevelLoader {
                     gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "sand"));
                 } else if (char === "A") {
                     gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "marble"));
+                }else if (char === "C") {
+                    gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "bricks"));
                 }
             }
         });
