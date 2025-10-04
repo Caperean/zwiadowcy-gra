@@ -18,7 +18,7 @@ export const level4 = {
         "RRRRRRRRRSRRSSRRRRRRRRRRR",
     ],
     objects: [
-       { type: "player", x: 15, y: 15 },
+       { type: "player", x: 25, y: 25 },
         { type: "bat", x: 500, y: 80 },
         { type: "bat", x: 400, y: 80 },   
    { type: "bat", x: 300, y: 80 },   
