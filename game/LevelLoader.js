@@ -11,8 +11,8 @@ import { allLevels } from "../levels/levels.js"; // Zmiana tutaj!
 import { Mage } from "../objects/Mage.js";
 import { Bat } from "../objects/Bat.js"; // <--- Nowy import
 import { Arab } from "../objects/Arab.js"; // Nowy import
-import { Clown } from \"../objects/Clown.js\";
-import { Mask } from \"../objects/Mask.js\";
+import { Clown } from "../objects/Clown.js";
+import { Mask } from "../objects/Mask.js";
 
 export class LevelLoader {
     /**
