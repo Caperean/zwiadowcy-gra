@@ -32,3 +32,13 @@ export const ARAB_HEIGHT = 48;
 export const ARAB_SPEED = 1;
 export const ARAB_DETECTION_RANGE = 300;
 export const ARAB_FOV_ANGLE = Math.PI / 3; // 60 stopni w radianach
+// Nowe stałe dla klauna
+export const CLOWN_WIDTH = 32;
+export const CLOWN_HEIGHT = 48;
+export const CLOWN_DETECTION_RANGE = 250;
+export const CLOWN_ATTACK_COOLDOWN = 1500; // 1.5 sekundy
+
+// Nowe stałe dla maski
+export const MASK_WIDTH = 32;
+export const MASK_HEIGHT = 32;
+export const MASK_SPEED = 4;
