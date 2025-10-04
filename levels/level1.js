@@ -18,7 +18,7 @@ export const level1 = {
         "NNWIIWWIWIIWIIWIWIIWIIWN#N",
     ],
     objects: [
-       { type: "player", x: 15, y: 15 },
+       { type: "player", x: 20, y: 20 },
        { type: "wolf", x: 100, y: 15 } ,      
    
        
