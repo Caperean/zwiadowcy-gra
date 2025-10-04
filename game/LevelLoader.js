@@ -133,11 +133,11 @@ export class LevelLoader {
             } else if (objData.type === "arab") { // <--- Dodaj tę logikę
                 const arab = new Arab(objData.x, objData.y, game);
                 gameObjects.push(arab);
-            } else if (objData.type === \"clown\") 
-               const clown = new Clown(objData.x, objData.y, game);
-               gameObjects.push(clown);
-        
-}
+            } else if (objData.type === "clown") { // Zwróć uwagę na usunięcie `\` i dodanie `{}`
+        const clown = new Clown(objData.x, objData.y, game);
+        gameObjects.push(clown);
+    }
+
             
         });
 
