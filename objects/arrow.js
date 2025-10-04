@@ -6,6 +6,7 @@ import { Wolf } from "./wolf.js";
 import { Mage } from "./Mage.js";
 import { Bat } from "./Bat.js";
 import { Arab } from "./Arab.js";
+import { Clown } from "./Clown.js";
 export class Arrow extends GameObject {
     /**
      * @param {number} x - Pozycja X startowa strzały.
