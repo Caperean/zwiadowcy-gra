@@ -11,6 +11,8 @@ import { allLevels } from "../levels/levels.js"; // Zmiana tutaj!
 import { Mage } from "../objects/Mage.js";
 import { Bat } from "../objects/Bat.js"; // <--- Nowy import
 import { Arab } from "../objects/Arab.js"; // Nowy import
+import { Clown } from \"../objects/Clown.js\";
+import { Mask } from \"../objects/Mask.js\";
 
 export class LevelLoader {
     /**
@@ -131,7 +133,11 @@ export class LevelLoader {
             } else if (objData.type === "arab") { // <--- Dodaj tę logikę
                 const arab = new Arab(objData.x, objData.y, game);
                 gameObjects.push(arab);
-            }
+            } else if (objData.type === \"clown\") 
+               const clown = new Clown(objData.x, objData.y, game);
+               gameObjects.push(clown);
+        
+}
             
         });
 
