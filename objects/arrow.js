@@ -7,6 +7,7 @@ import { Mage } from "./Mage.js";
 import { Bat } from "./Bat.js";
 import { Arab } from "./Arab.js";
 import { Clown } from "./Clown.js";
+import { Mask } from "./Mask.js";
 export class Arrow extends GameObject {
     /**
      * @param {number} x - Pozycja X startowa strzały.
@@ -63,7 +64,7 @@ export class Arrow extends GameObject {
         // Nowa logika sprawdzania kolizji z przeciwnikami
         this.game.gameObjects.forEach(obj => {
             if (this.checkCollision(obj)) {
-                if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab) {
+                if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab || obj instanceof Clown || obj instanceof Mask) {
                     obj.takeDamage(1); // Zadaj 1 punkt obrażeń
                     this.toRemove = true; // Strzała znika po trafieniu
                 }
