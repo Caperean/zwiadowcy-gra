@@ -21,7 +21,8 @@ export const level6 = {
        { type: "player", x: 15, y: 15 },
         { type: "bat", x: 500, y: 80 },
         { type: "bat", x: 400, y: 80 },   
-   { type: "bat", x: 300, y: 80 },   
+   { type: "bat", x: 300, y: 80 },  
+         { type: "clown", x: 400, y: 100 },
        
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
