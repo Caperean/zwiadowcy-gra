@@ -15,6 +15,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         "#....................#...#",                           
         "#......#..........#......#", 
         "###WW#W#############WWWWW#",
+        ],
     objects: [
         { type: "player", x: 36, y: 390 },
         { type: "wolf", x: 450, y: 390 },
