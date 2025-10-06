@@ -6,9 +6,9 @@ export const level0 = {                             //poziom testowy żeby nie p
         "#........................#",                             // #-blok ziemi
         "#........................#",                             // N-śnieg
         "#.........AAAAAA.........#",                            // I-lód
-        "#.........A....AGWWG.....#",                            // L-lawa
-        "#.........A....A####G....#", 
-        "#..............A.........#",                            //   S-kolce
+        "#.........A....AG..G.....#",                            // L-lawa
+        "#.........A....A#WW#G....#", 
+        "#..............AWWWWW....#",                            //   S-kolce
         "#.......A......A.....G...#",                           //  M-magma
         "#.......AAAAAAAA......G..#",                             // A- marmur
         "#........................#",                           // C- cegła
@@ -22,7 +22,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         { type: "wolf", x: 450, y: 390 },
         { type: "wolf", x: 425, y: 390 },
         { type: "clown", x: 400, y: 125 },
-        { type: "apple", x: 500, y: 130 },    
+        { type: "apple", x: 512, y: 130 },    
               
        
         { type: "exitGate", x: 400, y: 200, width: 64, height: 64 }
