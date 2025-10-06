@@ -6,8 +6,8 @@ export const level7 = {
         "#GGGGGGGGGGGGGGG#GG......R",                             // #-blok ziemi
         "#...................G....R",                             // N-śnieg
         "#........................R",                            // I-lód
-        "#...GGG..............GGGR",                            // L-lawa
-        "#..G...GGGGGG..GG..GG....R",                           //  W-water 
+        "#...GGGG.............GGGR",                            // L-lawa
+        "#..G....GGGGG..GG..GG....R",                           //  W-water 
         "#........................R",                          //   S-kolce
         "#G.......................R",                           //  M-magma
         "#.GGG....................R",                             // A-marmur
@@ -15,10 +15,10 @@ export const level7 = {
         "#.......GG...............R",                           
         "#...........G............R",                           
         "#...........#............R",
-        "#GGWWGGGGGGGGWWWWWWWWWWWGR",
+        "#GGGWWGGGGGGGWWWWWWWWWWWGR",
     ],
     objects: [
-       { type: "player", x: 28, y: 390 },  
+       { type: "player", x: 36, y: 390 },  
         { type: "wolf", x: 40, y: 25 },
         { type: "exitGate", x: 25, y: 25, width: 64, height: 64 }
     ]
