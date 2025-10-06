@@ -6,8 +6,8 @@ export const level7 = {
         "#GGGGGGGGGGGGGGG#GG......R",                             // #-blok ziemi
         "#...................G....R",                             // N-śnieg
         "#........................R",                            // I-lód
-        "#.....................GGGR",                            // L-lawa
-        "#...GGGGGGGGG..GG..GG....R",                           //  W-water 
+        "#....GG...............GGGR",                            // L-lawa
+        "#...G..GGGGGG..GG..GG....R",                           //  W-water 
         "#........................R",                          //   S-kolce
         "#G.......................R",                           //  M-magma
         "#.GG.....................R",                             // A-marmur
