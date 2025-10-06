@@ -2,14 +2,14 @@ export const level7 = {
     backgroundColor: "#add8e6",
     map: [
         "#........................R",                            // R-skała
-        "#................G.......R",                             // G-trawa
-        "#GGGGGGGGGGGGGGGG#G......R",                             // #-blok ziemi
+        "#.............G.........R",                             // G-trawa
+        "#GGGGGGGGGGGGG#G..G......R",                             // #-blok ziemi
         "#...................G....R",                             // N-śnieg
         "#........................R",                            // I-lód
         "#...GGGG..............GGGR",                            // L-lawa
         "#..G....GG...........G...R",                           //  W-water 
         "#.........GG..GG..GG.....R",                          //   S-kolce
-        "#G..G....................R",                           //  M-magma
+        "#G..GG...................R",                           //  M-magma
         "#.GG.....................R",                             // A-marmur
         "#......G.................R",                           // C-cegły
         "#.......GG...............R",                           
