@@ -18,7 +18,8 @@ export const level7 = {
         "#GWWGGGGGGGGGWWWWWWWWWWWGR",
     ],
     objects: [
-       { type: "player", x: 25, y: 390 },       
+       { type: "player", x: 25, y: 390 },  
+        { type: "wolf", x: 40, y: 390 },
         { type: "exitGate", x: 25, y: 25, width: 64, height: 64 }
     ]
 };
