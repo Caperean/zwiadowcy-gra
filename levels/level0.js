@@ -22,6 +22,6 @@ export const level0 = {                             //poziom testowy żeby nie p
             
    
        
-        { type: "exitGate", x: 320, y: 190, width: 64, height: 64 }
+        { type: "exitGate", x: 400, y: 200, width: 64, height: 64 }
     ]
 };
