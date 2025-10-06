@@ -15,7 +15,7 @@ export const allLevels = [
     { name: "level4.js", data: level4 },
     { name: "level5.js", data: level5 },
     { name: "level6.js", data: level6 },
-    { name: "level6.js", data: level7 },
+    { name: "level7.js", data: level7 },
     // Dodaj tu więcej poziomów, np.:
     // { name: "level2.js", data: level2 },
     // { name: "level3.js", data: level3 },
