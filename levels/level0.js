@@ -22,7 +22,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         { type: "wolf", x: 450, y: 390 },
         { type: "wolf", x: 425, y: 390 },
         { type: "clown", x: 400, y: 125 },
-        { type: "apple", x: 470, y: 150 },    
+        { type: "apple", x: 500, y: 130 },    
               
        
         { type: "exitGate", x: 400, y: 200, width: 64, height: 64 }
