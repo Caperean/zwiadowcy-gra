@@ -109,8 +109,8 @@ export class Player extends GameObject {
         if (keys["Space"]) {
             this.state = "sniping";
             this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
-            this.dx = 0;
-        } } else if (this.state === "sniping" && !keys["Space"]) {
+            this.dx = 0; //112
+         } else if (this.state === "sniping" && !keys["Space"]) { //113
     this.state = "idle";
     
     // Nowa logika: obliczenia dx/dy przeniesiono do arrow.js.
