@@ -22,10 +22,12 @@ export class Arrow extends GameObject {
      * @param {number} powerCharge - Naładowana siła strzału (od 0 do MAX_POWER_CHARGE).
      * @param {object} game - Obiekt gry, potrzebny do kolizji z kafelkami.
      */
-    constructor(x, y, powerCharge, game) { // Zmienione parametry!
+     constructor(x, y, dx, dy, game) { // <--- Zmienione parametry!
         super(x, y, ARROW_WIDTH, ARROW_HEIGHT);
         this.game = game;
         
+        this.dx = dx; // Prędkość pozioma
+        this.dy = dy; // Prędkość pionowa (z impulsem w górę)
         // Obliczenie wektora prędkości przy stałym kącie 40 stopni (w radianach)
         const angle = 40 * (Math.PI / 180); // Kąt 40 stopni
         
