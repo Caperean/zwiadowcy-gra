@@ -46,14 +46,14 @@ export class Arrow extends GameObject {
         this.isBurning = false; 
     }
 // ...
-    }
+    
     
     /**
      * Sprawdza kolizję z innym obiektem.
      * @param {GameObject} other - Inny obiekt do sprawdzenia kolizji.
      * @returns {boolean} - True, jeśli jest kolizja, w przeciwnym razie false.
      */
-    checkCollision(other) {
+    checkCollision(other) {  //56
         return this.x < other.x + other.width &&
                this.x + this.width > other.x &&
                this.y < other.y + other.height &&
