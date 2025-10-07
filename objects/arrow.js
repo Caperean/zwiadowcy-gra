@@ -1,5 +1,11 @@
 import { GameObject } from "./object.js";
-import { ARROW_WIDTH, ARROW_HEIGHT, GRAVITY } from "../engine/Constants.js";
+import { 
+    ARROW_WIDTH, 
+    ARROW_HEIGHT, 
+    ARROW_SPEED,         // <--- DODAJ TO
+    MAX_POWER_CHARGE,    // <--- DODAJ TO
+    GRAVITY              // <--- DODAJ TO (potrzebne do update, ale lepiej mieć w jednym miejscu)
+}
 import { Tile } from "./tile.js";
 import { Fire } from "./fire.js";
 import { Wolf } from "./wolf.js";
