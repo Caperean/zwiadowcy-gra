@@ -167,16 +167,16 @@ export class Player extends GameObject {
         }
         // --------------------------------------------------
         
-        this.dy += GRAVITY;
+        this.dy += GRAVITY; // linia 170
         
         const prevX = this.x;
         const prevY = this.y;
 // ... (reszta kodu kolizji jest poprawna)
-
+    }
     /**
      * Teleportuje gracza do jego początkowej pozycji.
      */
-     respawn() {
+     respawn() {                    // linia 179
         this.x = this.startX;
         this.y = this.startY;
         this.dx = 0;
