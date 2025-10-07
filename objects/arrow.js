@@ -8,16 +8,7 @@ import { Bat } from "./Bat.js";
 import { Arab } from "./Arab.js";
 import { Clown } from "./Clown.js";
 import { Mask } from "./Mask.js";
-export class Arrow extends GameObject {
-    /**
-     * @param {number} x - Pozycja X startowa strzały.
-     * @param {number} y - Pozycja Y startowa strzały.
-     * @param {number} dx - Prędkość w poziomie.
-     * @param {number} dy - Prędkość w pionie.
-     * @param {object} game - Obiekt gry, potrzebny do kolizji z kafelkami.
-     */
-    // objects/arrow.js
-// ...
+
 export class Arrow extends GameObject {
     /**
      * @param {number} x - Pozycja X startowa strzały.
