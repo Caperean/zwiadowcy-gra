@@ -141,7 +141,7 @@ export class Player extends GameObject {
             this.game.resetLevelObjects();
             return;
         }
-        } else {
+         else {
             this.dx = 0;
             if (keys["ArrowLeft"] || keys["KeyA"]) {
                 this.dx = -PLAYER_SPEED;
