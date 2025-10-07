@@ -176,7 +176,7 @@ export class Player extends GameObject {
     /**
      * Teleportuje gracza do jego początkowej pozycji.
      */
-    respawn() 
+    respawn() {
         this.x = this.startX;
         this.y = this.startY;
         this.dx = 0;
