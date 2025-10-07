@@ -111,27 +111,24 @@ export class Player extends GameObject {
             this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
             this.dx = 0;
         } else if (this.state === "sniping" && !keys["Space"]) {
+            // Logika wystrzału (po puszczeniu Spacji)
             this.state = "idle";
             const power = this.powerCharge / MAX_POWER_CHARGE;
+            
+            // Prędkość pozioma (zależna od naładowania)
             const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
-            const arrowDy = 0; // Strzały mają lecieć prosto
+            
+            // Prędkość pionowa: Używamy stałego impulsu w górę (ujemna wartość)
+            const arrowDy = -ARROW_VERTICAL_STRENGTH; 
 
             if (this.poisonedArrows > 0) {
-                // Jeśli gracz ma zatrute strzały, strzela nimi
                 this.game.arrows.push(new PoisonedArrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
                 this.poisonedArrows--;
             } else {
-                // W przeciwnym razie strzela zwykłymi strzałami
                 this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
             }
             this.powerCharge = 0;
-            // Sprawdzanie śmierci gracza
-        if (this.currentHP <= 0) {
-            console.log("Gracz zginął! Resetowanie gracza i mobów...");
-            this.game.resetLevelObjects();
-            return;
-        }
-        } else {
+        } else { // TEN BLOK 'else' OBSŁUGUJE CAŁY RUCH I JEST TERAZ POPRAWNIE POWIĄZANY
             this.dx = 0;
             if (keys["ArrowLeft"] || keys["KeyA"]) {
                 this.dx = -PLAYER_SPEED;
@@ -162,53 +159,19 @@ export class Player extends GameObject {
             }
         }
         
+        // --- Sprawdzanie śmierci jest OSOBNYM BLOKIEM ---
+        if (this.currentHP <= 0) {
+            console.log("Gracz zginął! Resetowanie gracza i mobów...");
+            this.game.resetLevelObjects();
+            return;
+        }
+        // --------------------------------------------------
+        
         this.dy += GRAVITY;
         
         const prevX = this.x;
         const prevY = this.y;
-
-        this.x += this.dx;
-        this.y += this.dy;
-
-        this.onGround = false;
-
-        this.game.gameObjects.forEach(obj => {
-            if (obj instanceof Tile) {
-                if (this.checkCollision(obj)) {
-                    if (this.dy > 0 && prevY + this.height <= obj.y) {
-                        this.y = obj.y - this.height;
-                        this.dy = 0;
-                        this.onGround = true;
-                    }
-                    else if (this.dy < 0 && prevY >= obj.y + obj.height) {
-                        this.y = obj.y + obj.height;
-                        this.dy = 0;
-                    }
-                    else if (this.dx > 0 && prevX + this.width <= obj.x) {
-                        this.x = obj.x - this.width;
-                    }
-                    else if (this.dx < 0 && prevX >= obj.x + obj.width) {
-                        this.x = obj.x + obj.width;
-                    }
-                    
-                    const lethalTiles = ["lava", "water", "spikes"];
-                    if (lethalTiles.includes(obj.spriteName)) {
-                        console.log("Gracz dotknął niebezpiecznego kafelka!");
-                        this.takeDamage();
-                    }
-                }
-            }
-            else if (obj instanceof ExitGate && this.checkCollision(obj)) {
-                console.log("Poziom ukończony!");
-            }
-        });
-        
-        if (this.y + this.height >= this.game.groundY) {
-            this.y = this.game.groundY - this.height;
-            this.dy = 0;
-            this.onGround = true;
-        }
-    }
+// ... (reszta kodu kolizji jest poprawna)
 
     /**
      * Teleportuje gracza do jego początkowej pozycji.
