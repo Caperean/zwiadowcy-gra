@@ -106,41 +106,31 @@ export class Player extends GameObject {
     update(deltaTime) {
         const keys = this.game.input.keys;
 
-        if (keys["Space"]) {  // 109
+        
+        if (keys["Space"]) {  
             this.state = "sniping";
             this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
-            this.dx = 0; //112
-       // objects/player.js (Zastąp wszystko od linii 113)
-
-        } else if (this.state === "sniping" && !keys["Space"]) { // 113
-            // 1. Wybór klasy strzały
+            this.dx = 0; // Gracz nie może się ruszać podczas celowania
+        } else if (this.state === "sniping" && !keys["Space"]) { 
+            // 1. Logika wystrzału (Twoja poprawna logika)
             let ArrowClass = Arrow;
             if (this.currentArrowType === 'poison' && this.poisonedArrows > 0) {
                 ArrowClass = PoisonedArrow;
-                this.poisonedArrows--; // Zużyj zatrutą strzałę, jeśli jest używana
-            } 
-            // W przeciwnym razie, używamy zwykłej strzały (Arrow)
-
-            // 2. Tworzenie i dodawanie strzały
+                this.poisonedArrows--; 
+            }
+            
             const arrow = new ArrowClass(
                 this.x + this.width / 2, 
                 this.y + this.height / 2, 
                 this.powerCharge, 
                 this.game
             );
-
             this.game.arrows.push(arrow);
             
-            // 3. Reset stanu i siły
+            // 2. Reset stanu i siły
             this.state = "idle";
-            this.powerCharge = 0; // Resetowanie siły
-        }
-            // Sprawdzanie śmierci gracza
-        if (this.currentHP <= 0) {
-            console.log("Gracz zginął! Resetowanie gracza i mobów...");
-            this.game.resetLevelObjects();
-            return;
-        }
+            this.powerCharge = 0; 
+        } 
          else {
             this.dx = 0;
             if (keys["ArrowLeft"] || keys["KeyA"]) {
