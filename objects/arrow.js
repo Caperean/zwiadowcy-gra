@@ -16,18 +16,45 @@ export class Arrow extends GameObject {
      * @param {number} dy - Prędkość w pionie.
      * @param {object} game - Obiekt gry, potrzebny do kolizji z kafelkami.
      */
-    constructor(x, y, dx, dy, game) {
+    // objects/arrow.js
+// ...
+export class Arrow extends GameObject {
+    /**
+     * @param {number} x - Pozycja X startowa strzały.
+     * @param {number} y - Pozycja Y startowa strzały.
+     * @param {number} powerCharge - Naładowana siła strzału (od 0 do MAX_POWER_CHARGE).
+     * @param {object} game - Obiekt gry, potrzebny do kolizji z kafelkami.
+     */
+    constructor(x, y, powerCharge, game) { // Zmienione parametry!
         super(x, y, ARROW_WIDTH, ARROW_HEIGHT);
-        this.dx = dx;
-        this.dy = dy;
         this.game = game;
+        
+        // Obliczenie wektora prędkości przy stałym kącie 40 stopni (w radianach)
+        const angle = 40 * (Math.PI / 180); // Kąt 40 stopni
+        
+        // Używamy siły strzału do skalowania prędkości
+        const speedMultiplier = powerCharge / this.game.player.MAX_POWER_CHARGE;
+        const initialSpeed = ARROW_SPEED * 2 * speedMultiplier; // Podwajamy bazową prędkość, by siła miała sens
+        
+        // Zależnie od kierunku gracza, zmieniamy kierunek strzału (dx)
+        if (this.game.player.facingDirection === "right") {
+            this.dx = initialSpeed * Math.cos(angle);
+        } else {
+            this.dx = -initialSpeed * Math.cos(angle);
+        }
+        
+        // Prędkość w pionie jest zawsze do góry (ujemna)
+        this.dy = -initialSpeed * Math.sin(angle); 
+        
         this.sprite = new Image();
         this.sprite.src = "assets/sprites/arrow.png"; 
         this.burningSprite = new Image();
         this.burningSprite.src = "assets/sprites/burningArrow.png";
         this.isFired = true;
-        this.toRemove = false; // Flaga do usunięcia strzały
-        this.isBurning = false; // Nowa flaga dla płonącej strzały
+        this.toRemove = false; 
+        this.isBurning = false; 
+    }
+// ...
     }
     
     /**
