@@ -171,6 +171,7 @@ export class Player extends GameObject {
         
         const prevX = this.x;
         const prevY = this.y;
+    }
 // ... (reszta kodu kolizji jest poprawna)
     
     /**
