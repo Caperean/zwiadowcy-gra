@@ -1,6 +1,8 @@
 import { LevelLoader } from "./LevelLoader.js";
 import { Input } from "../engine/Input.js"; 
 import { Player } from "../objects/player.js";
+import { Arrow } from "../objects/arrow.js";         // <--- DODAJ TEN IMPORT
+import { PoisonedArrow } from "../objects/PoisonedArrow.js"; // <--- DODAJ TEN IMPORT
 import { Apple } from "../objects/apple.js";
 import { ExitGate } from "../objects/ExitGate.js"; // Nowy import
 import { allLevels } from "../levels/levels.js"; // Nowy import
