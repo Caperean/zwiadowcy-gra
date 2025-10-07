@@ -64,20 +64,45 @@ export class Arrow extends GameObject {
      * Aktualizuje stan strzały w każdej klatce gry.
      * @param {number} deltaTime - Czas od ostatniej klatki w milisekundach.
      */
- update(deltaTime) {
+ /**
+     * Aktualizuje stan strzały w każdej klatce gry.
+     * @param {number} deltaTime - Czas od ostatniej klatki w milisekundach.
+     */
+    update(deltaTime) {
         if (!this.isFired) return;
 
-        // Sprawdzanie kolizji z kafelkami i ogniem
+        // 1. ZASTOSOWANIE GRAWITACJI
+        this.dy += GRAVITY; // Grawitacja zwiększa prędkość w dół
+
+        // ... (Kod dla kolizji z wrogami, który już masz)
         this.game.gameObjects.forEach(obj => {
             if (this.checkCollision(obj)) {
-                if (obj instanceof Tile) {
-                    this.isFired = false;
-                    this.toRemove = true; // Strzała znika po kolizji
-                } else if (obj instanceof Fire) {
-                    this.isBurning = true;
+                // Sprawdzenie kolizji z wrogami
+                // Zastąp obj.takeDamage(1) dla masek, które nie mają HP
+                if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab || obj instanceof Clown) {
+                    obj.takeDamage(1); 
+                    this.toRemove = true; 
+                } else if (obj instanceof Mask) {
+                    obj.toRemove = true; // Zniszcz maskę
+                    this.toRemove = true; 
                 }
             }
         });
+        
+        // Kolizja z kafelkami i ogniem
+        this.game.gameObjects.forEach(obj => {
+            if (obj instanceof Tile && this.checkCollision(obj)) {
+                this.isFired = false;
+                this.toRemove = true; // Strzała znika po kolizji
+            } else if (obj instanceof Fire && this.checkCollision(obj)) {
+                this.isBurning = true;
+            }
+        });
+
+        // 2. AKTUALIZACJA POZYCJI
+        this.x += this.dx;
+        this.y += this.dy;
+    }
 
         // Nowa logika sprawdzania kolizji z przeciwnikami
         this.game.gameObjects.forEach(obj => {
