@@ -5,7 +5,7 @@ import {
     ARROW_SPEED,         // <--- DODAJ TO
     MAX_POWER_CHARGE,    // <--- DODAJ TO
     GRAVITY              // <--- DODAJ TO (potrzebne do update, ale lepiej mieć w jednym miejscu)
-}
+} from "../engine/Constants.js";
 import { Tile } from "./tile.js";
 import { Fire } from "./fire.js";
 import { Wolf } from "./wolf.js";
