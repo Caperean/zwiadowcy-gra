@@ -110,21 +110,22 @@ export class Player extends GameObject {
             this.state = "sniping";
             this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
             this.dx = 0;
-        } else if (this.state === "sniping" && !keys["Space"]) {
-            this.state = "idle";
-            const power = this.powerCharge / MAX_POWER_CHARGE;
-            const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
-            const arrowDy = 0; // Strzały mają lecieć prosto
+        } } else if (this.state === "sniping" && !keys["Space"]) {
+    this.state = "idle";
+    
+    // Nowa logika: obliczenia dx/dy przeniesiono do arrow.js.
+    // Przekazujemy tylko siłę naładowania (this.powerCharge).
+    const powerChargeToSend = this.powerCharge; 
 
-            if (this.poisonedArrows > 0) {
-                // Jeśli gracz ma zatrute strzały, strzela nimi
-                this.game.arrows.push(new PoisonedArrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
-                this.poisonedArrows--;
-            } else {
-                // W przeciwnym razie strzela zwykłymi strzałami
-                this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
-            }
-            this.powerCharge = 0;
+    if (this.poisonedArrows > 0) {
+        // Strzała zatruta - przekazujemy this.powerCharge zamiast dx, dy
+        this.game.arrows.push(new PoisonedArrow(this.x, this.y + this.height / 2, powerChargeToSend, this.game));
+        this.poisonedArrows--;
+    } else {
+        // Strzała zwykła - przekazujemy this.powerCharge zamiast dx, dy
+        this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, powerChargeToSend, this.game));
+    }
+    this.powerCharge = 0;
             // Sprawdzanie śmierci gracza
         if (this.currentHP <= 0) {
             console.log("Gracz zginął! Resetowanie gracza i mobów...");
