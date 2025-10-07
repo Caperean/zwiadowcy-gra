@@ -106,32 +106,32 @@ export class Player extends GameObject {
     update(deltaTime) {
         const keys = this.game.input.keys;
 
-        
-        if (keys["Space"]) {  
+        if (keys["Space"]) {
             this.state = "sniping";
             this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
-            this.dx = 0; // Gracz nie może się ruszać podczas celowania
-        } else if (this.state === "sniping" && !keys["Space"]) { 
-            // 1. Logika wystrzału (Twoja poprawna logika)
-            let ArrowClass = Arrow;
-            if (this.currentArrowType === 'poison' && this.poisonedArrows > 0) {
-                ArrowClass = PoisonedArrow;
-                this.poisonedArrows--; 
-            }
-            
-            const arrow = new ArrowClass(
-                this.x + this.width / 2, 
-                this.y + this.height / 2, 
-                this.powerCharge, 
-                this.game
-            );
-            this.game.arrows.push(arrow);
-            
-            // 2. Reset stanu i siły
+            this.dx = 0;
+        } else if (this.state === "sniping" && !keys["Space"]) {
             this.state = "idle";
-            this.powerCharge = 0; 
-        } 
-         else {
+            const power = this.powerCharge / MAX_POWER_CHARGE;
+            const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
+            const arrowDy = 0; // Strzały mają lecieć prosto
+
+            if (this.poisonedArrows > 0) {
+                // Jeśli gracz ma zatrute strzały, strzela nimi
+                this.game.arrows.push(new PoisonedArrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+                this.poisonedArrows--;
+            } else {
+                // W przeciwnym razie strzela zwykłymi strzałami
+                this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+            }
+            this.powerCharge = 0;
+            // Sprawdzanie śmierci gracza
+        if (this.currentHP <= 0) {
+            console.log("Gracz zginął! Resetowanie gracza i mobów...");
+            this.game.resetLevelObjects();
+            return;
+        }
+        } else {
             this.dx = 0;
             if (keys["ArrowLeft"] || keys["KeyA"]) {
                 this.dx = -PLAYER_SPEED;
