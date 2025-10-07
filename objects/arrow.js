@@ -69,27 +69,25 @@ export class Arrow extends GameObject {
      * @param {number} deltaTime - Czas od ostatniej klatki w milisekundach.
      */
     update(deltaTime) {
-        if (!this.isFired) return;
+        // 1. ZASTOSOWANIE GRAWITACJI i RUCH
+        // Pamiętaj, żeby zaimportować GRAVITY z Constants.js
+        this.dy += GRAVITY; 
 
-        // 1. ZASTOSOWANIE GRAWITACJI
-        this.dy += GRAVITY; // Grawitacja zwiększa prędkość w dół
-
-        // ... (Kod dla kolizji z wrogami, który już masz)
-        this.game.gameObjects.forEach(obj => {
+        // 2. SPRAWDZANIE KOLIZJI Z WROGAMI I MASKAMI <--- TEN BLOK ZACZYNA SIĘ OD LINIJCE 108
+        this.game.gameObjects.forEach(obj => { // Linia 108
             if (this.checkCollision(obj)) {
                 // Sprawdzenie kolizji z wrogami
-                // Zastąp obj.takeDamage(1) dla masek, które nie mają HP
                 if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab || obj instanceof Clown) {
                     obj.takeDamage(1); 
                     this.toRemove = true; 
-                } else if (obj instanceof Mask) {
-                    obj.toRemove = true; // Zniszcz maskę
+                } else if (obj instanceof Mask) { // Maski
+                    obj.toRemove = true; 
                     this.toRemove = true; 
                 }
             }
         });
-        
-        // Kolizja z kafelkami i ogniem
+
+        // 3. KOLIZJA Z KAELKAMI I OGNIEM
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile && this.checkCollision(obj)) {
                 this.isFired = false;
@@ -99,21 +97,7 @@ export class Arrow extends GameObject {
             }
         });
 
-        // 2. AKTUALIZACJA POZYCJI
-        this.x += this.dx;
-        this.y += this.dy;
-    }
-
-        // Nowa logika sprawdzania kolizji z przeciwnikami
-        this.game.gameObjects.forEach(obj => {
-            if (this.checkCollision(obj)) {
-                if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab || obj instanceof Clown || obj instanceof Mask) {
-                    obj.takeDamage(1); // Zadaj 1 punkt obrażeń
-                    this.toRemove = true; // Strzała znika po trafieniu
-                }
-            }
-        });
-
+        // 4. AKTUALIZACJA POZYCJI
         this.x += this.dx;
         this.y += this.dy;
     }
