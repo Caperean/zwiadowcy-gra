@@ -24,7 +24,9 @@ export class Arrow extends GameObject {
      * @param {number} dy - Prędkość pionowa, obliczona przez gracza. <--- ZMIENIONE!
      * @param {object} game - Obiekt gry, potrzebny do kolizji.
      */
-     constructor(x, y, dx, dy, game) { 
+    // arrow.js (Wewnątrz klasy Arrow)
+
+    constructor(x, y, dx, dy, game) { 
         super(x, y, ARROW_WIDTH, ARROW_HEIGHT);
         this.game = game;
         
@@ -40,19 +42,9 @@ export class Arrow extends GameObject {
         this.toRemove = false; 
         this.isBurning = false; 
         this.damage = 1; // Ustaw domyślne obrażenia
-    }        
-        // Prędkość w pionie jest zawsze do góry (ujemna)
-        this.dy = -initialSpeed * Math.sin(angle); 
-        
-        this.sprite = new Image();
-        this.sprite.src = "assets/sprites/arrow.png"; 
-        this.burningSprite = new Image();
-        this.burningSprite.src = "assets/sprites/burningArrow.png";
-        this.isFired = true;
-        this.toRemove = false; 
-        this.isBurning = false; 
-    }
-// ...
+    } // <--- To jest jedyny i poprawny zamykający nawias klamrowy konstruktora
+    
+// ... (Tu powinien znajdować się początek metody checkCollision)
     
     
     /**
