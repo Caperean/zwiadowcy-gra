@@ -116,7 +116,7 @@ export class Player extends GameObject {
             
             // --- PEŁNA LOGIKA BALISTYCZNA KĄTA 40 STOPNI ---
             
-            const angle = 40 * (Math.PI / 180); // Kąt 40 stopni w radianach
+            const angle = 44 * (Math.PI / 180); // Kąt 40 stopni w radianach
             const initialSpeed = ARROW_SPEED * power; // Używamy siły ładowania (power)
             
             // Obliczanie PRĘDKOŚCI POZIOMEJ (dx)
