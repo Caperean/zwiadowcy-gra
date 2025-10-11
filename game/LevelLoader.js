@@ -91,6 +91,9 @@ export class LevelLoader {
              else if (objData.type === "cactus") {
                 const cactus = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "cactus");
                 gameObjects.push(cactus);
+            }  else if (objData.type === "spruce") {
+                const spruce = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "spruce");
+                gameObjects.push(spruce);
             }
              
     });
