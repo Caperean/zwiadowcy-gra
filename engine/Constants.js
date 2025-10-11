@@ -19,7 +19,7 @@ export const WOLF_ANIMATION_SPEED = 100;
 export const MAX_POWER_CHARGE = 2000; // 4 sekundy w milisekundach
 export const ARROW_WIDTH = 64;
 export const ARROW_HEIGHT = 16;
-export const ARROW_SPEED = 8;
+export const ARROW_SPEED = 24
 export const ARROW_VERTICAL_STRENGTH = -2;
 // Nowe stałe dla nietoperza
 export const BAT_WIDTH = 18;
