@@ -114,7 +114,7 @@ export class Player extends GameObject {
             this.state = "idle";
             const power = this.powerCharge / MAX_POWER_CHARGE;
             const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
-            const arrowDy = 40; // Strzały mają lecieć prosto
+            const arrowDy = 300; // Strzały mają lecieć prosto
 
             if (this.poisonedArrows > 0) {
                 // Jeśli gracz ma zatrute strzały, strzela nimi
