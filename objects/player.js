@@ -113,18 +113,25 @@ export class Player extends GameObject {
         } else if (this.state === "sniping" && !keys["Space"]) {
             this.state = "idle";
             const power = this.powerCharge / MAX_POWER_CHARGE;
+            
             const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
-            const arrowDy = 0; // Strzały mają lecieć prosto
+            
+            // POPRAWKA: Dajemy strzale impuls pionowy. Ujemna wartość to RUCH W GÓRĘ.
+            const arrowDy = -ARROW_VERTICAL_STRENGTH; 
 
+            // BEZPIECZNY START: Przesuwamy strzałę poza obszar kolizji gracza
+            const spawnX = this.facingDirection === "right" ? this.x + this.width : this.x - 5;
+            const spawnY = this.y + this.height / 2 - 5; 
+            
             if (this.poisonedArrows > 0) {
                 // Jeśli gracz ma zatrute strzały, strzela nimi
-                this.game.arrows.push(new PoisonedArrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+                this.game.arrows.push(new PoisonedArrow(spawnX, spawnY, arrowDx, arrowDy, this.game));
                 this.poisonedArrows--;
             } else {
                 // W przeciwnym razie strzela zwykłymi strzałami
-                this.game.arrows.push(new Arrow(this.x, this.y + this.height / 2, arrowDx, arrowDy, this.game));
+                this.game.arrows.push(new Arrow(spawnX, spawnY, arrowDx, arrowDy, this.game));
             }
-            this.powerCharge = 0;
+            this.powerCharge = 0
             // Sprawdzanie śmierci gracza
         if (this.currentHP <= 0) {
             console.log("Gracz zginął! Resetowanie gracza i mobów...");
