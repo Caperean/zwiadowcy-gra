@@ -110,28 +110,39 @@ export class Player extends GameObject {
             this.state = "sniping";
             this.powerCharge = Math.min(this.powerCharge + deltaTime, MAX_POWER_CHARGE);
             this.dx = 0;
-        } else if (this.state === "sniping" && !keys["Space"]) {
+        }  else if (this.state === "sniping" && !keys["Space"]) {
             this.state = "idle";
             const power = this.powerCharge / MAX_POWER_CHARGE;
             
-            const arrowDx = this.facingDirection === "right" ? ARROW_SPEED * power : -ARROW_SPEED * power;
+            // --- PEŁNA LOGIKA BALISTYCZNA KĄTA 40 STOPNI ---
             
-            // POPRAWKA: Dajemy strzale impuls pionowy. Ujemna wartość to RUCH W GÓRĘ.
-            const arrowDy = -ARROW_VERTICAL_STRENGTH; 
+            const angle = 40 * (Math.PI / 180); // Kąt 40 stopni w radianach
+            const initialSpeed = ARROW_SPEED * power; // Używamy siły ładowania (power)
+            
+            // Obliczanie PRĘDKOŚCI POZIOMEJ (dx)
+            let arrowDx;
+            if (this.facingDirection === "right") {
+                arrowDx = initialSpeed * Math.cos(angle);
+            } else {
+                arrowDx = -initialSpeed * Math.cos(angle); // Strzał w lewo
+            }
+            
+            // Obliczanie PRĘDKOŚCI PIONOWEJ (dy) - ZAWSZE do góry (ujemne)
+            const arrowDy = -initialSpeed * Math.sin(angle); 
+            
+            // ------------------------------------------------
 
-            // BEZPIECZNY START: Przesuwamy strzałę poza obszar kolizji gracza
+            // Bezpieczne miejsce startu
             const spawnX = this.facingDirection === "right" ? this.x + this.width : this.x - 5;
             const spawnY = this.y + this.height / 2 - 5; 
             
             if (this.poisonedArrows > 0) {
-                // Jeśli gracz ma zatrute strzały, strzela nimi
                 this.game.arrows.push(new PoisonedArrow(spawnX, spawnY, arrowDx, arrowDy, this.game));
                 this.poisonedArrows--;
             } else {
-                // W przeciwnym razie strzela zwykłymi strzałami
                 this.game.arrows.push(new Arrow(spawnX, spawnY, arrowDx, arrowDy, this.game));
             }
-            this.powerCharge = 0
+            this.powerCharge = 0;
             // Sprawdzanie śmierci gracza
         if (this.currentHP <= 0) {
             console.log("Gracz zginął! Resetowanie gracza i mobów...");
