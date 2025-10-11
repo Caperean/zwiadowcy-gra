@@ -14,8 +14,8 @@ export const level0 = {                             //poziom testowy żeby nie p
         "#........................#",                           // C- cegła
         "#.......................G#",
         "#......................G##",
-        "#..G...G...........G..G..#", 
-        "#GGWWGGGGGGGGGGGGGGGWWWWW#",
+        "#......G...........G..G..#", 
+        "#GGWWGG#GGGGGGGGGGG#WWWWW#",
         ],
     objects: [
         { type: "player", x: 36, y: 390 },
