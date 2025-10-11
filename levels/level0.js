@@ -13,7 +13,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         "#.......AAAAAAAA......G..#",                             // A- marmur
         "#........................#",                           // C- cegła
         "#.......................G#",
-        "#......................G##",
+        "#......................G.#",
         "#......G...........G..G..#", 
         "#GGWWGG#GGGGGGGGGGG#WWWWW#",
         ],
