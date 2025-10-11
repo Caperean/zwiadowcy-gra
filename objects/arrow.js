@@ -105,27 +105,28 @@ export class Arrow extends GameObject {
      * @param {CanvasRenderingContext2D} ctx - Kontekst rysowania 2D.
      */
     draw(ctx) {
-        const spriteToDraw = this.isBurning ? this.burningSprite : this.sprite;
+    const spriteToDraw = this.isBurning ? this.burningSprite : this.sprite;
 
-        if (spriteToDraw.complete) {
-            ctx.save();
-            ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+    if (spriteToDraw.complete) {
+        ctx.save();
 
-            // Odwróć strzałę, jeśli leci w lewo
-            if (this.dx < 0) {
-                ctx.scale(-1, 1);
-            }
-            
-            // Ponieważ sprite jest domyślnie pionowy, obracamy go o 90 stopni
-            ctx.rotate(Math.PI / 2);
-            
-            // Rysujemy strzałę z przesunięciem, aby obrót był wokół jej środka
-            ctx.drawImage(spriteToDraw, -this.width / 2, -this.height / 2, this.width, this.height);
-            
-            ctx.restore();
-        } else {
-            ctx.fillStyle = this.isBurning ? "orange" : "brown";
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-        }
+        // Przesuń układ odniesienia do środka strzały
+        ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+
+        // Oblicz kąt w kierunku ruchu
+        const angle = Math.atan2(this.dy, this.dx);
+
+        // Obróć sprite wzdłuż wektora prędkości
+        ctx.rotate(angle + Math.PI / 2);  
+        // ↑ +Math.PI/2 — bo twój sprite jest pionowy (grot w górę),
+        //   jeśli byłby poziomy, wystarczyłoby samo ctx.rotate(angle)
+
+        // Rysuj strzałę od środka
+        ctx.drawImage(spriteToDraw, -this.width / 2, -this.height / 2, this.width, this.height);
+
+        ctx.restore();
+    } else {
+        ctx.fillStyle = this.isBurning ? "orange" : "brown";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }
