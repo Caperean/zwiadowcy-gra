@@ -16,32 +16,31 @@ import { Clown } from "./Clown.js";
 import { Mask } from "./Mask.js";
 
 export class Arrow extends GameObject {
-    /**
+    
+/**
      * @param {number} x - Pozycja X startowa strzały.
      * @param {number} y - Pozycja Y startowa strzały.
-     * @param {number} powerCharge - Naładowana siła strzału (od 0 do MAX_POWER_CHARGE).
-     * @param {object} game - Obiekt gry, potrzebny do kolizji z kafelkami.
+     * @param {number} dx - Prędkość pozioma, obliczona przez gracza. <--- ZMIENIONE!
+     * @param {number} dy - Prędkość pionowa, obliczona przez gracza. <--- ZMIENIONE!
+     * @param {object} game - Obiekt gry, potrzebny do kolizji.
      */
-     constructor(x, y, dx, dy, game) { // <--- Zmienione parametry!
+     constructor(x, y, dx, dy, game) { 
         super(x, y, ARROW_WIDTH, ARROW_HEIGHT);
         this.game = game;
         
-        this.dx = dx; // Prędkość pozioma
-        this.dy = dy; // Prędkość pionowa (z impulsem w górę)
-        // Obliczenie wektora prędkości przy stałym kącie 40 stopni (w radianach)
-        const angle = 40 * (Math.PI / 180); // Kąt 40 stopni
+        // Używamy PRZEKAZANYCH prędkości z player.js
+        this.dx = dx; 
+        this.dy = dy;
         
-        // Używamy siły strzału do skalowania prędkości
-        const speedMultiplier = powerCharge / this.game.player.MAX_POWER_CHARGE;
-        const initialSpeed = ARROW_SPEED * 2 * speedMultiplier; // Podwajamy bazową prędkość, by siła miała sens
-        
-        // Zależnie od kierunku gracza, zmieniamy kierunek strzału (dx)
-        if (this.game.player.facingDirection === "right") {
-            this.dx = initialSpeed * Math.cos(angle);
-        } else {
-            this.dx = -initialSpeed * Math.cos(angle);
-        }
-        
+        this.sprite = new Image();
+        this.sprite.src = "assets/sprites/arrow.png"; 
+        this.burningSprite = new Image();
+        this.burningSprite.src = "assets/sprites/burningArrow.png";
+        this.isFired = true;
+        this.toRemove = false; 
+        this.isBurning = false; 
+        this.damage = 1; // Ustaw domyślne obrażenia
+    }        
         // Prędkość w pionie jest zawsze do góry (ujemna)
         this.dy = -initialSpeed * Math.sin(angle); 
         
