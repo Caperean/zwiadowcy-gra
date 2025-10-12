@@ -28,7 +28,8 @@ export const level0 = {                             //poziom testowy żeby nie p
          { type: "arab", x: 33, y: 300 },
         { type: "bat", x: 280, y: 96 },
         { type: "wolf", x: 604, y: 400 },
-         { type: "arab", x: 620, y: 400 },
+         { type: "apple", x: 620, y: 400 },
+          { type: "arab", x: 620, y: 400 },
         { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
     ]
 };
