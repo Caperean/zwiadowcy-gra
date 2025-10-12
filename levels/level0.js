@@ -3,12 +3,12 @@ export const level0 = {                             //poziom testowy żeby nie p
     map: [
         "..................P......#",                            // R-skała
         "..................P..P...#",                             // G-trawa
-        "....C.............P..PSP.#",                             // #-blok ziemi
-        "..C...............PPSPP..#",                             // N-śnieg
+        "....C.............PPSPSP.#",                             // #-blok ziemi
+        "..C..................PP..#",                             // N-śnieg
         "..CC.....................#",                            // I-lód
-        "....C....................#",                            // L-lawa
-        ".CC.............PSP......#",                              // P- piasek
-        ".CCC.......C.......P.PP.P#",                            //   S-kolce
+        "....C...................#",                            // L-lawa
+        ".CC.....S.PPPPPPP.P......#",                              // P- piasek
+        ".CCC.......C.....S.P.PP.P#",                            //   S-kolce
         ".CC.C.......CCC....PSPPSP#",                           //  M-magma
         "C.C.............CCCCC....#",                             // A- marmur
         "C..C..............C...C..#",                           // C- cegła
