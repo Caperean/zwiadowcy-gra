@@ -15,10 +15,11 @@ export const level0 = {                             //poziom testowy żeby nie p
         ".#######.................#",
         ".........................#",
         ".........................#", 
-        "GGGGGG...................#",
+        "GGGGGGGGGGGGG............#",
         ],
     objects: [
         { type: "player", x: 20, y: 33 },
+         { type: "wilk", x: 500, y: 33 },
     ]
        
 };
