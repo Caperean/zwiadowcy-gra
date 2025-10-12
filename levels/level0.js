@@ -18,7 +18,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         "CCCCPPPPPPPPPPPPPPPPPPPPP#",
         ],
     objects: [
-        { type: "player", x: 480, y: 390 },
+        { type: "player", x: 480, y: 385 },
         { type: "arab", x: 96, y: 290 },
             
               
