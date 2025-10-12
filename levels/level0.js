@@ -2,7 +2,7 @@ export const level0 = {                             //poziom testowy żeby nie p
     backgroundColor: "#add8e6",
     map: [
         ".........................#",                            // R-skała
-        "........C...CCCCCCC......#",                             // G-trawa
+        "........C...CCCCCC.......#",                             // G-trawa
         "....C....................#",                             // #-blok ziemi
         "..C..CCC.CCC.......C.....#",                             // N-śnieg
         "..CC.....................#",                            // I-lód
@@ -25,7 +25,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         { type: "arab", x: 335, y: 400 },  
          { type: "wolf", x: 240, y: 400 },      
         { type: "arab", x: 96, y: 46 },  
-         { type: "arab", x: 60, y: 320 },
+         { type: "arab", x: 60, y: 300 },
          { type: "arab", x: 335, y: 30 }, 
         { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
     ]
