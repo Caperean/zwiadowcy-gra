@@ -2,17 +2,17 @@ export const level0 = {                             //poziom testowy żeby nie p
     backgroundColor: "#add8e6",
     map: [
         ".........................#",                            // R-skała
-        ".........................#",                             // G-trawa
+        "........C....CCCCCC......#",                             // G-trawa
         "....C....................#",                             // #-blok ziemi
-        "..C......................#",                             // N-śnieg
+        "..C..CCC..CCC......C.....#",                             // N-śnieg
         "..CC.....................#",                            // I-lód
-        "....C....................#",                            // L-lawa
+        "....C........CCCCCC......#",                            // L-lawa
         ".CC......................#", 
-        ".CCC.....................#",                            //   S-kolce
-        ".CC.C....................#",                           //  M-magma
-        "CCC.............CCCCC....#",                             // A- marmur
+        ".CCC.......C.............#",                            //   S-kolce
+        ".CC.C........CC..........#",                           //  M-magma
+        "C.C.............CCCCC....#",                             // A- marmur
         "C..C..............C...C..#",                           // C- cegła
-        "C........................#",
+        "CC......................C#",
         "C........P...............#",
         "C..CP....P....PPCCCCCPPPP#", 
         "CCCCPPPPPPPPPPPPPPPPPPPPP#",
@@ -24,7 +24,9 @@ export const level0 = {                             //poziom testowy żeby nie p
         { type: "wolf", x: 320, y: 400 },
         { type: "arab", x: 335, y: 400 },  
          { type: "wolf", x: 240, y: 400 },      
-       
+        { type: "arab", x: 96, y: 46 },  
+         { type: "arab", x: 60, y: 320 },
+         { type: "arab", x: 335, y: 30 }, 
         { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
     ]
 };
