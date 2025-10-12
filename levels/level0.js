@@ -8,8 +8,8 @@ export const level0 = {                             //poziom testowy żeby nie p
         ".........................#",                            // I-lód
         ".........................#",                            // L-lawa
         ".........................#", 
-        ".........................#",                            //   S-kolce
-        "C.C......................#",                           //  M-magma
+        "........................#",                            //   S-kolce
+        "C.C.....................#",                           //  M-magma
         "CCC.C...........CCCCC....#",                             // A- marmur
         "C..CC.............C...C....#",                           // C- cegła
         "C........................#",
@@ -19,10 +19,10 @@ export const level0 = {                             //poziom testowy żeby nie p
         ],
     objects: [
         { type: "player", x: 480, y: 390 },
-        { type: "arab", x: 36, y: 290 },
+        { type: "arab", x: 96, y: 290 },
             
               
        
-        { type: "exitGate", x: 64, y: 400, width: 64, height: 64 }
+        { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
     ]
 };
