@@ -13,8 +13,8 @@ export const level0 = {                             //poziom testowy żeby nie p
         "CCC.............CCCCC....#",                             // A- marmur
         "C..C..............C...C..#",                           // C- cegła
         "C........................#",
-        "C........................#",
-        "C..CPP........PPCCCCCPPPP#", 
+        "C........P...............#",
+        "C..CP....P....PPCCCCCPPPP#", 
         "CCCCPPPPPPPPPPPPPPPPPPPPP#",
         ],
     objects: [
@@ -23,7 +23,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         { type: "arab", x: 96, y: 158 },
         { type: "wolf", x: 320, y: 400 },
         { type: "arab", x: 335, y: 400 },  
-              
+         { type: "wolf", x: 280, y: 400 },      
        
         { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
     ]
