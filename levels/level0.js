@@ -20,9 +20,9 @@ export const level0 = {                             //poziom testowy żeby nie p
     objects: [
         { type: "player", x: 20, y: 35 },
           { type: "wolf", x: 332, y: 35 },
-          { type: "wolf", x: 332, y: 50 },
-           { type: "wolf", x: 332, y: 150 },
-           { type: "wolf", x: 332, y: 250 },
+          { type: "wolf", x: 332, y: 100 },
+           { type: "wolf", x: 332, y: 200 },
+           { type: "wolf", x: 332, y: 300 },
          
     ]
        
