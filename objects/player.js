@@ -209,7 +209,7 @@ export class Player extends GameObject {
                         this.x = obj.x + obj.width;
                     }
                     
-                    const lethalTiles = ["lava", "water", "spikes"];
+                    const lethalTiles = ["lava", "water", "spikes","fullwater"];
                     if (lethalTiles.includes(obj.spriteName)) {
                         console.log("Gracz dotknął niebezpiecznego kafelka!");
                         this.takeDamage();
