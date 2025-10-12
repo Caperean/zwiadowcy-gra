@@ -2,9 +2,9 @@ export const level0 = {                             //poziom testowy żeby nie p
     backgroundColor: "#add8e6",
     map: [
         ".........................#",                            // R-skała
-        "........C....CCCCCC......#",                             // G-trawa
+        "........C...CCCCCCC......#",                             // G-trawa
         "....C....................#",                             // #-blok ziemi
-        "..C..CCC.CCCC......C.....#",                             // N-śnieg
+        "..C..CCC.CCC.......C.....#",                             // N-śnieg
         "..CC.....................#",                            // I-lód
         "....C........CCCCCC......#",                            // L-lawa
         ".CC......................#", 
