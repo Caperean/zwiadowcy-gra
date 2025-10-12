@@ -3,7 +3,7 @@ export const level0 = {                             //poziom testowy żeby nie p
     map: [
         ".........................#",                            // R-skała
         "........C...CCCCCC.......#",                             // G-trawa
-        "....C....................#",                             // #-blok ziemi
+        "....C................CCCC#",                             // #-blok ziemi
         "..C..CCC.CCC.......C.....#",                             // N-śnieg
         "..CC.....................#",                            // I-lód
         "....C........CCCCCC......#",                            // L-lawa
@@ -18,7 +18,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         "CCCCPPPPPPPPPPPPPPPPPPPPP#",
         ],
     objects: [
-        { type: "player", x: 480, y: 385 },
+        { type: "player", x: 550, y: 64 },
         { type: "arab", x: 96, y: 270 },
         { type: "arab", x: 96, y: 158 },
         { type: "wolf", x: 320, y: 400 },
@@ -26,7 +26,6 @@ export const level0 = {                             //poziom testowy żeby nie p
          { type: "wolf", x: 240, y: 400 },      
         { type: "arab", x: 96, y: 46 },  
          { type: "arab", x: 33, y: 300 },
-         { type: "arab", x: 335, y: 30 }, 
         { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
     ]
 };
