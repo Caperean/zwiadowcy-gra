@@ -4,8 +4,8 @@ export const level0 = {                             //poziom testowy żeby nie p
         "G....WG..................#",                            // R-skała
         "#....W#..................#",                             // G-trawa
         "#....W#GGGG..............#",                             // #-blok ziemi
-        "SG...W...................#",                             // N-śnieg
-        ".....WW..................#",                            // I-lód
+        ".G...W...................#",                             // N-śnieg
+        "S....WW..................#",                            // I-lód
         ".....GW..................#",                            // L-lawa
         "......W..................#",                              // P- piasek
         ".G....W..................#",                            //   S-kolce
@@ -18,8 +18,8 @@ export const level0 = {                             //poziom testowy żeby nie p
         "GGGGGGGGGGGGGWWWWWWWWWWWW#",
         ],
     objects: [
-        { type: "player", x: 30, y: 40 },
-         { type: "wilk", x: 20, y: 332 },
+        { type: "player", x: 20, y: 35 },
+         { type: "wolf", x: 20, y: 332 },
          { type: "wilk", x: 50, y: 332 },
          { type: "wilk", x: 75, y: 332 },
          { type: "wilk", x: 332, y: 100 },
