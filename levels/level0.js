@@ -21,8 +21,8 @@ export const level0 = {                             //poziom testowy żeby nie p
         { type: "player", x: 480, y: 385 },
         { type: "arab", x: 96, y: 270 },
         { type: "arab", x: 96, y: 158 },
-        { type: "wolf", x: 320, y: 450 },
-        { type: "arab", x: 335, y: 450 },  
+        { type: "wolf", x: 320, y: 400 },
+        { type: "arab", x: 335, y: 400 },  
               
        
         { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
