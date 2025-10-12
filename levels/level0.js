@@ -17,6 +17,6 @@ export const level0 = {                             //poziom testowy żeby nie p
         ".........................#", 
         ".........................#",
         ],
-    objects: [
+    objects: [  ]
        
 };
