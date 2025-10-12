@@ -6,9 +6,9 @@ export const level0 = {                             //poziom testowy żeby nie p
         "....C.............PPSPSP.#",                             // #-blok ziemi
         "..C..................PP..#",                             // N-śnieg
         "..CC.....................#",                            // I-lód
-        "....C.....PPPPPPP........#",                            // L-lawa
-        ".CC.....S.......P.P......#",                              // P- piasek
-        ".CCC.......P....PS.P.PP.P#",                            //   S-kolce
+        "....C...P..PPPPP.P......#",                            // L-lawa
+        ".CC.....S.......PSP......#",                              // P- piasek
+        ".CCC......PP.......P.PP.P#",                            //   S-kolce
         ".CC.C.......PPP....PSPPSP#",                           //  M-magma
         "C.C.............CCCCC....#",                             // A- marmur
         "C..C..............C...C..#",                           // C- cegła
