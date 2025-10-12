@@ -14,7 +14,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         "C..C..............C...C..#",                           // C- cegła
         "CC......................C#",
         ".........P...............#",
-        "...CP....P....PPCCCCCPPPP#", 
+        "...CP....P....PPPPPPPPPPP#", 
         "CCCCPPPPPPPPPPPPPPPPPPPPP#",
         ],
     objects: [
