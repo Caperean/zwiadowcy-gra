@@ -21,7 +21,10 @@ export const level4 = {
        { type: "player", x: 25, y: 25 },
         { type: "bat", x: 500, y: 80 },
         { type: "bat", x: 400, y: 80 },   
-   { type: "bat", x: 300, y: 80 },   
+   { type: "bat", x: 300, y: 80 },
+          { type: "bat", x: 500, y: 100 },
+        { type: "bat", x: 400, y: 80 },   
+   { type: "bat", x: 300, y: 100 },   
        
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
