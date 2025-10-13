@@ -143,7 +143,7 @@ export class LevelLoader {
         const clown = new Clown(objData.x, objData.y, game);
         gameObjects.push(clown);
           } else if (objData.type === "Boar") { // Zwróć uwagę na usunięcie `\` i dodanie `{}`
-        const Boar = new Boar(objData.x, objData.y, game);
+        const boar = new Boar(objData.x, objData.y, game);
         gameObjects.push(boar);
              }
             
