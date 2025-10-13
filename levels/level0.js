@@ -13,7 +13,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         ".A........................",                             // A- marmur
         ".A...AA...................",                            
         ".AAAAAA...................",                                                            // C- cegła
-        "......A.AA................",                          //T- pełna woda
+        "......A.A.................",                          //T- pełna woda
         ".......A.A................",
         "AAAAAAAAAAAAAAAAAWWIWWIINN",
        
@@ -21,7 +21,7 @@ export const level0 = {                             //poziom testowy żeby nie p
     objects: [
          { type: "player", x: 750, y: 332 },
          { type: "clown", x: 100, y: 320 },
-         { type: "clown", x: 50, y: 332 },
+         { type: "clown", x: 0, y: 332 },
          
     ]
        
