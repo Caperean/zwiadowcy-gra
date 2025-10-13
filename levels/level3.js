@@ -1,25 +1,26 @@
 export const level3 = {
     backgroundColor: "#FF934A",
     map: [
-        ".........................",                            // R-skała
-        ".........................",                             // G-trawa
-        ".........................",                             // #-blok ziemi
-        ".........................",                             // N-śnieg
-        "PPPPPPPP..PPP............",                            // I-lód
-        "P..............PPPPP.....",                            // L-lawa
-        "P........................",                           //  W-water 
-        "P....................PPPP",                          //   S-kolce
-        "P.P..............PPPP....",                           //  M-magma
-        "P.PPPPP.PPPPPPPPP........",                           // P-Piasek  
-        "P......P.................",                           
-        "P........................",                           
-        "P........................",                           
-        "P.......................P",
-        "PPPPPPPPPPPPPPPPPWWWPPPPP",
+        "P........................P",                            // R-skała
+        "P........................P",                             // G-trawa
+        "P........................P",                             // #-blok ziemi
+        "P........................P",                             // N-śnieg
+        "PPPPPPPP..PPP............P",                            // I-lód
+        "P..............PPPPP.....P",                            // L-lawa
+        "P........................P",                           //  W-water 
+        "P....................PPPPP",                          //   S-kolce
+        "P.P..............PPPP....P",                           //  M-magma
+        "P.PPPPP.PPPPPPPPP........P",                           // P-Piasek  
+        "P......P.................P",                           
+        "P........................P",                           
+        "P........................P",                           
+        "P.......................PP",
+        "PPPPPPPPPPPPPPPPPWWWPPPPPP",
     ],
     objects: [
        { type: "player", x: 50, y: 15 },
-       { type: "cactus", x: 100, y: 100, width: 140, height: 200 },
+       { type: "cactus", x: 100, y: 100, width: 70, height: 100 },
+         { type: "cactus", x: 110, y: 60, width: 140, height: 200 },
         { type: "bat", x: 500, y: 400 },
         { type: "arab", x: 50, y: 150 },
          { type: "arab", x: 100, y: 150 },
