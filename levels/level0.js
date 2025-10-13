@@ -19,7 +19,7 @@ export const level0 = {                             //poziom testowy żeby nie p
        
         ],
     objects: [
-         { type: "player", x: 700, y: 332 },
+         { type: "player", x: 750, y: 332 },
          
     ]
        
