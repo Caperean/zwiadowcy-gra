@@ -1,4 +1,4 @@
-export const level0 = {                             //poziom testowy żeby nie przechodzić wszystkiego
+export const level10 = {                             //poziom testowy żeby nie przechodzić wszystkiego
     backgroundColor: "#add8e6",
     map: [
         "#G....WG.................#",                            // R-skała
