@@ -5,7 +5,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         ".........................",                             // G-trawa
         "..AAAAAAAAAAAAAAA........",                             // #-blok ziemi
         "....A..........A....A....",                             // N-śnieg
-        "....A..........A.......A.",                            // I-lód
+        "....A..........A.........",                            // I-lód
         "....A..........A..AAAAA..",                            // L-lawa
         "..AAA..A...A.A.A.A......A",                              // P- piasek
         "....A........A.A.........",                            //   S-kolce
