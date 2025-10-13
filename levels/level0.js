@@ -15,7 +15,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         ".AAAAAA...................",                                                            // C- cegła
         "......AAAA................",                          //T- pełna woda
         ".......A.A................",
-        "AAAAAAAAAAAAAAAAAWWIWWIINN",
+        "AAAAAAAAAAAAAAAAAAAAAAAAAA",
        
         ],
     objects: [
