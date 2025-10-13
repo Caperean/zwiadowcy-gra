@@ -28,12 +28,7 @@ export class Boar extends GameObject {
         this.facingDirection = "right";
         this.attackDamage = BOAR_DAMAGE; // Obrażenia zadawane graczowi
         
-        // --- LOGIKA ZATRUCIA (z object.js) ---
-        this.isPoisoned = false;
-        this.poisonDamagePerTick = 0;
-        this.poisonEndTime = 0;
-        this.lastPoisonTick = 0;
-        this.poisonTickInterval = 500;
+       
         // ------------------------------------
 
         // Ładowanie sprite'ów
