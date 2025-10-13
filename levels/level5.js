@@ -10,11 +10,11 @@ export const level5 = {
         "M........................M",                           //  W-water 
         "M....MMMMMMMMMMMM..MMLMLLM",                          //   S-kolce
         "M................MLMMMMMMM",                           //  M-magma
-        "MMMM.............MMM.....M",                             
+        "M.MM.............MMM.....M",                             
         "M....MM..................M",                           
-        "M.......MMM..............M",                           
-        "M...........MMM..........M",                           
-        "M..............MMMMM.....M",
+        "M.......M.M..............M",                           
+        "M...........M.M..........M",                           
+        "M..............MM.MM.....M",
         "MLLLLLLLLLLLLLLLLLLLLMMMMM",
     ],
     objects: [
