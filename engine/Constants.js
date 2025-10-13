@@ -42,3 +42,12 @@ export const CLOWN_ATTACK_COOLDOWN = 1500; // 1.5 sekundy
 export const MASK_WIDTH = 32;
 export const MASK_HEIGHT = 32;
 export const MASK_SPEED = 4;
+// nowe stałe dla dzika
+export const BOAR_WIDTH = 48;
+export const BOAR_HEIGHT = 32;
+export const BOAR_SPEED = 1.5; // Trochę szybszy niż WOLF_SPEED (1)
+export const BOAR_CHASE_DISTANCE = 250; // Większy zasięg wykrywania niż Wilk (200)
+export const BOAR_ATTACK_DISTANCE = 50;
+export const BOAR_RETREAT_DISTANCE = 100;
+export const BOAR_DAMAGE = 3; // Zadaje 3 HP obrażeń
+export const BOAR_ANIMATION_SPEED = 100;
