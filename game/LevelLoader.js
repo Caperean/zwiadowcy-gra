@@ -141,7 +141,9 @@ export class LevelLoader {
             } else if (objData.type === "clown") { // Zwróć uwagę na usunięcie `\` i dodanie `{}`
         const clown = new Clown(objData.x, objData.y, game);
         gameObjects.push(clown);
-    }
+    } else if (objData.type === "Boar") { // Zwróć uwagę na usunięcie `\` i dodanie `{}`
+        const clown = new Boar(objData.x, objData.y, game);
+        gameObjects.push(Boar);
 
             
         });
