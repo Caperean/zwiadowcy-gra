@@ -18,7 +18,13 @@ export const level0 = {                             //poziom testowy żeby nie p
         "##GGGGGGGGGGGGWWWWWWWWWWW#",
         ],
     objects: [
-    
+         { type: "player", x: 40, y: 35 },
+          { type: "wolf", x: 20, y: 332 },
+          { type: "wolf", x: 100, y: 332 },
+           { type: "wolf", x: 200, y: 332 },
+           { type: "wolf", x: 300, y: 332 },
+         { type: "exitGate", x: 250, y: 0, width: 64, height: 64 },
+        
     ]
        
 };
