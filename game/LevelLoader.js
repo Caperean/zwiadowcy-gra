@@ -13,7 +13,7 @@ import { Bat } from "../objects/Bat.js"; // <--- Nowy import
 import { Arab } from "../objects/Arab.js"; // Nowy import
 import { Clown } from "../objects/Clown.js";
 import { Mask } from "../objects/Mask.js";
-import { Clown } from "../objects/boar.js";
+import { boar } from "../objects/boar.js";
 
 export class LevelLoader {
     /**
