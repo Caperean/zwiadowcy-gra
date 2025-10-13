@@ -76,7 +76,7 @@ export class Arrow extends GameObject {
         this.game.gameObjects.forEach(obj => { // Linia 108
             if (this.checkCollision(obj)) {
                 // Sprawdzenie kolizji z wrogami
-                if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab || obj instanceof Clown) {
+                if (obj instanceof Wolf || obj instanceof Mage || obj instanceof Bat || obj instanceof Arab || obj instanceof Clown || obj instanceof Boar) {
                     obj.takeDamage(1); 
                     this.toRemove = true; 
                 } else if (obj instanceof Mask) { // Maski
