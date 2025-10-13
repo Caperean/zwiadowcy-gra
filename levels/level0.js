@@ -3,27 +3,24 @@ export const level0 = {                             //poziom testowy żeby nie p
     map: [
         "..........................",                            // R-skała
         "..........................",                             // G-trawa
-        ".A.......................",                             // #-blok ziemi
-        ".A........................",                             // N-śnieg
-        ".A........................",                            // I-lód
-        ".A........................",                            // L-lawa
-        ".A........................",                              // P- piasek
-        ".A........................",                            //   S-kolce
-        ".AAA....AAAAAAAAAAAAAAAAAA",                           //  M-magma
-        ".A........................",                             // A- marmur
-        ".A...AA...................",                            
-        ".AAAAAA...................",                                                            // C- cegła
-        "......AAAA................",                          //T- pełna woda
-        ".......A.A................",
-        "AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "...AAAAAAAAAAAAAAA........",                             // #-blok ziemi
+        ".....A..........A....A....",                             // N-śnieg
+        ".....A..........A.......A.",                            // I-lód
+        ".....A..........A.........",                            // L-lawa
+        "...AAA..A...A.A.A.AAAAAAA.",                              // P- piasek
+        ".....A........A.A.........",                            //   S-kolce
+        ".....AA.......A.AAA....AAA",                           //  M-magma
+        ".....A....A...A.A.........",                             // A- marmur
+        "...A.A........A.A...AA....",                            
+        ".....A.A......A.AAAAAA....",                                                            // C- cegła
+        ".....A.....AA.A......AAAA.",                          //T- pełna woda
+        "..............A.......A.A.",
+        "WWWWAWWAWAAAAAAAAAAAAAAAAA",
        
         ],
     objects: [
          { type: "player", x: 750, y: 332 },
-         { type: "clown", x: 100, y: 320 },
-         { type: "clown", x: 0, y: 332 },
-         { type: "mage", x: 500, y: 150 },
-         { type: "mage", x: 400, y: 150 },
+       
          
     ]
        
