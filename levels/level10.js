@@ -28,6 +28,7 @@ export const level10 = {                             //poziom testowy żeby nie 
     { type: "bat", x: 400, y: 200 }, 
     { type: "bat", x: 300, y: 300 }, 
     { type: "clown", x: 270, y: 0 },
+          { type: "apple", x: 220, y: 100 },
     ]
        
 };
