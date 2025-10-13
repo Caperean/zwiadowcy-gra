@@ -24,7 +24,7 @@ export const level8 = {
         { type: "clown", x: 400, y: 125 },
         { type: "apple", x: 512, y: 130 },  
         { type: "wolf", x: 480, y: 390 },    
-              
+          { type: "tree", x: 150, y: 390, width: 70, height: 140 },     
        
         { type: "exitGate", x: 400, y: 220, width: 64, height: 64 }
     ]
