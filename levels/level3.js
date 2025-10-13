@@ -19,8 +19,8 @@ export const level3 = {
     ],
     objects: [
        { type: "player", x: 50, y: 15 },
-       { type: "cactus", x: 100, y: 100, width: 70, height: 100 },
-         { type: "cactus", x: 110, y: 60, width: 140, height: 200 },
+       { type: "cactus", x: 100, y: 80, width: 70, height: 100 },
+         { type: "cactus", x: 110, y: 40, width: 140, height: 200 },
         { type: "bat", x: 500, y: 400 },
         { type: "arab", x: 50, y: 150 },
          { type: "arab", x: 100, y: 150 },
