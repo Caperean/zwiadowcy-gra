@@ -24,10 +24,10 @@ export const level0 = {                             //poziom testowy żeby nie p
            { type: "wolf", x: 200, y: 332 },
            { type: "wolf", x: 300, y: 332 },
          { type: "exitGate", x: 250, y: 0, width: 64, height: 64 },
-         { type: "bat", x: 100, y: 100 },
-           { type: "bat", x: 200, y: 432 },
-           { type: "bat", x: 300, y: 300 },
-         { type: "clown", x: 275, y: 50  }, 
+       { type: "bat", x: 500, y: 100 }, 
+    { type: "bat", x: 400, y: 200 }, 
+    { type: "bat", x: 300, y: 300 }, 
+    { type: "clown", x: 270, y: 0 },
     ]
        
 };
