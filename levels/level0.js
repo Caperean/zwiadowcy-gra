@@ -22,6 +22,8 @@ export const level0 = {                             //poziom testowy żeby nie p
          { type: "player", x: 750, y: 332 },
          { type: "clown", x: 100, y: 320 },
          { type: "clown", x: 0, y: 332 },
+         { type: "mage", x: 500, y: 140 },
+         { type: "mage", x: 400, y: 140 },
          
     ]
        
