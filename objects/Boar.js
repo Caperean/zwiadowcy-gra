@@ -182,6 +182,8 @@ export class Boar extends GameObject {
             } else {
                 ctx.translate(this.x, this.y);
                 ctx.drawImage(spriteToDraw, 0, 0, this.width, this.height);
+                 ctx.fillStyle = "purple"; // Łatwy do zauważenia kolor
+            ctx.fillRect(this.x, this.y, this.width, this.height);
             }
             ctx.restore();
         } else {
