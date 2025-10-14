@@ -30,7 +30,13 @@ export class Boar extends GameObject {
         
        
         // ------------------------------------
-
+   // --- LOGIKA ZATRUCIA (z object.js) ---
+        this.isPoisoned = false;
+        this.poisonDamagePerTick = 0;
+        this.poisonEndTime = 0;
+        this.lastPoisonTick = 0;
+        this.poisonTickInterval = 500;
+        // --
         // Ładowanie sprite'ów
         this.boarSprites = [];
         // Załaduj 4 sprite'y dzika z podfolderu 'boar_sprites'
