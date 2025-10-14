@@ -60,7 +60,7 @@ export class Game {
      */
     update(deltaTime) {
         // Aktualizacja wszystkich obiektów gry
-        this.gameObjects.forEach(obj => obj.update(deltaTime));
+        this.gameObjects.forEach(obj => obj.update(deltaTime, this.gameObjects));
         this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
         this.arrows.forEach(arrow => arrow.update(deltaTime));
         
