@@ -25,6 +25,8 @@ export class Boar extends GameObject {
         this.animationTimer = 0;
         this.animationFrame = 0;
         this.animationSpeed = BOAR_ANIMATION_SPEED;
+         // NOWA ZMIENNA DLA PATROLOWANIA
+        this.patrolDirection = "right"; // Domyślnie idzie w prawo
         this.facingDirection = "right";
 
         // Ustawienia patrolu
