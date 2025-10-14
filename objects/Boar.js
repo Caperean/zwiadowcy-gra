@@ -28,6 +28,7 @@ export class Boar extends GameObject {
         this.facingDirection = "right";
 
         // Ustawienia patrolu
+        this.patrolDirection = \"left\";
         this.patrolRange = 50; 
         this.patrolStartTime = x;
         this.patrolEndTime = x + this.patrolRange;
