@@ -22,7 +22,7 @@ export const level0 = {                             //poziom testowy żeby nie p
          { type: "player", x: 750, y: 332 },
            { type: "oar", x: 400, y: 50 },// nie używać
          { type: "exitGate", x: 600, y: 350, width: 64, height: 64 },
-         { type: "bat, x: 150, y: 50 },
+         { type: "bat", x: 150, y: 50 },
     ]
        
 };
