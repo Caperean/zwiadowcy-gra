@@ -12,7 +12,7 @@ export const level0 = {                             //poziom testowy żeby nie p
         "....AA.......A.AAA....AAA",                           //  M-magma
         "....A....A...A.A.........",                             // A- marmur
         "..A.A........A.A...AA....",                            
-        "....A.A......A.AAAAAA....",                                                            // C- cegła
+        "......A......A.AAAAAA....",                                                            // C- cegła
         "..........AA.A......AAAA.",                          //T- pełna woda
         ".............A.......A.A.",
         "WWWAWWAWAAAAAAAAAAAAAAAAA",
@@ -21,7 +21,7 @@ export const level0 = {                             //poziom testowy żeby nie p
     objects: [
          { type: "player", x: 750, y: 332 },
            { type: "oar", x: 400, y: 50 },// nie używać
-         { type: "exitGate", x: 600, y: 350, width: 64, height: 64 },
+         { type: "exitGate", x: 550, y: 360, width: 64, height: 64 },
          { type: "bat", x: 150, y: 50 },
     ]
        
