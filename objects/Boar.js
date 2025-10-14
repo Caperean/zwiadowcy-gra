@@ -36,7 +36,7 @@ export class Boar extends GameObject {
         this.boarSprites = [];
         for (let i = 1; i <= 4; i++) {
             const sprite = new Image();
-            sprite.src = `assets/sprites/boar${i}.png`; // Załóżmy, że masz boar1.png do boar4.png
+            sprite.src = `assets/sprites/boar_sprites/boar${i}.png`; // Załóżmy, że masz boar1.png do boar4.png
             this.boarSprites.push(sprite);
         }
 
