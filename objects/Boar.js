@@ -61,7 +61,7 @@ export class Boar extends GameObject {
     
     update(deltaTime, gameObjects) {
         // !!! OBSŁUGA ZATRUCIA (zaimportowana z object.js)
-        this.updatePoison(deltaTime);
+       
         
         if (this.hp <= 0) {
             this.toRemove = true;
