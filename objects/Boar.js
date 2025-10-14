@@ -26,104 +26,79 @@ export class Boar extends GameObject {
         this.animationFrame = 0;
         this.animationSpeed = BOAR_ANIMATION_SPEED;
         this.facingDirection = "right";
-        this.attackDamage = BOAR_DAMAGE; // Obrażenia zadawane graczowi
-        
-       
-        // ------------------------------------
-   // --- LOGIKA ZATRUCIA (z object.js) ---
-        this.isPoisoned = false;
-        this.poisonDamagePerTick = 0;
-        this.poisonEndTime = 0;
-        this.lastPoisonTick = 0;
-        this.poisonTickInterval = 500;
-        // --
-        // Ładowanie sprite'ów
+
+        // Ustawienia patrolu
+        this.patrolRange = 50; 
+        this.patrolStartTime = x;
+        this.patrolEndTime = x + this.patrolRange;
+        this.speed = BOAR_SPEED;
+
         this.boarSprites = [];
-        // Załaduj 4 sprite'y dzika z podfolderu 'boar_sprites'
         for (let i = 1; i <= 4; i++) {
-            this.boarSprites[i - 1] = new Image();
-            this.boarSprites[i - 1].src = `assets/sprites/boar_sprites/boar${i}.png`;
+            const sprite = new Image();
+            sprite.src = `assets/sprites/boar${i}.png`; // Załóżmy, że masz boar1.png do boar4.png
+            this.boarSprites.push(sprite);
         }
-    }
-    
-    // Metoda resetPosition jest przydatna przy ponownym ładowaniu poziomu
-    resetPosition() {
-        this.x = this.initialX;
-        this.y = this.initialY;
-        this.dx = 0;
-        this.dy = 0;
-        this.hp = 2; // Reset HP
-        this.toRemove = false;
-        this.state = "patrol";
-        this.onGround = false;
-        this.isPoisoned = false; // Reset zatrucia
-    }
-    
-    update(deltaTime, gameObjects) {
-        // !!! OBSŁUGA ZATRUCIA (zaimportowana z object.js)
-       
+
+        // Zmienne do ataku
+        this.attackCooldown = 1500;
+        this.lastAttackTime = 0;
+        this.chargeSpeed = BOAR_SPEED * 3; // Szybkość szarży
+        this.chargeTimer = 0;
+        this.chargeDuration = 300; // Czas trwania szarży
+        this.damage = BOAR_DAMAGE;
         
+        // --- USUNIĘTO: Logika związana z zatruciem (isPoisoned, poisonTimer) ---
+    }
+    
+    // --- USUNIĘTO: Metoda applyPoison() ---
+
+    update(deltaTime) {
         if (this.hp <= 0) {
             this.toRemove = true;
             return;
         }
 
-        const player = this.game.player;
-        if (!player) return;
-
-        const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
-
-        // Zmiana stanu
-        if (distanceToPlayer < BOAR_ATTACK_DISTANCE && this.onGround) {
-            this.state = "attack";
-        } else if (distanceToPlayer < BOAR_CHASE_DISTANCE) {
-            this.state = "chase";
-        } else {
-            this.state = "patrol";
-        }
-        
-        // Logika ruchu
-        switch (this.state) {
-            case "chase":
-                this.dx = (player.x < this.x ? -BOAR_SPEED : BOAR_SPEED);
-                this.facingDirection = (this.dx < 0 ? "left" : "right");
-                break;
-            case "attack":
-                // Zadaj obrażenia przy kolizji z graczem (obsługiwane w kolizjach)
-                this.dx = 0; // Zatrzymaj ruch podczas ataku
-                break;
-            case "patrol":
-                // Prosty ruch patrolujący - np. w miejscu, jeśli nie ma logiki krawędzi
-                this.dx = 0; 
-                break;
-        }
-
-        // 1. Zastosowanie ruchu i grawitacji
+        // 1. ZASTOSOWANIE GRAWITACJI
         this.dy += GRAVITY;
+        this.onGround = false;
+        
+        // 2. LOGIKA RUCHU I STANU
+        this.updateState();
+
+        // 3. AKTUALIZACJA POZYCJI (Wstępna)
+        const oldX = this.x;
+        const oldY = this.y;
         this.x += this.dx;
         this.y += this.dy;
-        this.onGround = false;
 
-        // 2. Kolizja z graczem (atak)
-        if (this.checkCollision(player)) {
-            player.takeDamage(this.attackDamage); // Dzik zadaje 3 obrażenia
-            // Odskok (opcjonalnie)
-            this.x -= this.dx * 10;
-        }
-
-        // 3. Kolizja z kafelkami (podłoże)
-        const oldY = this.y - this.dy; // Wymagane do poprawnej kolizji
-        gameObjects.forEach(obj => {
+        // 4. KOLIZJE Z KAFELKAMI TERENU (NAPRAWIA PRZENIKANIE)
+        this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile && this.checkCollision(obj)) {
-                if (this.dy > 0 && oldY + this.height <= obj.y) { // Kolizja z góry
+                // Kolizja pionowa
+                if (this.y < oldY) { // Kolizja z dołu (skok pod platformę)
+                    this.y = obj.y + obj.height;
+                    this.dy = 0;
+                } else if (this.y > oldY) { // Kolizja z góry (lądowanie)
                     this.y = obj.y - this.height;
                     this.dy = 0;
                     this.onGround = true;
                 }
+                
+                // Kolizja pozioma (odwrócenie kierunku)
+                if (this.x < oldX) { // Kolizja z lewej strony kafelka
+                    this.x = obj.x + obj.width;
+                    this.dx = 0; // Zatrzymaj ruch
+                    this.facingDirection = "right";
+                } else if (this.x > oldX) { // Kolizja z prawej strony kafelka
+                    this.x = obj.x - this.width;
+                    this.dx = 0; // Zatrzymaj ruch
+                    this.facingDirection = "left";
+                }
             }
         });
         
-        // 4. Logika animacji (4 klatki)
+        // 5. LOGIKA ANIMACJI (4 klatki)
         if (this.dx !== 0 || this.state === "attack") {
             this.animationTimer += deltaTime;
             if (this.animationTimer >= this.animationSpeed) {
@@ -135,16 +110,68 @@ export class Boar extends GameObject {
             this.animationFrame = 0;
             this.animationTimer = 0;
         }
+        
+        // --- USUNIĘTO: Logika uszkodzeń i spowolnienia od zatrucia z metody update ---
+    }
+    
+    // Metoda odpowiedzialna za logikę stanu dzika (patrol/pościg/atak)
+    updateState() {
+        const player = this.game.player;
+        const distanceToPlayer = Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2));
+
+        if (this.state === "patrol") {
+            // Logika ruchu patrolu (odbijanie się od krańców patrolRange)
+            if (this.x <= this.patrolStartTime) {
+                this.facingDirection = "right";
+            } else if (this.x + this.width >= this.patrolEndTime) {
+                this.facingDirection = "left";
+            }
+
+            this.dx = this.facingDirection === "right" ? this.speed : -this.speed;
+
+            // Przejście do stanu pościgu
+            if (distanceToPlayer < BOAR_CHASE_DISTANCE && Math.abs(this.y - player.y) < TILE_HEIGHT * 2) {
+                this.state = "chase";
+            }
+        } else if (this.state === "chase") {
+            // Logika pościgu
+            if (distanceToPlayer < BOAR_ATTACK_DISTANCE && Date.now() - this.lastAttackTime > this.attackCooldown) {
+                this.state = "attack";
+                this.chargeTimer = this.chargeDuration;
+                this.dx = this.facingDirection === "right" ? this.chargeSpeed : -this.chargeSpeed;
+                this.lastAttackTime = Date.now();
+            } else if (distanceToPlayer > BOAR_RETREAT_DISTANCE) {
+                this.state = "patrol";
+            } else {
+                // Biegnij w kierunku gracza
+                this.facingDirection = (player.x > this.x) ? "right" : "left";
+                this.dx = this.facingDirection === "right" ? this.speed : -this.speed;
+            }
+        } else if (this.state === "attack") {
+            // Logika ataku (szarża)
+            this.chargeTimer -= this.game.deltaTime;
+            if (this.chargeTimer <= 0) {
+                this.state = "chase";
+                this.dx = 0; // Zatrzymaj szarżę po czasie
+            }
+            
+            // Kolizja z graczem podczas szarży zadaje obrażenia
+            if (this.checkCollision(player)) {
+                player.takeDamage(this.damage);
+            }
+        }
     }
 
     draw(ctx) {
         const spriteToDraw = this.boarSprites[this.animationFrame];
         
-        // Opcjonalnie: Rysowanie na czerwono, jeśli zatruty
+        // --- USUNIĘTO: Opcjonalne rysowanie na czerwono, jeśli zatruty ---
+        /*
         if (this.isPoisoned) {
              ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
              ctx.fillRect(this.x, this.y, this.width, this.height);
         }
+        */
 
         if (spriteToDraw && spriteToDraw.complete) {
             ctx.save();
@@ -158,7 +185,7 @@ export class Boar extends GameObject {
             }
             ctx.restore();
         } else {
-            ctx.fillStyle = "darkred";
+            ctx.fillStyle = "brown"; // Tymczasowy prostokąt, jeśli sprite się nie załadował
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
