@@ -20,7 +20,7 @@ export const level7 = {
     objects: [
        { type: "player", x: 36, y: 390 },  
         { type: "wolf", x: 40, y: 25 },
-         { type: "spruce", x: 36, y: 380, width: 48, height: 100 },
+         { type: "spruce", x: 36, y: 350, width: 48, height: 100 },
          { type: "bush", x: 150, y: 410, width: 60, height: 30 },
          { type: "bush", x: 160, y: 35, width: 60, height: 30 },
         { type: "exitGate", x: 25, y: 15, width: 64, height: 64 }
