@@ -5,7 +5,7 @@ export const level66 = {
         "R...R......R...........R.R",                             // G-trawa
         "R...........RLRLRLLRLLR..R",                             // #-blok ziemi
         "RR.....R.R..RRRRRRRRRRR..R",                             // N-śnieg
-        "R.....R.....R.........RRRR",                            // I-lód
+        "R.....R.....R..........RRR",                            // I-lód
         "R..RR......RR............R",                            // L-lawa
         "RLLR........R............R",                           //  W-water 
         "RRM....RLLR.RRRRRLRLRLR..R",                          //   S-kolce
@@ -21,6 +21,6 @@ export const level66 = {
        { type: "player", x: 400, y: 150 },
         
        
-        { type: "exitGate", x: 720, y: 80, width: 64, height: 64 }
+        { type: "exitGate", x: 730, y: 80, width: 64, height: 64 }
     ]
 };
