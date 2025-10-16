@@ -18,7 +18,7 @@ export const level66 = {
         "LLLLLLLLLLLLLLLLLLLMMMLLLL",
     ],
     objects: [
-       { type: "player", x: 400, y: 150 },
+       { type: "player", x: 420, y: 150 },
         
        
         { type: "exitGate", x: 730, y: 66, width: 64, height: 64 }
