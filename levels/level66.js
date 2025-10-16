@@ -14,7 +14,7 @@ export const level66 = {
         "M..M.....................R",                           // C-cegły
         "MM......M.M...........MLLR",                           
         "MM...MM.....M.M..........R",                           
-        "..M.M...........M.M......R",
+        "..M.M..........M..M......R",
         "LLLLLLLLLLLLLLLLLLLMMMLLLL",
     ],
     objects: [
