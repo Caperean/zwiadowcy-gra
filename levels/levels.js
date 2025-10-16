@@ -3,7 +3,7 @@ import { level0 } from "./level0.js";
 import { level1 } from "./level1.js";
 import { level2 } from "./level2.js";
 import { level3 } from "./level3.js";
-import { level4 } from "./level4.js";
+import { level4 } from "./level4.js";        // Cała gra ma mieć ok. 20 poziomów
 import { level5 } from "./level5.js";
 import { level6 } from "./level6.js";
 import { level7 } from "./level7.js";
