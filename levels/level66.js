@@ -4,8 +4,8 @@ export const level66 = {
         "R.R...RRRRR..............R",                            // R-skała
         "R...R......R...........R.R",                             // G-trawa
         "R...........RLRLRLLRLLR..R",                             // #-blok ziemi
-        "RR.......R..RRRRRRRRRRR..R",                             // N-śnieg
-        "R.....RR....R.........RRRR",                            // I-lód
+        "RR.....R.R..RRRRRRRRRRR..R",                             // N-śnieg
+        "R.....R.....R.........RRRR",                            // I-lód
         "R..RR......RR............R",                            // L-lawa
         "RLLR........R............R",                           //  W-water 
         "RRM....RLLR.RRRRRLLRLLR..R",                          //   S-kolce
