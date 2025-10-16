@@ -12,7 +12,7 @@ export const level66 = {
         "M....R.RRR.......MMMMM...R",                           //  M-magma
         "M...MM...................R",                             // A-marmur
         "M..M.....................R",                           // C-cegły
-        "MM......M.M...........MLLR",                           
+        "MM......M.M...........M..R",                           
         "MM...MM.....M.M..........R",                           
         "..M.M..........M..M......R",
         "LLLLLLLLLLLLLLLLLLLMMMLLLL",
