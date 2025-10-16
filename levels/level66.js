@@ -22,6 +22,6 @@ export const level66 = {
         { type: "mage", x: 705, y: 0 },
         { type: "bat", x: 320, y: 350 },
        
-        { type: "exitGate", x: 730, y: 66, width: 64, height: 64 }
+        { type: "exitGate", x: 740, y: 66, width: 64, height: 64 }
     ]
 };
