@@ -1,14 +1,14 @@
 export const level66 = {
     backgroundColor: "#add8e6",
     map: [
-        "R.R...RRRRR..............R",                            // R-skała
-        "R...R......R...........R.R",                             // G-trawa
+        "R.R...RRRRRR.............R",                            // R-skała
+        "R...R..................R.R",                             // G-trawa
         "R...........RLRLRLLRLLR..R",                             // #-blok ziemi
         "RR.....R.R..RRRRRRRRRRR..R",                             // N-śnieg
         "R.....R.....R..........RRR",                            // I-lód
         "R..RR......RR............R",                            // L-lawa
         "RLLR........R............R",                           //  W-water 
-        "RRM....RLLR.RRRRRLRLRLR..R",                          //   S-kolce
+        "RRM....RLRR.RRRRRLRLRLR..R",                          //   S-kolce
         "M....R.RRR.......MMMMM...R",                           //  M-magma
         "M...MM...................R",                             // A-marmur
         "M..M.....................R",                           // C-cegły
