@@ -2,17 +2,17 @@ export const level11 = {
     backgroundColor: "#add8e6",
     map: [
         "R.........................R",                            // R-skała
-        "R.........................R",                             // G-trawa
-        "R.........................R",                             // #-blok ziemi
-        "R.RRR.....................R",                             // N-śnieg
-        "RR........................R",                            // I-lód
-        "R.R....R.R..RRRRRRRRRRRRRRR",                            // L-lawa
-        "RLR.R.......R.............R",                           //  W-water 
-        "RR.........RRRRRR.........R",                          //   S-kolce
-        "M.....MLLM.......LLMLLM...R",                           //  M-magma
-        "M....M.............M......R",                             // A-marmur
-        "M..M................M.....R",                           // C-cegły
-        "MM......M.M.........M..MLLR",                           
+        "R.R.R..R.RR.............R.R",                             // G-trawa
+        "R....R.....RLLRL..........R",                             // #-blok ziemi
+        "RR..........R.............R",                             // N-śnieg
+        "R........R..RRRRRRRRRRRRRRR",                            // I-lód
+        "R..R..R....RR.............R",                            // L-lawa
+        "RLLR........R.............R",                           //  W-water 
+        "RRM....RLLRRRRRR.........R",                          //   S-kolce
+        "M......RRR......MLLMLLM...R",                           //  M-magma
+        "M...MM.............MMM....R",                             // A-marmur
+        "M..M.....................R",                           // C-cegły
+        "MM......M.M............MLLR",                           
         "M.MMM.M.....M.M...........R",                           
         "................M.M.......R",
         "LLLLLLLLLLLLLLLLLLLLMMMLLLM",
@@ -21,6 +21,6 @@ export const level11 = {
        { type: "player", x: 400, y: 270 },
         
        
-        { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
+        { type: "exitGate", x: 1000, y: 150, width: 64, height: 64 }
     ]
 };
