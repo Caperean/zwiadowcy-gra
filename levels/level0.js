@@ -7,12 +7,12 @@ export const level0 = {                             //poziom testowy żeby nie p
         "....A..........A....A....",                             // N-śnieg
         "....A..........A.........",                            // I-lód
         "....A......A...A..AAAAA..",                            // L-lawa
-        "..AAA..A.....A.A.A......A",                              // P- piasek
-        "....A........A.A.........",                            //   S-kolce
+        "..AAA..A.....A.A..A.....A",                              // P- piasek
+        "....A........A.AWWA......",                            //   S-kolce
         "....AA.......A.AAA....AAA",                           //  M-magma
         "......AAAA...A.A.........",                             // A- marmur
         "..A.........AA.A...AA....",                            
-        ".............A.AAA.AA....",                                                            // C- cegła
+        ".............A.AAAAAA....",                                                            // C- cegła
         "..........AA.A......AAAA.",                          //T- pełna woda
         ".............A.......A.A.",
         "WWWAWWAWAAAAAAAAAAAAAAAAA",
