@@ -1,4 +1,4 @@
-export const level66 = {
+export const level12 = {
     backgroundColor: "#add8e6",
     map: [
         "R.....RRRRRR.............R",                            // R-skała
