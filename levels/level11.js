@@ -1,26 +1,26 @@
 export const level11 = {
     backgroundColor: "#add8e6",
     map: [
-        "R.........................R",                            // R-skała
-        "R.R.R..R.RR.............R.R",                             // G-trawa
-        "R....R.....RLLRL..........R",                             // #-blok ziemi
-        "RR..........R.............R",                             // N-śnieg
-        "R........R..RRRRRRRRRRRRRRR",                            // I-lód
-        "R..R..R....RR.............R",                            // L-lawa
-        "RLLR........R.............R",                           //  W-water 
-        "RRM....RLLRRRRRR.........R",                          //   S-kolce
-        "M......RRR......MLLMLLM...R",                           //  M-magma
-        "M...MM.............MMM....R",                             // A-marmur
+        "R.R....RRRR..............R",                            // R-skała
+        "R...R.RR...............R.R",                             // G-trawa
+        "R..........RLLRLRLLRLLR..R",                             // #-blok ziemi
+        "RR..........RRRRRRRRRRR..R",                             // N-śnieg
+        "R.....R..R..R.........RRRR",                            // I-lód
+        "R..R.......RR............R",                            // L-lawa
+        "RLLR........R............R",                           //  W-water 
+        "RRM....RLLRRRRRRRLLRLLR..R",                          //   S-kolce
+        "M....R.RRR.......MMMMM...R",                           //  M-magma
+        "M...MM...................R",                             // A-marmur
         "M..M.....................R",                           // C-cegły
-        "MM......M.M............MLLR",                           
-        "M.MMM.M.....M.M...........R",                           
-        "................M.M.......R",
-        "LLLLLLLLLLLLLLLLLLLLMMMLLLM",
+        "MM......M.M...........MLLR",                           
+        "MM...MM.....M.M..........R",                           
+        "..M.M...........M.M......R",
+        "LLLLLLLLLLLLLLLLLLLMMMLLLL",
     ],
     objects: [
-       { type: "player", x: 400, y: 270 },
+       { type: "player", x: 400, y: 250 },
         
        
-        { type: "exitGate", x: 1000, y: 150, width: 64, height: 64 }
+        { type: "exitGate", x: 800, y: 150, width: 64, height: 64 }
     ]
 };
