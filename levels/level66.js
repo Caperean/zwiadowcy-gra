@@ -2,7 +2,7 @@ export const level66 = {
     backgroundColor: "#add8e6",
     map: [
         "R.....RRRRRR.............R",                            // R-skała
-        "R...R..................R.R",                             // G-trawa
+        "R...R....................R",                             // G-trawa
         "R...........RLRLRLLRLLR..R",                             // #-blok ziemi
         "RR.....R.R..RRRRRRRRRRR..R",                             // N-śnieg
         "R.....R.....R..........RRR",                            // I-lód
@@ -19,7 +19,7 @@ export const level66 = {
     ],
     objects: [
        { type: "player", x: 420, y: 150 },
-        { type: "mage", x: 710, y: 0 },
+        { type: "mage", x: 705, y: 0 },
         { type: "bat", x: 320, y: 350 },
        
         { type: "exitGate", x: 730, y: 66, width: 64, height: 64 }
