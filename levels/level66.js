@@ -1,0 +1,26 @@
+export const level66 = {
+    backgroundColor: "#add8e6",
+    map: [
+        "R.R...RRRRR..............R",                            // R-skała
+        "R...R......R...........R.R",                             // G-trawa
+        "R...........RLRLRLLRLLR..R",                             // #-blok ziemi
+        "RR.......R..RRRRRRRRRRR..R",                             // N-śnieg
+        "R.....RR....R.........RRRR",                            // I-lód
+        "R..RR......RR............R",                            // L-lawa
+        "RLLR........R............R",                           //  W-water 
+        "RRM....RLLR.RRRRRLLRLLR..R",                          //   S-kolce
+        "M....R.RRR.......MMMMM...R",                           //  M-magma
+        "M...MM...................R",                             // A-marmur
+        "M..M.....................R",                           // C-cegły
+        "MM......M.M...........MLLR",                           
+        "MM...MM.....M.M..........R",                           
+        "..M.M...........M.M......R",
+        "LLLLLLLLLLLLLLLLLLLMMMLLLL",
+    ],
+    objects: [
+       { type: "player", x: 400, y: 250 },
+        
+       
+        { type: "exitGate", x: 500, y: 150, width: 64, height: 64 }
+    ]
+};
