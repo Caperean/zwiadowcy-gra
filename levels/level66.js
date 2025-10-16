@@ -8,8 +8,8 @@ export const level66 = {
         "R.....R.....R..........RRR",                            // I-lód
         "R..RR......RR............R",                            // L-lawa
         "RLLR........R............R",                           //  W-water 
-        "RRM....RLRR.RRRRRLRLRLR..R",                          //   S-kolce
-        "M....R.RRR.......MMMMM...R",                           //  M-magma
+        "RRR....RLRR.RRRRRLRRRLR..R",                          //   S-kolce
+        "M....M.MMM.......M...M...R",                           //  M-magma
         "M...MM...................R",                             // A-marmur
         "M..M.....................R",                           // C-cegły
         "MM......M.M...........M..R",                           
