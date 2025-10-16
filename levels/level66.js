@@ -19,7 +19,7 @@ export const level66 = {
     ],
     objects: [
        { type: "player", x: 420, y: 150 },
-        { type: "mage", x: 715, y: 10 },
+        { type: "mage", x: 710, y: 4 },
         
        
         { type: "exitGate", x: 730, y: 66, width: 64, height: 64 }
