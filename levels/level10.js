@@ -12,7 +12,7 @@ export const level10 = {                             //poziom testowy żeby nie 
         "#.#WWWTG.................#",                           //  M-magma
         "#.######.................#",                             // A- marmur
         "#.......G....G...........#",                           // C- cegła
-        "#.........G.....G........#",                          //T- pełna woda
+        "#.........GG....G........#",                          //T- pełna woda
         "#........................#",
         "#G............G..........#", 
         "##GGGGGGGGGGGGWWWWWWWWWWW#",
