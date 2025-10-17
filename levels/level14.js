@@ -21,8 +21,9 @@ export const level14 = {
        { type: "player", x: 700, y: 33 },
        { type: "boar", x: 500, y: 15 } ,      
          { type: "bush", x: 15, y: 130, width: 100, height: 80 } ,
-         { type: "house", x: 500, y: 40, width: 200, height: 160 } ,
-         { type: "hill", x: 500, y: 0, width: 400, height: 310 } ,
+         { type: "hill", x: 400, y: -100, width: 400, height: 310 ,
+         { type: "house", x: 500, y: 40, width: 200, height: 16 }0 } ,
+        
        
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
