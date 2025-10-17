@@ -4,7 +4,7 @@ export const level9 = {                             //poziom testowy żeby nie p
         "...............SSSP......#SSS",                            // R-skała
         "..................P..P...#",                             // G-trawa
         "....C..............PSPSP.#",                             // #-blok ziemi
-        "..C..................PP..#",                             // N-śnieg
+        "..C..................PPP.#",                             // N-śnieg
         "..CC....S..PP............#",                            // I-lód
         "....C...P....PPP..P......#",                            // L-lawa
         ".CC.....P.......PSP......#",                              // P- piasek
