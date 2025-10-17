@@ -97,6 +97,9 @@ export class LevelLoader {
             }  else if (objData.type === "spruce") {
                 const spruce = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "spruce");
                 gameObjects.push(spruce);
+            } else if (objData.type === "house") {
+                const house = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "house");
+                gameObjects.push(house);
             }
              
     });
