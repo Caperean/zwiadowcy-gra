@@ -21,7 +21,7 @@ export const level13 = {
        { type: "player", x: 20, y: 33 },
        { type: "wolf", x: 100, y: 15 } ,      
          { type: "tree", x: 80, y: 100, width: 120, height: 200 } ,  
-       { type: "boar", x: 100, y: 15 } ,
+       { type: "boar", x: 100, y: 100 } ,
         { type: "exitGate", x: 50, y: 400, width: 64, height: 64 }
     ]
 };
