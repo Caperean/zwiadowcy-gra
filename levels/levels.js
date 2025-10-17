@@ -13,10 +13,11 @@ import { level10 } from "./level10.js";
 import { level11 } from "./level11.js";
 import { level12 } from "./level12.js";
 import { level13 } from "./level13.js";
+import { level14 } from "./level14.js";
 
 // Tutaj będziesz dodawać kolejne poziomy
 export const allLevels = [
-    
+     { name: "level14.js", data: level14 },
     { name: "level0.js", data: level0 }, // poziom testowy żeby nie przechodzić wszystkiego 
     { name: "level1.js", data: level1 },
     { name: "level2.js", data: level2 },
