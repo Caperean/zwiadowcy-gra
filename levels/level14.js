@@ -1,8 +1,8 @@
 export const level14 = {
     backgroundColor: "#add8e6",
     map: [
-        "#........................",                            // R-skała
-        "#........................",                             // G-trawa
+        "#......C.................",                            // R-skała
+        "#.....CCC................",                             // G-trawa
         "#...CCCCCC...............",                             // #-blok ziemi
         "#...C....C...............",                             // N-śnieg
         "#...C....................",                            // I-lód
@@ -22,6 +22,7 @@ export const level14 = {
        { type: "boar", x: 500, y: 15 } ,      
          { type: "bush", x: 15, y: 130, width: 100, height: 80 } ,
          { type: "house", x: 500, y: 10, width: 200, height: 160 } ,
+         { type: "hill", x: 500, y: 10, width: 200, height: 160 } ,
        
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
