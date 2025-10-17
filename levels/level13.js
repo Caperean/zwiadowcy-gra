@@ -3,9 +3,9 @@ export const level13 = {
     map: [
         "S........................M",                            // R-skała
         "#........................M",                             // G-trawa
-        "#G.......................M",                             // #-blok ziemi
-        "#...................G....M",                                                       // N-śnieg
-        "#GGGGGGGGGGGGGGGGGGG#....M",                         // I-lód
+        "#........................M",                             // #-blok ziemi
+        "#.G.................G....M",                                                       // N-śnieg
+        "#G#GGGGGGGGGGGGGGGGG#....M",                         // I-lód
         "#........................M",                           // L-lawa
         "#........................M",                           //  W-water 
         "#........................M",                          //   S-kolce
@@ -21,12 +21,12 @@ export const level13 = {
        { type: "player", x: 33, y: 0 },
        { type: "wolf", x: 100, y: 15 } ,      
         { type: "boar", x: 270, y: 100 } ,
-         { type: "tree", x: 80, y: 100, width: 180, height: 280 } ,  
+         { type: "tree", x: 80, y: 200, width: 180, height: 280 } ,  
        { type: "boar", x: 100, y: 300 } ,
         { type: "wolf", x: 200, y: 15 } ,  
         { type: "wolf", x: 400, y: 300 } ,  
         { type: "wolf", x: 580, y: 300 } ,
-        { type: "bat", x: 700, y: 100 } ,
+        { type: "bat", x: 650, y: 20 } ,
         { type: "exitGate", x: 50, y: 400, width: 64, height: 64 }
     ]
 };
