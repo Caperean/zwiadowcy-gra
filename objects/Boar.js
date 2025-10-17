@@ -3,7 +3,7 @@ import { GRAVITY, BOAR_WIDTH, BOAR_HEIGHT, BOAR_SPEED, WOLF_CHASE_DISTANCE, WOLF
 import { Tile } from "./tile.js";
 import { Player } from "./player.js";
 
-export class Wolf extends GameObject {
+export class Boar extends GameObject {
     /**
      * @param {number} x - Pozycja X wilka.
      * @param {number} y - Pozycja Y wilka.
