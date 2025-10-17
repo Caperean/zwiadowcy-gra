@@ -18,9 +18,9 @@ export const level14 = {
         "#########################",
     ],
     objects: [
-       { type: "player", x: 20, y: 33 },
-       { type: "wolf", x: 100, y: 15 } ,      
-         { type: "bush", x: 10, y: 160, width: 100, height: 80 } ,  
+       { type: "player", x: 700, y: 33 },
+       { type: "boar", x: 500, y: 15 } ,      
+         { type: "bush", x: 15, y: 150, width: 100, height: 80 } ,  
        
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
