@@ -34,6 +34,7 @@ export const level13 = {
         { type: "bat", x: 650, y: 20 } ,
          { type: "bat", x: 350, y: 20 } ,
          { type: "bat", x: 400, y: 200 } ,
+         { type: "bat", x: 150, y: 200 } ,
         { type: "exitGate", x: 50, y: 400, width: 64, height: 64 }
     ]
 };
