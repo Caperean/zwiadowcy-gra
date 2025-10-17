@@ -18,8 +18,8 @@ export const level11 = {
         "LLLLLLLLLLLLLLLLLLLMMMLLLL",
     ],
     objects: [
-       { type: "player", x: 400, y: 250 },
-        { type: "mage", x: 710, y: 0 },
+       { type: "player", x: 400, y: 180 },
+        { type: "mage", x: 700, y: 0 },
         { type: "bat", x: 350, y: 280 },
        
         { type: "exitGate", x: 500, y: 150, width: 64, height: 64 }
