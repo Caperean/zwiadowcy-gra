@@ -20,9 +20,9 @@ export const level0 = {                             //poziom testowy żeby nie p
         ],
     objects: [
          { type: "player", x: 750, y: 332 },
-        { type: "boar", x: 100, y: 50 },
+        { type: "boar", x: 100, y: 0 },
          { type: "exitGate", x: 550, y: 400, width: 64, height: 64 },
-         { type: "bat", x: 150, y: 0 },
+         { type: "bat", x: 150, y: 50 },
     ]
        
 };
