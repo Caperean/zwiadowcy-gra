@@ -1,15 +1,15 @@
 export const level11 = {
     backgroundColor: "#add8e6",
     map: [
-        "R.R...RRRRR..............R",                            // R-skała
+        "S.....RRRRR..............R",                            // R-skała
         "R...R......R...........R.R",                             // G-trawa
         "R...........RLRLRLLRLLR..R",                             // #-blok ziemi
         "RR.......R..RRRRRRRRRRR..R",                             // N-śnieg
         "R.....RR....R.........RRRR",                            // I-lód
         "R..RR......RR............R",                            // L-lawa
         "RLLR........R............R",                           //  W-water 
-        "RRM....RLLR.RRRRRLLRLLR..R",                          //   S-kolce
-        "M....R.RRR.......MMMMM...R",                           //  M-magma
+        "RRR....RLLR.RRRRRLLRLLR..R",                          //   S-kolce
+        "M....M.MMM.......MMMMM...R",                           //  M-magma
         "M...MM...................R",                             // A-marmur
         "M..M.....................R",                           // C-cegły
         "MM......M.M...........MLLR",                           
@@ -19,7 +19,8 @@ export const level11 = {
     ],
     objects: [
        { type: "player", x: 400, y: 250 },
-        
+        { type: "mage", x: 710, y: 0 },
+        { type: "bat", x: 350, y: 280 },
        
         { type: "exitGate", x: 500, y: 150, width: 64, height: 64 }
     ]
