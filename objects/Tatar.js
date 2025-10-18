@@ -11,7 +11,7 @@ export class Tatar extends GameObject {          // heiht, widhight, speed, anim
      * @param {object} game - Obiekt gry, potrzebny do interakcji.
      */
     constructor(x, y, player, game) {
-        super(x, y, BOAR_WIDTH, BOAR_HEIGHT);
+        super(x, y, TATAR_WIDTH, TATR_HEIGHT);
         this.hp = 3; // Wilki mają 1 HP
         this.toRemove = false;
         this.player = player;
@@ -22,17 +22,17 @@ export class Tatar extends GameObject {          // heiht, widhight, speed, anim
         this.state = "idle";
         this.animationTimer = 0;
         this.animationFrame = 0;
-        this.animationSpeed = WOLF_ANIMATION_SPEED;
+        this.animationSpeed = TATAR_ANIMATION_SPEED;
         this.facingDirection = "right";
         this.wolfSprites = [];
         this.wolfSprites[0] = new Image();
-        this.wolfSprites[0].src = "assets/sprites/boar_sprites/boar1.png";
+        this.wolfSprites[0].src = "assets/sprites/tatar1.png";
         this.wolfSprites[1] = new Image();
-        this.wolfSprites[1].src = "assets/sprites/boar_sprites/boar2.png";
+        this.wolfSprites[1].src = "assets/sprites/tatar2.png";
         this.wolfSprites[2] = new Image();
-        this.wolfSprites[2].src = "assets/sprites/boar_sprites/boar3.png";
+        this.wolfSprites[2].src = "assets/sprites/tatar3.png";
         this.wolfSprites[3] = new Image();
-        this.wolfSprites[3].src = "assets/sprites/boar_sprites/boar4.png";
+        this.wolfSprites[3].src = "assets/sprites/tatar4.png";
         this.retreatStartPosition = null;
         this.patrolDirection = 1; // 1 dla prawo, -1 dla lewo
     }
@@ -123,7 +123,7 @@ export class Tatar extends GameObject {          // heiht, widhight, speed, anim
                     } else if (distanceToPlayer > WOLF_CHASE_DISTANCE + 50) {
                         this.state = "idle";
                     } else {
-                        this.dx = (this.player.x > this.x) ? BOAR_SPEED : -BOAR_SPEED;
+                        this.dx = (this.player.x > this.x) ? TATAR_SPEED : -TATAR_SPEED;
                         this.facingDirection = (this.player.x > this.x) ? "right" : "left";
                     }
                     break;
@@ -132,7 +132,7 @@ export class Tatar extends GameObject {          // heiht, widhight, speed, anim
                         this.player.takeDamage(); // Zadawanie obrażeń graczowi
                         this.state = "retreat";
                         this.retreatStartPosition = { x: this.x, y: this.y };
-                        this.dx = (this.player.x > this.x) ? -BOAR_SPEED : BOAR_SPEED;
+                        this.dx = (this.player.x > this.x) ? -TATR_SPEED : TATR_SPEED;
                     } else {
                         this.state = "chase";
                     }
