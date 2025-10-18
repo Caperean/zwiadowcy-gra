@@ -19,7 +19,7 @@ export const level12 = {
     ],
     objects: [
        { type: "player", x: 33, y:450 },
-        { type: "tatr", x: 1000, y: 200 },
+        { type: "tatar", x: 1000, y: 200 },
         { type: "bat", x: 320, y: 350 },
        
         { type: "exitGate", x: 33, y: 168, width: 64, height: 64 }
