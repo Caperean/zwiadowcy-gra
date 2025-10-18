@@ -51,3 +51,7 @@ export const BOAR_ATTACK_DISTANCE = 50;
 export const BOAR_RETREAT_DISTANCE = 100;
 export const BOAR_DAMAGE = 3; // Zadaje 3 HP obrażeń
 export const BOAR_ANIMATION_SPEED = 100;
+// nowe zmienne dla tatara
+export const TATAR_WIDTH = 50;
+export const TATAR_HEIGHT = 70;
+export const TATAR_SPEED = 2.5;
