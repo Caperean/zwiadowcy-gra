@@ -8,7 +8,7 @@ export const level12 = {
         "#GGG........#G....GG#....R",                            // I-lód
         "#.....G..................R",                            // L-lawa
         "#........G...............R",                           //  W-water 
-        "#..................G.GG..R",                          //   S-kolce
+        "#..................G.....R",                          //   S-kolce
         "#........................R",                           //  M-magma
         "#...............G...........................R",                             // A-marmur
         "#..................G........................R",                           // C-cegły
@@ -18,7 +18,7 @@ export const level12 = {
         "#GGGGGGGGGGGGGGGGGGGGGGGGGR",
     ],
     objects: [
-       { type: "player", x: 33, y:450 },
+       { type: "player", x: 33, y:350 },
         { type: "tatar", x: 1000, y: 200 },
         { type: "bat", x: 320, y: 350 },
        
