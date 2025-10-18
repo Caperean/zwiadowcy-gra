@@ -132,7 +132,7 @@ export class Tatar extends GameObject {          // heiht, widhight, speed, anim
                         this.player.takeDamage(); // Zadawanie obrażeń graczowi
                         this.state = "retreat";
                         this.retreatStartPosition = { x: this.x, y: this.y };
-                        this.dx = (this.player.x > this.x) ? -TATR_SPEED : TATR_SPEED;
+                        this.dx = (this.player.x > this.x) ? -TATAR_SPEED : TATAR_SPEED;
                     } else {
                         this.state = "chase";
                     }
