@@ -55,3 +55,4 @@ export const BOAR_ANIMATION_SPEED = 100;
 export const TATAR_WIDTH = 50;
 export const TATAR_HEIGHT = 70;
 export const TATAR_SPEED = 2.5;
+export const TATAR_ANIMATION_SPEED = 200;
