@@ -14,6 +14,7 @@ import { Arab } from "../objects/Arab.js"; // Nowy import
 import { Clown } from "../objects/Clown.js";
 import { Mask } from "../objects/Mask.js";
 import { Boar } from "../objects/Boar.js";
+import { Tatar } from "../objects/Tatar.js";
 
 export class LevelLoader {
     /**
@@ -148,6 +149,9 @@ export class LevelLoader {
           }    else if (objData.type === "Boar" || objData.type === "boar") { 
     const boar = new Boar(objData.x, objData.y, player, game);
     gameObjects.push(boar);
+}  else if (objData.type === "tatar" || objData.type === "Tatar") { 
+    const tatar = new Tatar(objData.x, objData.y, player, game);
+    gameObjects.push(tatar);
 }
             
         });
