@@ -8,8 +8,8 @@ export const level12 = {
         "#GGG........#G....G..GG#.R",                            // I-lód
         "#.....G.............G....R",                            // L-lawa
         "#........................R",                           //  W-water 
-        "#SSSSSSS.G.........G.....R",                          //   S-kolce
-        "########.................R",                           //  M-magma
+        "#........G.........G.....R",                          //   S-kolce
+        "#........................R",                           //  M-magma
         "#...............G...........................R",                             // A-marmur
         "#.................GG........................R",                           // C-cegły
         "#...........................................R",                           
@@ -23,10 +23,10 @@ export const level12 = {
          { type: "tatar", x: 1000, y: 200 },
          { type: "tatar", x: 1100, y: 200 },
         { type: "tatar", x: 1100, y: 200 },
-         { type: "tatar", x: 999, y: 200 },
-         { type: "tatar", x: 999, y: 200 },
+         { type: "tatar", x: 1400, y: 200 },
+         { type: "tatar", x: 1400, y: 200 },
         { type: "bat", x: 320, y: 350 },
        
-        { type: "exitGate", x: 33, y: 90, width: 64, height: 64 }
+        { type: "exitGate", x: 33, y: 60, width: 64, height: 64 }
     ]
 };
