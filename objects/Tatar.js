@@ -107,7 +107,7 @@ export class Tatar extends GameObject {          // heiht, widhight, speed, anim
             switch (this.state) {
                 case "idle":
                     // Nowa logika patrolowania
-                    this.dx = BOAR_SPEED * this.patrolDirection;
+                    this.dx = TATAR_SPEED * this.patrolDirection;
                     this.facingDirection = this.patrolDirection === 1 ? "right" : "left";
 
                     if (this.checkObstacle()) {
