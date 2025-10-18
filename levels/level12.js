@@ -23,9 +23,10 @@ export const level12 = {
          { type: "tatar", x: 1000, y: 200 },
          { type: "tatar", x: 1100, y: 200 },
         { type: "tatar", x: 1100, y: 200 },
-         { type: "tatar", x: 1400, y: 200 },
-         { type: "tatar", x: 1400, y: 200 },
+         { type: "tatar", x: 1200, y: 200 },
+         { type: "tatar", x: 1200, y: 200 },
         { type: "bat", x: 320, y: 350 },
+        { type: "boar", x: 500, y: 300 },
        
         { type: "exitGate", x: 33, y: 60, width: 64, height: 64 }
     ]
