@@ -29,7 +29,8 @@ export const level12 = {
         { type: "boar", x: 500, y: 300 },
          { type: "clown", x: 34, y: 60 },
          { type: "clown", x: 384, y: 10 },
-       
+        { type: "tatar", x: 450, y: 310 },
+         { type: "tatar", x: 450, y: 310 },
         { type: "exitGate", x: 33, y: 66, width: 64, height: 64 }
     ]
 };
