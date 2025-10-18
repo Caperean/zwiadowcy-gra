@@ -11,7 +11,7 @@ export class Tatar extends GameObject {          // heiht, widhight, speed, anim
      * @param {object} game - Obiekt gry, potrzebny do interakcji.
      */
     constructor(x, y, player, game) {
-        super(x, y, TATAR_WIDTH, TATR_HEIGHT);
+        super(x, y, TATAR_WIDTH, TATAR_HEIGHT);
         this.hp = 4; // Wilki mają 1 HP
         this.toRemove = false;
         this.player = player;
