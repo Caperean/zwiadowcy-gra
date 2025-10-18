@@ -24,7 +24,7 @@ export const level0 = {                             //poziom testowy żeby nie p
          { type: "bat", x: 150, y: 50 },
          { type: "tatar", x: 100, y: 50 },
         
-}
+
     ]
        
 };
