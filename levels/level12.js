@@ -1,7 +1,7 @@
 export const level12 = {
     backgroundColor: "#add8e6",
     map: [
-        "G......G.................S",                            // R-skała
+        "GGGGGGGG.................S",                            // R-skała
         "#......#.........G..G.G..R",                             // G-trawa
         "#......#....G............R",                             // #-blok ziemi
         "#........G..#...........GR",                             // N-śnieg
