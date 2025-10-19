@@ -3,7 +3,7 @@ export const level15 = {
     map: [
         "N........................",                            // R-skała
         "#........................",                             // G-trawa
-        "#.SS.....................",                             // #-blok ziemi
+        "#.NN.....................",                             // #-blok ziemi
         "#...........#............",                             // N-śnieg
         "#...........#............",                            // I-lód
         "#........I..#............",                            // L-lawa
@@ -18,7 +18,7 @@ export const level15 = {
         "#WWWWWWWWIIII............",
     ],
     objects: [
-       { type: "player", x: 150, y: 330 },
+       { type: "player", x: 300, y: 330 },
        { type: "clown", x: 70, y: 15 } ,      
          { type: "snowytree", x: 800, y: 100, width: 120, height: 80 } ,  
        
