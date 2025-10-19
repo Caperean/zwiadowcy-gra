@@ -21,7 +21,7 @@ export const level15 = {
        { type: "player", x: 300, y: 330 },
        { type: "clown", x: 70, y: 15 } ,      
          { type: "snowytree", x: 800, y: 100, width: 120, height: 80 } ,  
-       
-        { type: "exitGate", x: 600, y: 100, width: 64, height: 64 }
+         { type: "bat", x: 600, y: 15 } , 
+        { type: "exitGate", x: 607, y: 400, width: 64, height: 64 }
     ]
 };
