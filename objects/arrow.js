@@ -16,6 +16,7 @@ import { Clown } from "./Clown.js";
 import { Mask } from "./Mask.js";
 import { Boar } from "./Boar.js";
 import { Tatar } from "./Tatar.js";
+import { Snowman } from "./Snowman.js";
 export class Arrow extends GameObject {
     
 /**
