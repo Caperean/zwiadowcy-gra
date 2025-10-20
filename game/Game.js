@@ -6,7 +6,6 @@ import { PoisonedArrow } from "../objects/PoisonedArrow.js"; // <--- DODAJ TEN I
 import { Apple } from "../objects/apple.js";
 import { ExitGate } from "../objects/ExitGate.js"; // Nowy import
 import { allLevels } from "../levels/levels.js"; // Nowy import
-import { IceBlock } from "../objects/IceBlock.js"; // <--- DODAJ TEN IMPORT, jeśli używasz IceBlocków
 
 export class Game {
     constructor(canvas) {
