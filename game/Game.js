@@ -9,6 +9,7 @@ import { allLevels } from "../levels/levels.js"; // Nowy import
 import { Snowball } from "../objects/Snowball.js"; // <--- DODAJ
 import { Snowbullet } from "../objects/Snowbullet.js"; // <--- DODAJ
 import { IceBlock } from "../objects/IceBlock.js"; // <--- DODAJ
+
 export class Game {
     constructor(canvas) {
         this.canvas = canvas;
@@ -17,7 +18,8 @@ export class Game {
 
         this.input = new Input();
         this.groundY = 500;
-        
+
+        this.levelLoader = LevelLoader; // <--- Dodane, by resetLevelObjects działało poprawnie
         this.currentLevelIndex = 0;
         this.loadLevel(this.currentLevelIndex);
         
@@ -56,7 +58,7 @@ export class Game {
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 
-      /**
+    /**
      * Aktualizuje stan wszystkich obiektów gry.
      * @param {number} deltaTime - Czas od ostatniej klatki.
      */
@@ -66,29 +68,22 @@ export class Game {
         this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
         this.arrows.forEach(arrow => arrow.update(deltaTime));
         
-    
         // Sprawdzanie kolizji gracza z ExitGate
         const exitGate = this.gameObjects.find(obj => obj instanceof ExitGate);
         if (exitGate && this.player && this.player.checkCollision(exitGate)) {
             console.log("Poziom ukończony! Ładowanie następnego poziomu...");
             this.currentLevelIndex++;
             this.loadLevel(this.currentLevelIndex);
-            return; // <-- Dodaj tę linijkę, aby zatrzymać dalsze przetwarzanie
+            return; // <-- Zatrzymuje dalsze przetwarzanie
         }
 
-        // Usuwanie obiektów, które są oznaczone do usunięcia (np. jabłka, które zostały zebrane)
-        this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
-
         // Filtrowanie strzał, które wyleciały poza ekran
-        this.arrows = this.arrows.filter(arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove);
+        this.arrows = this.arrows.filter(
+            arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove
+        );
     } 
-    this.gameObjects = this.gameObjects.filter(obj => {
-    // Dodatkowa logika sprawdzająca, czy to nie jest IceBlock.isTile 
-    // lub inna logika usuwania zależna od Twojej struktury,
-    // ale standardowo `toRemove` powinno wystarczyć:
-    return !obj.toRemove; 
-});
-/**
+
+    /**
      * Resetuje pozycje gracza i wszystkich mobów do ich stanu początkowego.
      */
     resetLevelObjects() {
@@ -112,6 +107,7 @@ export class Game {
             }
         });
     }
+
     /**
      * Czyści płótno i rysuje wszystkie obiekty gry.
      */
