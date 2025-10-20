@@ -56,19 +56,20 @@ export class Snowman extends GameObject {
         }
     }
 
-    attack() {
-        const player = this.game.player;
-        const dx = player.x - this.x;
-        const dy = player.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        // Normalizacja wektora kierunku i ustawienie prędkości
-        const maskDx = (dx / distance) * SNOWBALL_SPEED;
-        const maskDy = (dy / distance) * SNOWBALL_SPEED;
+   attack() {
+    const player = this.game.player;
+    const dx = player.x - this.x;
+    const dy = player.y - this.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-        const mask = new Snowball(this.x, this.y, snowballDx, snowballDy, this.game);
-        this.game.gameObjects.push(Snowball)
-    }
+    // Normalizacja i nadanie prędkości śnieżce
+    const snowballDx = (dx / distance) * SNOWBALL_SPEED;
+    const snowballDy = (dy / distance) * SNOWBALL_SPEED;
+
+    const snowball = new Snowball(this.x, this.y, snowballDx, snowballDy, this.game);
+    this.game.gameObjects.push(snowball);
+}
+
     
     draw(ctx) {
         if (this.sprite.complete) {
