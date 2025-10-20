@@ -56,3 +56,21 @@ export const TATAR_WIDTH = 50;
 export const TATAR_HEIGHT = 70;
 export const TATAR_SPEED = 3;
 export const TATAR_ANIMATION_SPEED = 200;
+// Nowe stałe dla Bałwana
+export const SNOWMAN_WIDTH = 48;
+export const SNOWMAN_HEIGHT = 64;
+export const SNOWMAN_HP = 3;
+export const SNOWMAN_DETECTION_RANGE = 400;
+
+// Nowe stałe dla Pocisków Bałwana
+export const SNOWBALL_SIZE = 16;
+export const SNOWBALL_SPEED = 6;
+export const SNOWBALL_COOLDOWN = 250; // 0.25 sekundy
+
+export const SNOWBULLET_SIZE = 32;
+export const SNOWBULLET_SPEED = 8;
+export const SNOWBULLET_COOLDOWN = 5000; // 5 sekund
+
+// Nowe stałe dla Lodowego Bloku
+export const ICEBLOCK_SIZE_MULTIPLIER = 3;
+export const ICEBLOCK_DURATION = 5000; // 5 sekund
