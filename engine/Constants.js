@@ -81,7 +81,7 @@ export const ICEBLOCK_DURATION = 5000; // 5 sekund
 export const SNOWBALL_KNOCKBACK = 5; 
 
 // Nowe stałe dla Pocisków Bałwana
-export const SNOWBULLET_SIZE = 32;
+
 export const SNOWBULLET_SPEED = 8;
 export const SNOWBULLET_COOLDOWN = 5000; // 5 sekund
 export const SNOWBULLET_KNOCKBACK_MULTIPLIER = 3; // Mnożnik knockback
