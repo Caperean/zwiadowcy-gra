@@ -61,11 +61,12 @@ export const SNOWMAN_WIDTH = 48;
 export const SNOWMAN_HEIGHT = 64;
 export const SNOWMAN_HP = 3;
 export const SNOWMAN_DETECTION_RANGE = 400;
+export const SNOWMAN_ATTACK_COOLDOWN = 250;
 
 // Nowe stałe dla Pocisków Bałwana
 export const SNOWBALL_SIZE = 16;
 export const SNOWBALL_SPEED = 6;
-export const SNOWBALL_COOLDOWN = 250; // 0.25 sekundy
+
 
 export const SNOWBULLET_SIZE = 32;
 export const SNOWBULLET_SPEED = 8;
