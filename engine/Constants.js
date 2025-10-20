@@ -68,23 +68,14 @@ export const SNOWBALL_SIZE = 16;
 export const SNOWBALL_SPEED = 6;
 
 
-export const SNOWBULLET_SIZE = 32;
-export const SNOWBULLET_SPEED = 8;
-export const SNOWBULLET_COOLDOWN = 5000; // 5 sekund
 
-// Nowe stałe dla Lodowego Bloku
-export const ICEBLOCK_SIZE_MULTIPLIER = 3;
-export const ICEBLOCK_DURATION = 5000; // 5 sekund
-// ... (istniejące stałe)
+
+
 
 // Zmiana nazwy/dodanie dla spójności ze Snowball.js
 export const SNOWBALL_KNOCKBACK = 5; 
 
 // Nowe stałe dla Pocisków Bałwana
 
-export const SNOWBULLET_SPEED = 8;
-export const SNOWBULLET_COOLDOWN = 5000; // 5 sekund
-export const SNOWBULLET_KNOCKBACK_MULTIPLIER = 3; // Mnożnik knockback
-export const SNOWBULLET_DAMAGE = 1; // Obrażenia zadawane przez pocisk
 
 // ...
