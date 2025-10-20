@@ -73,7 +73,7 @@ export const SNOWBALL_SPEED = 6;
 
 
 // Zmiana nazwy/dodanie dla spójności ze Snowball.js
-export const SNOWBALL_KNOCKBACK = 5; 
+export const SNOWBALL_KNOCKBACK = 25; 
 
 // Nowe stałe dla Pocisków Bałwana
 
