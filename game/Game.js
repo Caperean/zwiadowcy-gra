@@ -81,7 +81,13 @@ export class Game {
 
         // Filtrowanie strzał, które wyleciały poza ekran
         this.arrows = this.arrows.filter(arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove);
-    }
+    } 
+    this.gameObjects = this.gameObjects.filter(obj => {
+    // Dodatkowa logika sprawdzająca, czy to nie jest IceBlock.isTile 
+    // lub inna logika usuwania zależna od Twojej struktury,
+    // ale standardowo `toRemove` powinno wystarczyć:
+    return !obj.toRemove; 
+});
 /**
      * Resetuje pozycje gracza i wszystkich mobów do ich stanu początkowego.
      */
