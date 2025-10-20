@@ -157,7 +157,7 @@ export class LevelLoader {
     const tatar = new Tatar(objData.x, objData.y, player, game);
     gameObjects.push(tatar);
 } else if (objData.type === "snowman") { // <--- DODAJ
-    const snowman = new Snowman(objData.x, objData.y, player, game);
+    const snowman = new Snowman(objData.x, objData.y, game);
     gameObjects.push(snowman)
             
              }  });
