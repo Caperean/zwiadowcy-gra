@@ -15,6 +15,7 @@ import { Clown } from "../objects/Clown.js";
 import { Mask } from "../objects/Mask.js";
 import { Boar } from "../objects/Boar.js";
 import { Tatar } from "../objects/Tatar.js";
+import { Snowman } from "../objects/Snowman.js";
 
 export class LevelLoader {
     /**
@@ -155,7 +156,9 @@ export class LevelLoader {
 }  else if (objData.type === "tatar" || objData.type === "Tatar") { 
     const tatar = new Tatar(objData.x, objData.y, player, game);
     gameObjects.push(tatar);
-}
+} else if (objData.type === "snowman") { // <--- DODAJ
+    const snowman = new Snowman(objData.x, objData.y, player, game);
+    gameObjects.push(snowman)
             
         });
 
