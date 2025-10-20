@@ -6,9 +6,7 @@ import { PoisonedArrow } from "../objects/PoisonedArrow.js"; // <--- DODAJ TEN I
 import { Apple } from "../objects/apple.js";
 import { ExitGate } from "../objects/ExitGate.js"; // Nowy import
 import { allLevels } from "../levels/levels.js"; // Nowy import
-import { Snowball } from "../objects/Snowball.js"; // <--- DODAJ
-import { Snowbullet } from "../objects/Snowbullet.js"; // <--- DODAJ
-import { IceBlock } from "../objects/IceBlock.js"; // <--- DODAJ
+import { IceBlock } from "../objects/IceBlock.js"; // <--- DODAJ TEN IMPORT, jeśli używasz IceBlocków
 
 export class Game {
     constructor(canvas) {
@@ -19,7 +17,7 @@ export class Game {
         this.input = new Input();
         this.groundY = 500;
 
-        this.levelLoader = LevelLoader; // <--- Dodane, by resetLevelObjects działało poprawnie
+        this.levelLoader = LevelLoader; // żeby resetLevelObjects działało poprawnie
         this.currentLevelIndex = 0;
         this.loadLevel(this.currentLevelIndex);
         
@@ -65,23 +63,30 @@ export class Game {
     update(deltaTime) {
         // Aktualizacja wszystkich obiektów gry
         this.gameObjects.forEach(obj => obj.update(deltaTime, this.gameObjects));
-        this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
         this.arrows.forEach(arrow => arrow.update(deltaTime));
-        
+
+        // 🔹 Usuwanie obiektów z uwzględnieniem IceBlock.isTile
+        this.gameObjects = this.gameObjects.filter(obj => {
+            // Jeśli to IceBlock z flagą isTile — zostaje
+            if (obj instanceof IceBlock && obj.isTile) return true;
+            // W przeciwnym razie usuń, jeśli ma toRemove = true
+            return !obj.toRemove;
+        });
+    
         // Sprawdzanie kolizji gracza z ExitGate
         const exitGate = this.gameObjects.find(obj => obj instanceof ExitGate);
         if (exitGate && this.player && this.player.checkCollision(exitGate)) {
             console.log("Poziom ukończony! Ładowanie następnego poziomu...");
             this.currentLevelIndex++;
             this.loadLevel(this.currentLevelIndex);
-            return; // <-- Zatrzymuje dalsze przetwarzanie
+            return; // <-- zatrzymuje dalsze przetwarzanie po zmianie poziomu
         }
 
         // Filtrowanie strzał, które wyleciały poza ekran
         this.arrows = this.arrows.filter(
             arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove
         );
-    } 
+    }
 
     /**
      * Resetuje pozycje gracza i wszystkich mobów do ich stanu początkowego.
