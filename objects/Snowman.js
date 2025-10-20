@@ -4,7 +4,7 @@ import { GRAVITY, SNOWMAN_WIDTH, SNOWMAN_HEIGHT, CLOWN_DETECTION_RANGE, SNOWMAN_
 import { Snowball } from "./Snowball.js";
 import { Player } from "./player.js";     // GRAVITY, SNOWMAN_WIDTH, SNOWMAN_HEIGHT, CLOWN_DETECTION_RANGE, SNOWMAN_ATTACK_COOLDOWN, SNOWBALL_SPEED
 
-export class Clown extends GameObject {
+export class Snowman extends GameObject {
     constructor(x, y, game) {
         super(x, y, SNOWMAN_WIDTH, SNOWMAN_HEIGHT);
         this.game = game;
