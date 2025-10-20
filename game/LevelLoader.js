@@ -160,7 +160,7 @@ export class LevelLoader {
     const snowman = new Snowman(objData.x, objData.y, player, game);
     gameObjects.push(snowman)
             
-        });
+             }  });
 
         return { gameObjects, backgroundColor: levelData.data.backgroundColor };
     }
