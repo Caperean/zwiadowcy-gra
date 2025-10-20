@@ -67,7 +67,10 @@ export class LevelLoader {
                     gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "bricks"));
                 }else if (char === "T") {
                     gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "fullwater"));
+                }else if (char === "B") {
+                    gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "bblock"));
                 }
+
             }
         });
 
