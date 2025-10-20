@@ -15,8 +15,7 @@ export class Game {
 
         this.input = new Input();
         this.groundY = 500;
-
-        this.levelLoader = LevelLoader; // żeby resetLevelObjects działało poprawnie
+        
         this.currentLevelIndex = 0;
         this.loadLevel(this.currentLevelIndex);
         
@@ -55,22 +54,16 @@ export class Game {
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 
-    /**
+      /**
      * Aktualizuje stan wszystkich obiektów gry.
      * @param {number} deltaTime - Czas od ostatniej klatki.
      */
     update(deltaTime) {
         // Aktualizacja wszystkich obiektów gry
         this.gameObjects.forEach(obj => obj.update(deltaTime, this.gameObjects));
+        this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
         this.arrows.forEach(arrow => arrow.update(deltaTime));
-
-        // 🔹 Usuwanie obiektów z uwzględnieniem IceBlock.isTile
-        this.gameObjects = this.gameObjects.filter(obj => {
-            // Jeśli to IceBlock z flagą isTile — zostaje
-            if (obj instanceof IceBlock && obj.isTile) return true;
-            // W przeciwnym razie usuń, jeśli ma toRemove = true
-            return !obj.toRemove;
-        });
+        
     
         // Sprawdzanie kolizji gracza z ExitGate
         const exitGate = this.gameObjects.find(obj => obj instanceof ExitGate);
@@ -78,16 +71,16 @@ export class Game {
             console.log("Poziom ukończony! Ładowanie następnego poziomu...");
             this.currentLevelIndex++;
             this.loadLevel(this.currentLevelIndex);
-            return; // <-- zatrzymuje dalsze przetwarzanie po zmianie poziomu
+            return; // <-- Dodaj tę linijkę, aby zatrzymać dalsze przetwarzanie
         }
 
-        // Filtrowanie strzał, które wyleciały poza ekran
-        this.arrows = this.arrows.filter(
-            arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove
-        );
-    }
+        // Usuwanie obiektów, które są oznaczone do usunięcia (np. jabłka, które zostały zebrane)
+        this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
 
-    /**
+        // Filtrowanie strzał, które wyleciały poza ekran
+        this.arrows = this.arrows.filter(arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove);
+    }
+/**
      * Resetuje pozycje gracza i wszystkich mobów do ich stanu początkowego.
      */
     resetLevelObjects() {
@@ -111,7 +104,6 @@ export class Game {
             }
         });
     }
-
     /**
      * Czyści płótno i rysuje wszystkie obiekty gry.
      */
