@@ -2,6 +2,7 @@ import { GameObject } from "./object.js";
 import { Tile } from "./tile.js";
 import { GRAVITY, SNOWMAN_WIDTH, SNOWMAN_HEIGHT, CLOWN_DETECTION_RANGE, SNOWMAN_ATTACK_COOLDOWN, SNOWBALL_SPEED } from "../engine/Constants.js";
 import { Snowball } from "./Snowball.js";
+import { Snowbullet } from "./Snowbullet.js";
 import { Player } from "./player.js";     // GRAVITY, SNOWMAN_WIDTH, SNOWMAN_HEIGHT, CLOWN_DETECTION_RANGE, SNOWMAN_ATTACK_COOLDOWN, SNOWBALL_SPEED
 
 export class Snowman extends GameObject {
@@ -65,9 +66,13 @@ export class Snowman extends GameObject {
     // Normalizacja i nadanie prędkości śnieżce
     const snowballDx = (dx / distance) * SNOWBALL_SPEED;
     const snowballDy = (dy / distance) * SNOWBALL_SPEED;
+    const SnowbulletDx = (dx / distance) * SB_SPEED;
+    const SnowbulletDy = (dy / distance) * SB_SPEED;  
 
     const snowball = new Snowball(this.x, this.y, snowballDx, snowballDy, this.game);
     this.game.gameObjects.push(snowball);
+    const snowbullet = new Snowbullet(this.x, this.y, SnowbulletDx, SnowbulletDy, this.game);
+    this.game.gameObjects.push(snowbullet);
 }
 
     
