@@ -76,6 +76,7 @@ export const SNOWBALL_SPEED = 6;
 export const SNOWBALL_KNOCKBACK = 25; 
 
 // Nowe stałe dla Pocisków Bałwana
-
-
+export const SB_WIDTH = 25;
+export const SB_HIGHT = 25;
+export const SB_SPEED = 25;
 // ...
