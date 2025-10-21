@@ -21,7 +21,7 @@ export class Snowbullet extends GameObject {
         
         this.sprite = new Image();
         this.sprite.src = "assets/sprites/snowball.png";
-        this.burningSprite = new Image();
+
         ;
     }
 
