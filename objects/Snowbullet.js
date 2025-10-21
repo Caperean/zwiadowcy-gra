@@ -38,7 +38,7 @@ export class Snowbullet extends GameObject {
         this.game.gameObjects.forEach(obj => {
             if (obj instanceof Tile && this.checkCollision(obj)) {
                 this.toRemove = true;
-            
+            }
         });
     }
 
