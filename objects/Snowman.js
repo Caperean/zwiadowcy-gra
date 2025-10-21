@@ -1,6 +1,6 @@
 import { GameObject } from "./object.js";
 import { Tile } from "./tile.js";
-import { GRAVITY, SNOWMAN_WIDTH, SNOWMAN_HEIGHT, CLOWN_DETECTION_RANGE, SNOWMAN_ATTACK_COOLDOWN, SNOWBALL_SPEED } from "../engine/Constants.js";
+import { GRAVITY, SNOWMAN_WIDTH, SNOWMAN_HEIGHT, CLOWN_DETECTION_RANGE, SNOWMAN_ATTACK_COOLDOWN, SNOWBALL_SPEED, SB_SPEED } from "../engine/Constants.js";
 import { Snowball } from "./Snowball.js";
 import { Snowbullet } from "./Snowbullet.js";
 import { Player } from "./player.js";     // GRAVITY, SNOWMAN_WIDTH, SNOWMAN_HEIGHT, CLOWN_DETECTION_RANGE, SNOWMAN_ATTACK_COOLDOWN, SNOWBALL_SPEED
