@@ -30,7 +30,7 @@ export const level9 = {                             //poziom testowy żeby nie p
         { type: "wolf", x: 604, y: 400 },
          { type: "apple", x: 620, y: 400 },
           { type: "arab", x: 620, y: 400 },
-         { type: "cactus", x: 110, y: 60, width: 70, height: 140 },
+         { type: "cactus", x: 300, y: 40, width: 70, height: 140 },
         { type: "exitGate", x: 46, y: 390, width: 64, height: 64 }
     ]
 };
