@@ -2,9 +2,9 @@ export const level15 = {
     backgroundColor: "#add8e6",
     map: [
         "N........................#",                            // R-skała
-        "#........................#",                             // G-trawa
-        "#.NN.....................#",                             // #-blok ziemi
-        "#...........#IIIIII.IIIII#",                             // N-śnieg
+        "#.......I................#",                             // G-trawa
+        "#.NN........N............#",                             // #-blok ziemi
+        "#.....I.....#IIIIII.IIIII#",                             // N-śnieg
         "#...........#.......#...#",                            // I-lód
         "#........I..#.......#....#",                            // L-lawa
         "#.....III...#.......#....#.",                           //  W-water 
@@ -22,7 +22,9 @@ export const level15 = {
        { type: "clown", x: 70, y: 15 } ,      
          { type: "snowytree", x: 800, y: 100, width: 120, height: 80 } ,  
          { type: "bat", x: 600, y: 15 } , 
-        { type: "snowman", x: 600, y: 15 } , 
+        { type: "snowman", x: 600, y: 15 } ,
+         { type: "wolf", x: 600, y: 15 } ,
+         { type: "snowman", x: 570, y: 15 } ,
         { type: "exitGate", x: 607, y: 400, width: 64, height: 64 }
     ]
 };
