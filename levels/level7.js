@@ -6,7 +6,7 @@ export const level7 = {
         "#GGGGGGGGGGGGG#G..G......R",                             // #-blok ziemi
         "#...................G....R",                             // N-śnieg
         "#........................R",                            // I-lód
-        "#...GGGG..............GGGR",                            // L-lawa
+        "#...GGGG..............GG.R",                            // L-lawa
         "#.......GG...........G...R",                           //  W-water 
         "#.G.......GG..GG..GG.....R",                          //   S-kolce
         "#W#.GG...................R",                           //  M-magma
@@ -15,7 +15,7 @@ export const level7 = {
         "#.......GG...............R",                           
         "#...........G............R",                           
         "#...........#............R",
-        "#GGGWWGGGGGGGWWWWWWWWWWWWR",
+        "#GGGWWGGGGGG#WWWWWWWWWWWWR",
     ],
     objects: [
        { type: "player", x: 36, y: 390 },  
