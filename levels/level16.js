@@ -16,9 +16,7 @@ export const level16 = {
         "#.............B.BB.......#",                           
         "#.............BSB........#",
         "#GGGGGGGGGGGGGBBBBBSBSBSS#", //granica widzenia
-        ".........................#",
-        ".........................#",
-        "SSSSSSSSSSSSSSSSSSSSSSSSS#",
+     
     ],
     objects: [
        { type: "player", x: 300, y: 330 },
