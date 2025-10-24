@@ -23,7 +23,7 @@ export const level16 = {
         { type: "boar", x: 360, y: 330 },
        { type: "clown", x: 660, y: 15 } ,      
         { type: "clown", x: 685, y: 15 } ,   
-        { type: "maj", x: 250, y: 270, width: 170, height: 170 },
-        { type: "exitGate", x: 555, y: 400, width: 64, height: 64 }
+        { type: "maj", x: 250, y: 280, width: 170, height: 170 },
+        { type: "exitGate", x: 535, y: 400, width: 64, height: 64 }
     ]
 };
