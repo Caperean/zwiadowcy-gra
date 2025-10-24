@@ -21,7 +21,7 @@ export const level16 = {
     objects: [
        { type: "player", x: 300, y: 330 },
         { type: "boar", x: 360, y: 330 },
-        { type: "boar", x: 360, y: 20 },
+        { type: "boar", x: 370, y: 20 },
        { type: "clown", x: 660, y: 15 } , 
         { type: "bat", x: 160, y: 60 } , 
          { type: "bat", x: 190, y: 60 } , 
