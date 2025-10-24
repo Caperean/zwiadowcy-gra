@@ -13,7 +13,7 @@ export const level16 = {
         "#.................BBBBB..#",                             
         "#................BBBBBB..#",                           
         "#................BBB.....#",                          
-        "#.............B.BB.......#",                           
+        "#.............B.B........#",                           
         "#.............BSB........#",
         "#GGGGGGGGGGGGGBBBBBSBSBSS#", //granica widzenia
      
@@ -22,6 +22,6 @@ export const level16 = {
        { type: "player", x: 300, y: 330 },
        { type: "clown", x: 660, y: 15 } ,      
          
-        { type: "exitGate", x: 655, y: 420, width: 64, height: 64 }
+        { type: "exitGate", x: 625, y: 400, width: 64, height: 64 }
     ]
 };
