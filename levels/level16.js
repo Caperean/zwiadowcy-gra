@@ -14,14 +14,14 @@ export const level16 = {
         "#................BBBBBB..#",                           
         "#................BBB.....#",                          
         "#.............B.B........#",                           
-        "#.............BSB........#",
-        "#GGGGGGGGGGGGGBBBBBSBSBSS#", //granica widzenia
+        "#.....G.......BSB........#",
+        "#WWWWWWGGGGGGGBBBBBSBSBSS#", //granica widzenia
      
     ],
     objects: [
        { type: "player", x: 300, y: 330 },
        { type: "clown", x: 660, y: 15 } ,      
-         
+        { type: "clown", x: 685, y: 15 } ,   
         { type: "exitGate", x: 625, y: 400, width: 64, height: 64 }
     ]
 };
