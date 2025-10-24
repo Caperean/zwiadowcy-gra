@@ -23,7 +23,8 @@ export const level16 = {
         { type: "boar", x: 360, y: 330 },
        { type: "clown", x: 660, y: 15 } , 
         { type: "bat", x: 160, y: 60 } , 
-         { type: "bat", x: 1900, y: 60 } , 
+         { type: "bat", x: 190, y: 60 } , 
+         { type: "bat", x: 50, y: 60 } , 
         { type: "clown", x: 685, y: 15 } ,   
         { type: "maj", x: 250, y: 280, width: 170, height: 170 },
         { type: "exitGate", x: 535, y: 400, width: 64, height: 64 }
