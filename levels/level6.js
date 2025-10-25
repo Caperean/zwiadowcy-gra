@@ -4,18 +4,18 @@ export const level6 = {
         "PPPPPPPPPPPPPPPPPPPPPPPPP",                            // R-skała
         "P........................R",                             // G-trawa
         "P........................R",                             // #-blok ziemi
-        "AAAAAA...................R",                             // N-śnieg
+        "PPPPPP...................R",                             // N-śnieg
         "P........................R",                            // I-lód
         "P........................R",                            // L-lawa
         "P........................R",                           //  W-water 
         "P........................R",                          //   S-kolce
-        "P........................R",                           //  M-magma
+        "P........................R",     C                     //  M-magma
         "P........................R",                             // A-marmur
         "P....CCCC................R",                           // C-cegły
         "P.......C................R",                           
-        "P.......C................R",                           
+        "P..C....C................R",                           
         "PPPPPPPPPPP..............R",
-        "PPPPPPPPPPPPPPWWWWWWWWWWWR",
+        "PPPPPPPPPPPPPPWWWWWWWWWWW.",
     ],
     objects: [
        { type: "player", x: 25, y: 25 },
