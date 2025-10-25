@@ -1,12 +1,12 @@
 export const level17 = {
     backgroundColor: "#add8e6",
     map: [
-        ".........................R",                            // R-skała
-        "................KKK......R",                             // G-trawa
-        "...........KKKKKK........R",                             // #-blok ziemi
-        "K.....K...KK.............R",                             // N-śnieg
+        "K........................R",                            // R-skała
+        "K..........K....KKK......R",                             // G-trawa
+        "K..........KKKKKK........R",                             // #-blok ziemi
+        "K.....K...K..............R",                             // N-śnieg
         "K.....K...K........K.....R",                            // I-lód
-        "K..KK.K...K..K..K..K.....R",                            // L-lawa
+        "K..KK.K...K..K.KK..K.....R",                            // L-lawa
         "K.....K...K........K.....R",                           //  W-water 
         "KK....K...KK.......K.....R",                          //   S-kolce
         "K.KK..K...K.K.K.K..K.....R",                           //  M-magma
@@ -20,6 +20,8 @@ export const level17 = {
     objects: [
        { type: "player", x: 360, y: 290 },  
         { type: "arab", x: 70, y: 390 },
+        { type: "arab", x: 460, y: 0 },
+        { type: "bat", x: 70, y: 30 },
         { type: "clown", x: 500, y: 10 },
          { type: "cactus", x: 700, y: 350, width: 70, height: 100 },
         { type: "exitGate", x: 750, y: 390, width: 64, height: 64 }
