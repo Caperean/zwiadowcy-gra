@@ -14,8 +14,8 @@ export const level6 = {
         "P....CCCC................R",                           // C-cegły
         "P.......C................R",                           
         "P.......C................R",                           
-        "PPPPPPPPPPP........D....D.R",
-        "PPPPPPPPPPPPPPWWWWPPDDDDWR",
+        "PPPPPPPPPPP.............D.R",
+        "PPPPPPPPPPPPPPWWWWwwDDDDWR",
     ],
     objects: [
        { type: "player", x: 25, y: 25 },
