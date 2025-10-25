@@ -18,7 +18,7 @@ export const level17 = {
         "KKKKKKKRRRKSSSSSSSSKSSPPPR",
     ],
     objects: [
-       { type: "player", x: 360, y: 290 },  
+       { type: "player", x: 430, y: 250 },  
         { type: "arab", x: 70, y: 390 },
         { type: "arab", x: 460, y: 0 },
         { type: "bat", x: 70, y: 30 },
