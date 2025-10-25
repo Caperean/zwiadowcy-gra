@@ -29,7 +29,7 @@ export const level6 = {
        { type: "palm", x: 300, y: 210, width: 150, height: 240 },
        { type: "palm", x: 35, y: 180, width: 150, height: 240 },
         { type: "ship", x: 460, y: 353, width: 150, height: 100 },
-        { type: "exitGate", x: 800, y: 400, width: 64, height: 64 },
+        { type: "exitGate", x: 740, y: 400, width: 64, height: 64 },
       //  { type: "key", x: 400, y: 100 },
        // { type: "gate", x: 300, y: 100 },
     ]
