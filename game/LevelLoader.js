@@ -16,6 +16,8 @@ import { Mask } from "../objects/Mask.js";
 import { Boar } from "../objects/Boar.js";
 import { Tatar } from "../objects/Tatar.js";
 import { Snowman } from "../objects/Snowman.js";
+import { Key } from "../objects/Key.js";
+import { Gate } from "../objects/Gate.js";
 
 export class LevelLoader {
     /**
@@ -166,14 +168,21 @@ export class LevelLoader {
           }    else if (objData.type === "Boar" || objData.type === "boar") { 
     const boar = new Boar(objData.x, objData.y, player, game);
     gameObjects.push(boar);
-}  else if (objData.type === "tatar" || objData.type === "Tatar") { 
+     }  else if (objData.type === "tatar" || objData.type === "Tatar") { 
     const tatar = new Tatar(objData.x, objData.y, player, game);
     gameObjects.push(tatar);
-} else if (objData.type === "snowman") { // <--- DODAJ
+       } else if (objData.type === "snowman") { // <--- DODAJ
     const snowman = new Snowman(objData.x, objData.y, game);
-    gameObjects.push(snowman)
-            
-             }  });
+    gameObjects.push(snowman);} else if (objData.type === "key") {
+            const key = new Key(objData.x, objData.y, game); 
+            gameObjects.push(key);
+        }
+        
+        else if (objData.type === "gate") { // <<< NOWY TYP: DRZWI BLOKUJĄCE
+            const gate = new Gate(objData.x, objData.y); 
+            gameObjects.push(gate);
+        }
+               });
 
         return { gameObjects, backgroundColor: levelData.data.backgroundColor };
     }

@@ -18,6 +18,7 @@ export class Player extends GameObject {
         this.dx = 0;
         this.dy = 0;
         this.onGround = false;
+        this.hasKey = false;
 
         this.maxHP = 3;
         this.currentHP = 3;
