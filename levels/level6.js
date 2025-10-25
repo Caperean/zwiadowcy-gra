@@ -15,7 +15,7 @@ export const level6 = {
         "P.......C................R",                           
         "P.......C................R",                           
         "PPPPPPPPPPP.............D.R",
-        "PPPPPPPPPPPPPPWWWWwwDDDDWR",
+        "PPPPPPPPPPPPPPWWWWWWDDDDWR",
     ],
     objects: [
        { type: "player", x: 25, y: 25 },
