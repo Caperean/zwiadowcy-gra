@@ -14,8 +14,8 @@ export const level6 = {
         "P....CCCC................R",                           // C-cegły
         "P.......C................R",                           
         "P.......C................R",                           
-        "PPPPPPPPPPP.............D.R",
-        "PPPPPPPPPPPPPPWWWWWWDDDDWR",
+        "PPPPPPPPPPP..............R",
+        "PPPPPPPPPPPPPPWWWWWWWWWWWR",
     ],
     objects: [
        { type: "player", x: 25, y: 25 },
@@ -24,7 +24,7 @@ export const level6 = {
    { type: "bat", x: 300, y: 80 },  
          { type: "clown", x: 400, y: 100 },
        { type: "palm", x: 270, y: 210, width: 150, height: 240 },
-        { type: "ship", x: 390, y: 353, width: 150, height: 100 },
+        { type: "ship", x: 460, y: 353, width: 150, height: 100 },
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
 };
