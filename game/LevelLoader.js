@@ -72,6 +72,8 @@ export class LevelLoader {
                     gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "bblock"));
                 } else if (char === "K") {
                     gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "pblock"));
+                } else if (char === "D") {
+                    gameObjects.push(new Tile(tileX, tileY, TILE_WIDTH, TILE_HEIGHT, "wood"));
                 }
 
             }
