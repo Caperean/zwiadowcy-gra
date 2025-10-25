@@ -9,7 +9,7 @@ export const level17 = {
         "K..KK.K...K..K..K..K.....R",                            // L-lawa
         "K.....K...K........K.....R",                           //  W-water 
         "KK....K...KK.......K.....R",                          //   S-kolce
-        "K.KK..K...K.K..KK..K.....R",                           //  M-magma
+        "K.KK..K...K.K.K.K..K.....R",                           //  M-magma
         "K.....K...K........K.....R",                             // A-marmur
         "K....KK...K.......KK.....R",                           // C-cegły
         "K..KK.K...K........K.....R",                           
