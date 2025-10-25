@@ -115,6 +115,9 @@ export class LevelLoader {
             } else if (objData.type === "palm") {
                 const palm = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "palm");
                 gameObjects.push(palm);
+            } else if (objData.type === "ship") {
+                const ship = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "ship");
+                gameObjects.push(ship);
             }
              
     });
