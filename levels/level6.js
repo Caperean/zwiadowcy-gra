@@ -23,7 +23,7 @@ export const level6 = {
         { type: "bat", x: 400, y: 80 },   
    { type: "bat", x: 300, y: 80 },  
          { type: "clown", x: 400, y: 100 },
-       
+       { type: "palm", x: 200, y: 120, width: 140, height: 90 },
         { type: "exitGate", x: 700, y: 400, width: 64, height: 64 }
     ]
 };
