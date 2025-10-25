@@ -9,13 +9,13 @@ export const level6 = {
         "P........................R",                            // L-lawa
         "P........................R",                           //  W-water 
         "P........................R",                          //   S-kolce
-        "P........................R",                          //  M-magma
-        "P....SSSS........P.......R",                             // A-marmur
-        "P....CCCC.....P..........R",                           // C-cegły
+        "P......................P.R",                          //  M-magma
+        "P....SSSS........P...P....R",                             // A-marmur
+        "P....CCCC.....P....P....R",                           // C-cegły
         "P............P...........R",                           
         "P.........P..............R",                           
         "PPPPPPPPPPP..............R",
-        "PPPPPPPPPPPPPPWWWWWWWWWWW.",
+        "PPPPPPPPPPPPPPWWWWWWWWWWP.",
     ],
     objects: [
        { type: "player", x: 33, y: 25 },
@@ -29,7 +29,7 @@ export const level6 = {
        { type: "palm", x: 300, y: 210, width: 150, height: 240 },
        { type: "palm", x: 35, y: 180, width: 150, height: 240 },
         { type: "ship", x: 460, y: 353, width: 150, height: 100 },
-        { type: "exitGate", x: 700, y: 400, width: 64, height: 64 },
+        { type: "exitGate", x: 800, y: 400, width: 64, height: 64 },
       //  { type: "key", x: 400, y: 100 },
        // { type: "gate", x: 300, y: 100 },
     ]
