@@ -20,7 +20,7 @@ export const level17 = {
     objects: [
        { type: "player", x: 360, y: 290 },  
         { type: "arab", x: 70, y: 390 },
-         { type: "cactus", x: 700, y: 300, width: 70, height: 100 },
-        { type: "exitGate", x: 750, y: 350, width: 64, height: 64 }
+         { type: "cactus", x: 700, y: 350, width: 70, height: 100 },
+        { type: "exitGate", x: 750, y: 390, width: 64, height: 64 }
     ]
 };
