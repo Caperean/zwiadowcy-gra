@@ -110,6 +110,9 @@ export class LevelLoader {
             } else if (objData.type === "maj") {
                 const maj = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "maj");
                 gameObjects.push(maj);
+            } else if (objData.type === "palm") {
+                const palm = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "palm");
+                gameObjects.push(palm);
             }
              
     });
