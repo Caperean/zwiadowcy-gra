@@ -23,6 +23,7 @@ export const level17 = {
         { type: "boar", x: 460, y: 0 },
         { type: "bat", x: 70, y: 30 },
         { type: "clown", x: 500, y: 10 },
+        { type: "clown", x: 450, y: 10 },
          { type: "cactus", x: 700, y: 350, width: 70, height: 100 },
         { type: "exitGate", x: 750, y: 390, width: 64, height: 64 }
     ]
