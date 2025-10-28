@@ -120,6 +120,9 @@ export class LevelLoader {
             } else if (objData.type === "ship") {
                 const ship = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "ship");
                 gameObjects.push(ship);
+            }  else if (objData.type === "iceberg") {
+                const iceberg = new BackgroundObject(objData.x, objData.y, objData.width, objData.height, "iceberg");
+                gameObjects.push(iceberg);
             }
              
     });
