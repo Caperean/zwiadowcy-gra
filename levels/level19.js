@@ -14,7 +14,7 @@ export const level19 = {
         ".T.T........S.I.I..I.....#",                           // C-cegły
         ".T.T..I...............III#",                           
         ".T.T.....................#",                           
-        ".T.T.........I.I..I.I....#",
+        ".T.T........I.I.I..I.I...#",
         "WTWTWWWWWIIIWWWWWWWWWWIII#",
     ],
     objects: [
