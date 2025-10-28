@@ -10,12 +10,12 @@ export const level19 = {
         "..T......................#",                           //  W-water 
         ".WTW.....................#",                          //   S-kolce
         ".T#T.....................#",                          //  M-magma
-        ".T.T.....III.............#",                             // A-marmur
-        ".T.T........S.I.I..I.....#",                           // C-cegły
-        ".T.T..I...............III#",                           
-        ".T.T.....................#",                           
-        ".T.T........I.I.I..I.I...#",
-        "WTWTWWWWWIIIWWWWWWWWWWIII#",
+        ".T.T.....................#",                             // A-marmur
+        ".T.T.....................#",                           // C-cegły
+        ".T.T..I...I...I.......III#",                           
+        ".T.T.............I.......#",                           
+        ".T.TII...................#",
+        "WTWTWWWWWWWWWWWWWWWWWWWWWW",
     ],
     objects: [
        { type: "player", x: 33, y: 25 },
