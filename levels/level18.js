@@ -28,7 +28,7 @@ export const level18 = {
      { type: "boar", x: 740, y: 360 },
      { type: "bat", x: 740, y: 160 },
      { type: "bat", x: 740, y: 100 },
-    
+    { type: "iceberg", x: 170, y: 145, width: 260, height: 380 },
     { type: "exitGate", x: 740, y: 400, width: 64, height: 64 },
       //  { type: "key", x: 400, y: 100 },
        // { type: "gate", x: 300, y: 100 },
