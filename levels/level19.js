@@ -18,7 +18,7 @@ export const level19 = {
         "WTWTWWWWWWWWWWWWWWWWWWWWWW",
     ],
     objects: [
-       { type: "player", x: 33, y: 25 },
+       { type: "player", x: 33, y: 5 },
         { type: "snowman", x: 750, y: 100 },
         { type: "clown", x: 350, y: 150 },
          { type: "apple", x: 750, y: 200 },
