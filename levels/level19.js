@@ -22,7 +22,7 @@ export const level19 = {
         { type: "snowman", x: 750, y: 100 },
         { type: "clown", x: 350, y: 150 },
          { type: "apple", x: 750, y: 200 },
-        { type: "bat", x: 34, y: 130 },
+        { type: "bat", x: 304, y: 240 },
         { type: "exitGate", x: 740, y: 400, width: 64, height: 64 },
      
            ]
