@@ -1,11 +1,11 @@
 import { LevelLoader } from "./LevelLoader.js";
 import { Input } from "../engine/Input.js"; 
 import { Player } from "../objects/player.js";
-import { Arrow } from "../objects/arrow.js";         // <--- DODAJ TEN IMPORT
-import { PoisonedArrow } from "../objects/PoisonedArrow.js"; // <--- DODAJ TEN IMPORT
+import { Arrow } from "../objects/arrow.js";
+import { PoisonedArrow } from "../objects/PoisonedArrow.js";
 import { Apple } from "../objects/apple.js";
-import { ExitGate } from "../objects/ExitGate.js"; // Nowy import
-import { allLevels } from "../levels/levels.js"; // Nowy import
+import { ExitGate } from "../objects/ExitGate.js";
+import { allLevels } from "../levels/levels.js";
 
 export class Game {
     constructor(canvas) {
@@ -17,16 +17,16 @@ export class Game {
         this.groundY = 500;
         
         this.currentLevelIndex = 0;
+        this.gameEnded = false; // Nowa flaga
         this.loadLevel(this.currentLevelIndex);
         
-        // Zapisanie ostatniego czasu do obliczania deltaTime
         this.lastTime = 0; 
     }
 
     loadLevel(levelIndex) {
         if (levelIndex >= allLevels.length) {
-            console.log("Koniec gry! Ukończyłeś wszystkie poziomy.");
-            // Tutaj możesz dodać ekran końcowy lub inne akcje
+            this.gameEnded = true;
+            this.showEndingScreen();
             return;
         }
 
@@ -36,14 +36,32 @@ export class Game {
         this.backgroundColor = levelData.backgroundColor;
         this.arrows = [];
         
-        // Poprawne przypisanie gracza
         this.player = this.gameObjects.find(obj => obj instanceof Player);
     }
     
-    /**
-     * Główna pętla gry.
-     * @param {number} timestamp - Aktualny czas.
-     */
+    showEndingScreen() {
+        // Czyszczenie canvas
+        this.ctx.fillStyle = "#000000";
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Rysowanie napisu
+        this.ctx.fillStyle = "#FFD700";
+        this.ctx.font = "bold 40px Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText("GRATULACJE!", this.canvas.width / 2, 100);
+        this.ctx.fillText("GRA UKOŃCZONA!", this.canvas.width / 2, 150);
+        
+        // Ładowanie i rysowanie gifa
+        const endingGif = new Image();
+        endingGif.src = "assets/sprites/ending.gif";
+        endingGif.onload = () => {
+            // Centrowanie gifa
+            const gifX = (this.canvas.width - endingGif.width) / 2;
+            const gifY = 200;
+            this.ctx.drawImage(endingGif, gifX, gifY);
+        };
+    }
+
     gameLoop(timestamp) {
         const deltaTime = timestamp - this.lastTime;
         this.lastTime = timestamp;
@@ -54,37 +72,26 @@ export class Game {
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 
-      /**
-     * Aktualizuje stan wszystkich obiektów gry.
-     * @param {number} deltaTime - Czas od ostatniej klatki.
-     */
     update(deltaTime) {
-        // Aktualizacja wszystkich obiektów gry
+        // Jeśli gra się skończyła, nie aktualizuj gry
+        if (this.gameEnded) return;
+
         this.gameObjects.forEach(obj => obj.update(deltaTime, this.gameObjects));
         this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
         this.arrows.forEach(arrow => arrow.update(deltaTime));
         
-    
-        // Sprawdzanie kolizji gracza z ExitGate
         const exitGate = this.gameObjects.find(obj => obj instanceof ExitGate);
         if (exitGate && this.player && this.player.checkCollision(exitGate)) {
-            console.log("Poziom ukończony! Ładowanie następnego poziomu...");
             this.currentLevelIndex++;
             this.loadLevel(this.currentLevelIndex);
-            return; // <-- Dodaj tę linijkę, aby zatrzymać dalsze przetwarzanie
+            return;
         }
 
-        // Usuwanie obiektów, które są oznaczone do usunięcia (np. jabłka, które zostały zebrane)
         this.gameObjects = this.gameObjects.filter(obj => !obj.toRemove);
-
-        // Filtrowanie strzał, które wyleciały poza ekran
         this.arrows = this.arrows.filter(arrow => arrow.x < this.canvas.width && arrow.x > 0 && arrow.y < this.canvas.height && !arrow.toRemove);
     }
-/**
-     * Resetuje pozycje gracza i wszystkich mobów do ich stanu początkowego.
-     */
+
     resetLevelObjects() {
-        // Resetowanie gracza
         this.player.currentHP = this.player.maxHP;
         const playerStart = this.levelLoader.getPlayerStartPosition();
         this.player.x = playerStart.x;
@@ -95,23 +102,21 @@ export class Game {
         this.player.onGround = false;
         this.player.isCharging = false;
         
-        // Resetowanie mobów i strzał
-        this.arrows = []; // Usuń wszystkie lecące strzały
+        this.arrows = [];
         this.gameObjects.forEach(obj => {
-            // Sprawdzanie, czy obiekt jest mobem i ma metodę resetPosition()
             if (typeof obj.resetPosition === 'function') {
                 obj.resetPosition();
             }
         });
     }
-    /**
-     * Czyści płótno i rysuje wszystkie obiekty gry.
-     */
+
     draw() {
+        // Jeśli gra się skończyła, nie rysuj normalnej gry
+        if (this.gameEnded) return;
+
         this.ctx.fillStyle = this.backgroundColor;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Rysowanie wszystkich obiektów
         this.gameObjects.forEach(obj => obj.draw(this.ctx));
         this.arrows.forEach(arrow => arrow.draw(this.ctx));
     }
