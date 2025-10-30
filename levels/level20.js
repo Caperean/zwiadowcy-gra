@@ -6,15 +6,15 @@ export const level20 = {
         "....M...................M.#",                             // #-blok ziemi
         "M...M..................MM.#",                             // N-śnieg
         "...MM..MM...MMMMMM..M.MMM#",                            // I-lód
-        "..................MM.....M#",                            // L-lawa
+        ".S................MM.....M#",                            // L-lawa
         ".....M.............M.....M#",                           //  W-water 
-        ".....MM.M.M.M.MM...M.....M#",                          //   S-kolce
+        ".....MM.M.M.M.MM.........M#",                          //   S-kolce
         "...M..M.........M..M.....M#",                          //  M-magma
         "......M............MM..M.M#",                             // A-marmur
         "......M...........MM...M.M#",                           // C-cegły
-        "M...............MM.....M.M#",                           
+        "................MM.....M.M#",                           
         ".............M.........M.M#",                           
-        "..M..M.M...M...........MMM#",
+        ".M..MM.M...M...........MMM#",
         "LLLLLLLLLLLLLLLLLLLLLLLLLLL",
     ],
     objects: [
