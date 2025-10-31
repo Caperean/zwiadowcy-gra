@@ -4,17 +4,17 @@ export const level4 = {
         "RRRRRRRRRRRRRRRRRRRRRRRRR",                            // R-skała
         "R....R..................R",                             // G-trawa
         "R....R..................R",                             // #-blok ziemi
-        "RRR..R..................R",                             // N-śnieg
+        "RRR..R.........R.R.R....R",                             // N-śnieg
         "R....R..................R",                            // I-lód
-        "R....R..................R",                            // L-lawa
-        "R....R..................R",                           //  W-water 
-        "R....R..................R",                          //   S-kolce
-        "R....R..................R",                           //  M-magma
-        "R....R..................R",                             
-        "R....R.........R........R",                           
-        "R..RRR........RR........R",                           
-        "R..........R..RR........R",                           
-        "R.........RR..RR........R",
+        "R....R.......R........R.R",                            // L-lawa
+        "R....R........RR......R.R",                           //  W-water 
+        "R....R.............R..R.R",                          //   S-kolce
+        "R....R................R.R",                           //  M-magma
+        "R....R...............RR.R",                             
+        "R....R.........R...RR...R",                           
+        "R..RRR........RR...RR...R",                           
+        "R..........R..RR...RR...R",                           
+        "R.........RR..RRSSSRR...R",
         "RRRRRRRRRSRRSSRRRRRRRRRRR",
     ],
     objects: [
